@@ -24,9 +24,26 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".student-section").hide();
+            $(".student-verified").click(function(){
+                $(".student-section").show(1000);
+            });
+            $(".student-not-verified").click(function(){
+                $(".student-section").hide(1000);
+            });
+            
+    });
+    </script>
+    <style>
+        input[type=date] { color: transparent !important; } 
+        .focus input[type=date] { color: white !important; }
+    </style>
 </head>
 
-<body>
+<body style="overflow-y: scroll;">
     <!-- #header -->
 
 
@@ -51,6 +68,15 @@
                                     <input type="text" class="input">
                                 </div>
                             </div>
+                            <div class="input-div one">
+                                <div class="i">
+                                    <i class="fas fa-mail-bulk"></i>
+                                </div>
+                                <div class="div">
+                                    <h5 class="text-white">Email</h5>
+                                    <input type="email" class="input">
+                                </div>
+                            </div>
                             <div class="input-div pass">
                                 <div class="i">
                                     <i class="fas fa-lock"></i>
@@ -60,13 +86,92 @@
                                     <input type="password" class="input">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="text-white" style="margin-top: 20px;">Gender</h5>
+                                </div>
+                                <div class="col">
+                                    <h5 class="text-white" for="male">Male</h5><br>
+                                    <input type="radio" class="input" id="male" name="gender" value="male">  
+                                </div>
+                                <div class="col">
+                                    <h5 class="text-white" for="male">Female</h5><br>
+                                    <input type="radio" class="input" id="female" name="gender" value="female" style="margin-top: 2px;">     
+                                </div>         
+                            </div><br>
+                            <div class="input-div one">
+                                <div class="i">
+                                    <i class="fas fa-signature"></i>
+                                </div>
+                                <div class="div">
+                                    <h5 class="text-white">First Name</h5>
+                                    <input type="fname" class="input">
+                                </div>
+                            </div>
+                            <div class="input-div one">
+                                <div class="i">
+                                    <i class="fas fa-signature"></i>
+                                </div>
+                                <div class="div">
+                                    <h5 class="text-white">Last Name</h5>
+                                    <input type="lname" class="input">
+                                </div>
+                            </div>
+                            <div class="input-div one">
+                                <div class="i">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="div">
+                                    <h5 class="text-white">Birthday</h5>
+                                    <input type="date" class="input">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="text-white" style="margin-top: 20px;">Are You a Student</h5>
+                                </div>
+                                <div class="col">
+                                    <h5 class="text-white" for="Yes">Yes</h5><br>
+                                    <input type="radio" class="input student-verified" id="Yes" name="student" value="Yes">  
+                                </div>
+                                <div class="col">
+                                    <h5 class="text-white" for="No">No</h5><br>
+                                    <input type="radio" class="input student-not-verified" id="No" name="student" value="No" style="margin-top: 2px;">     
+                                </div>         
+                            </div><br>  
+                            <div class="column student-section">
+                                <div class="input-div one ">
+                                    <div class="i">
+                                        <i class="fas fa-sort-numeric-asc"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 class="text-white">Year Level</h5>
+                                        <input type="text" class="input">
+                                    </div>
+                                </div>
+                                <div class="input-div one ">
+                                    <div class="i">
+                                        <i class="fas fa-id-badge"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 class="text-white">Student Id</h5>
+                                        <input type="text" class="input">
+                                    </div>
+                                </div>
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 class="text-white">School Name</h5>
+                                        <input type="text" class="input">
+                                    </div>
+                                </div>
+                            </div>
                             <a href="#" class="text-white">Already have an account?</a>
                             <input type="submit" class="btn" value="Sign Up">
                         </form>
                     </div>
-                </div>
-                <div class="col-lg-5 banner-right">
-                    <img class="img-fluid" src="img/navigation.svg" style="margin-top: 5vh; height: 60vh;" alt="">
                 </div>
             </div>
         </div>

@@ -109,7 +109,9 @@
  *  Typography
  *
  **/
-                                        
+                                        input{
+                                          font-family: "Poppins", sans-serif;
+                                        }
                                         .btn i,
                                         .btn-large i,
                                         .btn-floating i,
@@ -136,7 +138,9 @@
                                          margin-top: 0;
                                          font-weight: 600;
                                         }
-                                        
+                                        .design{
+                                          box-shadow: 2px 2px 2px 2px #333;
+                                        }
                                         .h1,
                                         .h2,
                                         .h3,
@@ -3219,7 +3223,7 @@
                                           }
 
                                           /*FOR THE STARS*/
-                                          fieldset{
+                                          .ratingContainer{
                                             margin-left: 60px;
                                           }
                                           .rating { 
@@ -3259,7 +3263,7 @@
                                           .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
                                           .arrow-button {
                                             margin: 1em auto;
-                                            width: 280px;
+                                            width: auto;
                                             text-align: center;
                                             background-color: #eee;
                                             padding: 0.5em 0;
@@ -3271,6 +3275,7 @@
                                             box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6);
                                             border-radius: 8px;
                                             background-color: #333;
+                                            font-size: 1.5vh;
                                           }
                                           .arrow-button:hover{     
                                               color: white;
@@ -3284,6 +3289,11 @@
                                             content: '\25c4';
                                             padding-right: 0.5em;
                                           }
+                                          /*FOR THE CHAT HERE */
+                                          /*--------------------
+                                          /*--------------------
+                                          Chat
+                                          --------------------*/
                                           
-
+                                          
                                           
