@@ -8,9 +8,9 @@ Sia, James Karl
 
 
 NPM packages used:
-bodyparser
-nodemon
-express
+bodyparser,
+nodemon,
+express,
 mysql
 
 
