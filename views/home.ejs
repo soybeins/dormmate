@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us" class="no-js">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="img/fav.png">
+    <meta name="author" content="codepixer">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <title>Dormmate by Team Mafumafu</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!-- choi mao ni css	============================================= -->
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <header id="header" id="home">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    <h1 class="text-white text-uppercase">Dormmate</h1>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                            <li class="menu-has-children"><a class="text-white"><strong> <%= user %> </strong></a>
+                                <ul>
+                                    <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                                </ul>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- #header -->
+
+
+    <!-- diri sugod banner area by james karl sia -->
+    <section class="banner-area" id="home">
+        <div class="container">
+            <div class="row fullscreen d-flex align-items-center justify-content-start">
+                <div class="banner-content col-lg-7">
+                    <h5 class="text-white text-uppercase"> Find, Meet, Chat Roommates</h5>
+                    <h1 class="text-uppercase">
+                        Welcome, <%= user%>!
+                    </h1>
+                    <p class="text-white pt-20 pb-20">
+                        Chat with others to book rooms together. <br> Room sharing made easier.<br>
+                    </p>
+                    <p class="text-white pt-20 pb-20">
+                        <br> <strong>Find or Host one now!.</strong>
+                    </p>
+                    <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;
+                    <a href="/findL" class="primary-btn text-uppercase">Find</a>
+                </div>
+                <div class="col-lg-5 banner-right">
+                    <img class="img-fluid" src="img/iphone.png" style="margin-top: 5vh; height: 60vh;" alt="">
+                </div>
+                <div class="col-lg-5 banner-right"></div>
+            </div>
+        </div>
+    </section>
+    <!-- end of banner Area -->
+
+    <!--Diri sugod about area by soy lebumfacil -->
+    <section class="course-area section-gap">
+        <div class="container" >
+            <div class="single-info row mt-40 align-items-center" id="about">
+                <div class="col-lg-6 col-md-12 text-center no-padding info-left">
+                    <div class="info-thumb">
+                        <img src="img/about-img.jpg" class="img-fluid info-img" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 no-padding info-rigth">
+                    <div class="info-content" style='text-align: center'>
+                        <h4 class="pb-10">About Us</h4>
+                        <h2 class="pb-30">Team Mafumafu</h2>
+                        <p>
+                            We at team mafumafu understand the problems of filipinos finding dorms, 
+                            <br>after researching it thoroughly 
+                            the team developed an app which will help individuals find room and/or roomies.
+                        </p>
+                        <br>
+                        <img src="img/signature.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End sa about Area -->
+
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>About Us</h6>
+                        <p style="color: white;">
+                            Just a group of 4 like-minded individuals that have created a strong bond throughout their university life.
+                        </p>
+                        <p class="footer-text" style="color: white;">
+                            Team Mafumafu since 2018 
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+                    <div class="single-footer-widget">
+                        <h6>Follow Us</h6>
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="https://www.facebook.com/renzogwapokaayo/"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/soybeins/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+
+    <script src="js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="js/easing.min.js"></script>
+    <script src="js/hoverIntent.js"></script>
+    <script src="js/superfish.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

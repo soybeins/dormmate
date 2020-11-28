@@ -1,0 +1,34 @@
+.animated  {
+    -webkit-animation-duration : 3s  ;
+    animation-duration : 3s  ;
+  
+    -webkit-animation-delay : 500ms  ;
+    animation-delay : 500ms  ;
+  }
+  
+  .animate-out {
+    -webkit-animation-delay : 0ms  ;
+    animation-delay : 0ms  ;
+  }
+  .owl-item {
+    display: table;
+  }
+  .btn {
+    display: inline-block;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+    padding: 0 20px;
+    width: auto;
+    background-color: #000;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .owl-carousel .item {
+    height: 80vh;
+    background-color: #fc0;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
