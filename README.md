@@ -13,7 +13,7 @@
 
 
 **NPM packages used:**\
-*please use the following packages by typing into the terminal* __npm i [package_name]__ *--s*
+*please use the following packages by typing into the terminal* __npm i [package_name] --s__
  1. bodyparser
  2. nodemon
  3. express
