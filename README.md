@@ -13,12 +13,12 @@
 
 
 **NPM packages used:**
+*please use the following packages by typing into the terminal npm i [package_name] --s*
  1. bodyparser
  2. nodemon
  3. express
  4. mysql
- 
- ![team mafumafu signature](dormmate\public\img\signature.png)
+ 5. url
 
 
 
