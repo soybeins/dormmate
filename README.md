@@ -4,7 +4,8 @@
 
   Have you ever encountered the problem of not having enough budget to live closer to your school or work? Have you ever wished you knew someone who you could split the rental cost with? Or have heard of students renting shelter together with their friends and wish you could’ve done the same? The developers of this project are driven to create an online platform for you to be able to find and communicate with potential roommates. People who wish to live in a shelter, splitting the rental costs between each other. In addition, the developers seek to reinforce the safety of its frequent and student users by implementing student verification and reputation systems. Once successful, this application would benefit people who wish to find a roommate; especially day 1 students who know neither friends nor schoolmates. It may also help schools ensure the safety of their students’ shelter if explored further.  The system will undergo X test cases where X programmers will also judge whether the website is acceptable. A survey will be distributed to gauge the testers’ opinion on the acceptability of the functionality, usability, efficiency, understandability and sense of security of the website.
 
-**Created by:**
+**Created by: Team Mafumafu**
+
   - *Alegre, Therese*
   - *Barriga, Hosea*
   - *Lebumfacil, Soy*
@@ -16,6 +17,8 @@
  2. nodemon
  3. express
  4. mysql
+ 
+ ![team mafumafu signature](\public\img\signature.png)
 
 
 
