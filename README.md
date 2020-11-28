@@ -12,8 +12,8 @@
   - *Sia, James Karl*
 
 
-**NPM packages used:**
-*please use the following packages by typing into the terminal npm i [package_name] --s*
+**NPM packages used:**/n
+*please use the following packages by typing into the terminal* __npm i [package_name]__ *--s*
  1. bodyparser
  2. nodemon
  3. express
