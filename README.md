@@ -12,7 +12,7 @@
   - *Sia, James Karl*
 
 
-**NPM packages used:**/n
+**NPM packages used:**\
 *please use the following packages by typing into the terminal* __npm i [package_name]__ *--s*
  1. bodyparser
  2. nodemon
