@@ -57,7 +57,7 @@
                                          font-weight: 300;
                                          line-height: 1.625em;
                                          position: relative;
-                                         background-image: linear-gradient(120deg, #f45622 0%, #f53e54 100%);
+                                         background-image: linear-gradient(120deg, #cd92f0  0%, #c268f7  100%);
                                         }
                                         
                                         ol,
@@ -109,9 +109,7 @@
  *  Typography
  *
  **/
-                                        input{
-                                          font-family: "Poppins", sans-serif;
-                                        }
+                                        
                                         .btn i,
                                         .btn-large i,
                                         .btn-floating i,
@@ -138,9 +136,7 @@
                                          margin-top: 0;
                                          font-weight: 600;
                                         }
-                                        .design{
-                                          box-shadow: 2px 2px 2px 2px #333;
-                                        }
+                                        
                                         .h1,
                                         .h2,
                                         .h3,
@@ -2794,7 +2790,7 @@
                                         
                                         .footer-area {
                                          padding-top: 100px;
-                                         background-color: #222222;
+                                         background-color: linear-gradient(#e26d30,#ffdf0f);
                                         }
                                         
                                         h6 {
@@ -2818,7 +2814,7 @@
                                         }
                                         
                                         .footer-social i {
-                                         color: #cccccc;
+                                         color: #ffffff;
                                          -webkit-transition: all 0.3s ease 0s;
                                          -moz-transition: all 0.3s ease 0s;
                                          -o-transition: all 0.3s ease 0s;
@@ -2836,7 +2832,7 @@
                                          width: 80% !important;
                                          font-weight: 300;
                                          background: #191919;
-                                         color: #777;
+                                         color: rgb(255, 255, 255);
                                          padding-left: 20px;
                                          border-radius: 0;
                                          font-size: 14px;
@@ -2848,7 +2844,7 @@
                                         }
                                         
                                         .single-footer-widget .bb-btn {
-                                         color: #fff;
+                                         color: rgb(255, 255, 255);
                                          font-weight: 300;
                                          border-radius: 0;
                                          z-index: 9999;
@@ -2858,7 +2854,7 @@
                                         .single-footer-widget .info {
                                          position: absolute;
                                          margin-top: 20%;
-                                         color: #fff;
+                                         color: rgb(255, 255, 255);
                                          font-size: 12px;
                                         }
                                         
@@ -2871,7 +2867,7 @@
                                         }
                                         
                                         .single-footer-widget .click-btn {
-                                         color: #fff;
+                                         color: rgb(255, 255, 255);
                                          border-radius: 0;
                                          border-top-left-radius: 0px;
                                          border-bottom-left-radius: 0px;
@@ -2882,43 +2878,43 @@
                                         .single-footer-widget ::-moz-selection {
                                          /* Code for Firefox */
                                          background-color: #191919 !important;
-                                         color: #777777;
+                                         color: #ffffff;
                                         }
                                         
                                         .single-footer-widget ::selection {
                                          background-color: #191919 !important;
-                                         color: #777777;
+                                         color: #ffffff;
                                         }
                                         
                                         .single-footer-widget ::-webkit-input-placeholder {
                                          /* WebKit, Blink, Edge */
-                                         color: #777777;
+                                         color: #ffffff;
                                          font-weight: 300;
                                         }
                                         
                                         .single-footer-widget :-moz-placeholder {
                                          /* Mozilla Firefox 4 to 18 */
-                                         color: #777777;
+                                         color: #ffffff;
                                          opacity: 1;
                                          font-weight: 300;
                                         }
                                         
                                         .single-footer-widget ::-moz-placeholder {
                                          /* Mozilla Firefox 19+ */
-                                         color: #777777;
+                                         color: #ffffff;
                                          opacity: 1;
                                          font-weight: 300;
                                         }
                                         
                                         .single-footer-widget :-ms-input-placeholder {
                                          /* Internet Explorer 10-11 */
-                                         color: #777777;
+                                         color: #ffffff;
                                          font-weight: 300;
                                         }
                                         
                                         .single-footer-widget ::-ms-input-placeholder {
                                          /* Microsoft Edge */
-                                         color: #777777;
+                                         color: #ffffff;
                                          font-weight: 300;
                                         }
                                         
@@ -3069,7 +3065,7 @@
                                          font-weight: bold;
                                          color: white;
                                          padding: 1rem;
-                                         background-color: blue;
+                                         /* background-color: blue; */
                                         }
                                         
                                         @media (min-width: 320px) {
@@ -3141,12 +3137,12 @@
                                               position: relative;
                                               width: 100%;
                                               padding: 0px,0px,0px,2px;
-                                              margin-top: 100px;
+                                              /* margin-top: 100px; */
                                             }
                                           }
                                           @media (min-width: 768px){
                                             .container-card-for-insideRoom{
-                                              margin-top: 150px;
+                                              /* margin-top: 150px; */
                                             }
                                           }
                                           @media (min-width: 1080px) {
@@ -3223,7 +3219,7 @@
                                           }
 
                                           /*FOR THE STARS*/
-                                          .ratingContainer{
+                                          fieldset{
                                             margin-left: 60px;
                                           }
                                           .rating { 
@@ -3263,7 +3259,7 @@
                                           .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
                                           .arrow-button {
                                             margin: 1em auto;
-                                            width: auto;
+                                            width: 280px;
                                             text-align: center;
                                             background-color: #eee;
                                             padding: 0.5em 0;
@@ -3272,10 +3268,9 @@
                                             text-decoration: none;
                                             text-transform: uppercase;
                                             transition: all 0.2s;
-                                            box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6);
+                                            /* box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6); */
                                             border-radius: 8px;
-                                            background-color: #333;
-                                            font-size: 1.5vh;
+                                            background-color: rgb(248, 61, 61);
                                           }
                                           .arrow-button:hover{     
                                               color: white;
@@ -3289,11 +3284,6 @@
                                             content: '\25c4';
                                             padding-right: 0.5em;
                                           }
-                                          /*FOR THE CHAT HERE */
-                                          /*--------------------
-                                          /*--------------------
-                                          Chat
-                                          --------------------*/
                                           
-                                          
+
                                           
