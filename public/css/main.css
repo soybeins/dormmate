@@ -50,6 +50,7 @@
   font-weight: 300;
  }
  
+
  body {
   color: #777777;
   font-family: "Poppins", sans-serif;
@@ -2242,9 +2243,9 @@
  .call-to-action-area,
  .single-footer-widget .click-btn,
  .generic-banner {
-  background-image: -moz-linear-gradient(90deg, #f45622 0%, #f53e54 100%);
-  background-image: -webkit-linear-gradient(90deg, #f45622 0%, #f53e54 100%);
-  background-image: -ms-linear-gradient(90deg, #f45622 0%, #f53e54 100%);
+  background-image: -moz-linear-gradient(120deg, #cd92f0  0%, #c268f7  100%);
+  background-image: -webkit-linear-gradient(120deg, #cd92f0  0%, #c268f7  100%);
+  background-image: -ms-linear-gradient(120deg, #cd92f0  0%, #c268f7  100%);
  }
  
  .p1-gradient-color,
