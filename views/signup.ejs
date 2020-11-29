@@ -2,164 +2,500 @@
 <html lang="en-us" class="no-js">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="img/fav.png">
-    <meta name="author" content="codepixer">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta charset="UTF-8">
-    <title>Dormmate</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+ <link rel="shortcut icon" href="img/fav.png">
+ <meta name="author" content="codepixer">
+ <meta name="description" content="">
+ <meta name="keywords" content="">
+ <meta charset="UTF-8">
+ <title>Dormmate</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
+ <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+ <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+ <!--
 			CSS
 			============================================= -->
-    <link rel="stylesheet" href="css/linearicons.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/animate.min.css">  
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+ <link rel="stylesheet" href="css/linearicons.css">
+ <link rel="stylesheet" href="css/font-awesome.min.css">
+ <link rel="stylesheet" href="css/bootstrap.css">
+ <link rel="stylesheet" href="css/magnific-popup.css">
+ <link rel="stylesheet" href="css/nice-select.css">
+ <link rel="stylesheet" href="css/animate.min.css">
+ <link rel="stylesheet" href="css/owl.carousel.css">
+ <link rel="stylesheet" href="css/main.css">
+
+ <script>
+    $(document).ready(function() {
+           $(".student-section").hide();
+           $(".student-verified").click(function(){
+               $(".student-section").show(1000);
+           });
+           $(".student-not-verified").click(function(){
+               $(".student-section").hide(1000);
+           });
+   });
+</script>
+ <style>
+     #msform {
+	width: auto;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #892cdc;
+	color: white;
+}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+ </style>
 </head>
 
+
+
 <body>
-    <!-- #header -->
+    <header id="header" id="home">
+        <div class="container">
+         <div class="row align-items-center justify-content-between d-flex">
+          <div id="logo">
+           <h1 class="text-white text-uppercase">Dormmate</h1>
+          </div>
+          <!-- #nav-menu-container -->
+         </div>
+        </div>
+       </header>
 
     <!-- start banner Area -->
-    <section class="banner-area" id="home">
-        <div class="container">
-            <div class="row fullscreen d-flex align-items-center justify-content-start">
-                <div class="container" >
-                    
-                    <div class="img">
-                        <img src="img/signup.svg">
+ <section id="home">
+  <div class="container">
+      <br><br><br><br>
+        <div class="col-lg-12" style="width: 100%;">
+            <form id="msform">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                  <li class="active">Account Info</li>
+                  <li>Personal Info</li>
+                  <li>Preferences</li>
+                </ul>
+                <!-- fieldsets -->
+                <fieldset>
+                  <h2 class="fs-title">Account Info</h2>
+                  <h3 class="fs-subtitle">This is step 1</h3>
+                  <div class="row">
+                      <div class="col-lg-2"></div>
+                      <div class="col-lg-8">
+                        <h5>Username</h5>
+                        <input type="text" class="design text-uppercase" name="username" placeholder="username"required />
+                      </div>
+                      <div class="col-lg-2"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <h5>Email Address</h5>
+                        <input type="email" class ="design text-uppercase" name="Email" placeholder="Email" required/>
                     </div>
-
-                    <div class="login-content">
-
-                        <form action="/create">
-                            <div class="input-div one"></div>
-
-                            <img src="img/avatar.svg">
-                            <h2 class="text-white title">Welcome!</h2>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
+                    <div class="col-lg-2"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <h5>Password</h5>
+                        <input type="password" class ="design text-uppercase required" name="password" placeholder="Password"required />
+                    </div>
+                    <div class="col-lg-2"></div>
+                  </div>
+                  
+                  
+                  <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
+                </fieldset>
+                <fieldset>
+                  <h2 class="fs-title">Personal Info</h2>
+                  <h3 class="fs-subtitle">Your Personal Information</h3>
+                  <div class="row">
+                      <div class="col-lg-2"></div>
+                      <div class="col-lg-8">
+                        <h5>Gender</h5>
+                          <div class="row">
+                              <div class="col-lg-3"></div>
+                              <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input .gender-checkbox-male" id="Male">
+                                    <label class="custom-control-label" for="Male" name="gender">Male</label>
                                 </div>
-                                <div class="div">
-                                    <h5 class="text-white">Username</h5>
-                                    <input type="text" class="input" required>
-                                </div>
+                              </div>
+                              <div class="col-lg-3">
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input .gender-checkbox-female" id="Female">
+                                  <label class="custom-control-label " for="Female" name="gender">Female</label>
+                              </div>
+                              <div class="col-lg-3"></div>
                             </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Password</h5>
-                                    <input type="password" class="input" required>
-                                </div>
+                          </div>
+                          <
+                          
+                        
+                      </div>
+                      <div class="col-lg-2"></div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-2"></div>
+                      <div class="col-lg-8">
+                        <h5>First Name</h5>
+                        <input type="text" class="design text-uppercase" name="fname" placeholder="First Name" required/>
+                      </div>
+                      <div class="col-lg-2"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <h5>Last Name</h5>
+                      <input type="text" class="design text-uppercase" name="lname" placeholder="Last Name" required/>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <h5>Birthdate</h5>
+                        <input required="" type="text" class="design text-uppercase" placeholder="Birthdate" onfocus="(this.type='date')" required/>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <h5 class="text-dark" style="margin-top: 20px;">Are You a Student?</h5>
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-dark" for="Yes">Yes</h5>
+                                <input type="radio" class="input student-verified" id="Yes" name="student" value="Yes">
                             </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Email</h5>
-                                    <input type="email" class="input">
-                                </div>
+                            <div class="col">
+                                <h5 class="text-dark" for="No">No</h5>
+                                <input type="radio" class="input student-not-verified" id="No" name="student" value="No">     
                             </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Gender</h5>
-                                    <input type="text" class="input">
-                                </div>
-                            </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Gender</h5>
-                                    <input type="text" class="input">
-                                </div>
-                            </div>
-
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Gender</h5>
-                                    <input type="text" class="input">
-                                </div>
-                            </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Gender</h5>
-                                    <input type="text" class="input">
-                                </div>
-                            </div>
-
-                            <div class="input-div one">
-                                <div class="i">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="div">
-                                    <h5 class="text-white">Gender</h5>
-                                    <input type="text" class="input">
-                                </div>
-                            </div>
-                            <a href="/login" style=" font-family:'Poppins', sans-serif;" class="text-white">Already have an account?</a>
-                            <input type="submit" class="btn" value="Sign Up">
-                        </form>
-
+                        </div>  
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+                <div class="column student-section">
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <h5>Year Level</h5>
+                            <input type="text" class="input design text-uppercase" placeholder="Year Level">
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <h5>Student ID Number/Code</h5>
+                            <input type="text" class="input design text-uppercase" placeholder="Student ID">
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <h5>School Name</h5>
+                            <input type="text" class="input design text-uppercase" placeholder="School Name">
+                        </div>
+                        <div class="col-lg-2"></div>
                     </div>
                 </div>
-                <div class="col-lg-5 banner-right">
-                    <img class="img-fluid" src="img/navigation.svg" style="margin-top: 5vh; height: 60vh;" alt="">
+
+               
+                  <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius:25px"/>
+                  <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius:25px"/>
+                </fieldset>
+                <fieldset>
+                  <h2 class="fs-title">Preferences</h2>
+                  <h3 class="fs-subtitle">Your Personal Preferences: Tick all that applies</h3>
+                  <div class="row">
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="Smoker">
+                            <label class="custom-control-label" for="Smoker">Smoker</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-5"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-2">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="Pets">
+                          <label class="custom-control-label" for="Pets">Pets</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-5"></div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-2">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="Alcohol">
+                          <label class="custom-control-label" for="Alcohol">Alcohol</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-5"></div>
+                </div>
+                  <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius: 25px;"/>
+                  <input type="submit" name="submit" class="submit action-button btn-success" value="SignUp" style="border-radius: 25px; "/>
+                </fieldset>
+              </form>
         </div>
-    </section>
-    <!-- End banner Area -->
-
-
-    <script src="js/vendor/jquery-2.2.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-    <script src="js/easing.min.js"></script>
-    <script src="js/hoverIntent.js"></script>
-    <script src="js/superfish.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/parallax.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
+   </div>
+ </section>
+ <!-- End banner Area -->
+ <script src="js/vendor/jquery-2.2.4.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="js/vendor/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+ <script src="js/easing.min.js"></script>
+ <script src="js/hoverIntent.js"></script>
+ <script src="js/superfish.min.js"></script>
+ <script src="js/jquery.ajaxchimp.min.js"></script>
+ <script src="js/jquery.magnific-popup.min.js"></script>
+ <script src="js/owl.carousel.min.js"></script>
+ <script src="js/jquery.sticky.js"></script>
+ <script src="js/jquery.nice-select.min.js"></script>
+ <script src="js/parallax.min.js"></script>
+ <script src="js/waypoints.min.js"></script>
+ <script src="js/jquery.counterup.min.js"></script>
+ <script src="js/mail-script.js"></script>
+ <script src="js/main.js"></script>
+ <script>
+     
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+    
+    $(".next").click(function(){
+        if(animating) return false;
+        animating = true;
+        
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+        
+        //activate next step on progressbar using the index of next_fs
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        
+        //show the next fieldset
+        next_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale current_fs down to 80%
+                scale = 1 - (1 - now) * 0.2;
+                //2. bring next_fs from the right(50%)
+                left = (now * 50)+"%";
+                //3. increase opacity of next_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({
+            'transform': 'scale('+scale+')',
+            'position': 'absolute'
+          });
+                next_fs.css({'left': left, 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+    
+    $(".previous").click(function(){
+        if(animating) return false;
+        animating = true;
+        
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+        
+        //de-activate current step on progressbar
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+        
+        //show the previous fieldset
+        previous_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale previous_fs from 80% to 100%
+                scale = 0.8 + (1 - now) * 0.2;
+                //2. take current_fs to the right(50%) - from 0%
+                left = ((1-now) * 50)+"%";
+                //3. increase opacity of previous_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({'left': left});
+                previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+    
+    $(".submit").click(function(){
+        return false;
+    })
+    
+     </script>
 </body>
 
 </html>

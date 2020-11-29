@@ -100,7 +100,7 @@ app.post('/findUser', (req,res)=>{
         return res.status(401).render('login', {message:'Please provide an email and/or password.'});
     }
 
-    var sql='SELECT count(UserID) as count,Email FROM users WHERE Email = ? && Password = ?';
+    var sql='SELECT count(UserID) as count,Email FROM users WHERE username = ? && Password = ?';
     db.query(sql,[data.username,data.password],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
