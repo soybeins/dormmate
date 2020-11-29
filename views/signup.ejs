@@ -190,6 +190,20 @@
   background: #4CAF50; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+#msform .action-button {
+	width: 100px;
+	background: #892cdc;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #892cdc;
+}
 
  </style>
 </head>
@@ -201,13 +215,12 @@
         <div class="container">
          <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
-           <h1 class="text-white text-uppercase">Dormmate</h1>
+           <h1 class="text-white text-uppercase">Dormmate Sign-up</h1>
           </div>
           <!-- #nav-menu-container -->
          </div>
         </div>
        </header>
-
     <!-- start banner Area -->
  <section id="home">
   <div class="container">
@@ -249,7 +262,7 @@
                     <div class="col-lg-2"></div>
                   </div>
                   
-                  
+                  <a type="button" name="next" class="next action-button btn-success" href="/" style="border-radius: 25px;">Cancel</a>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>
@@ -275,7 +288,7 @@
                               <div class="col-lg-3"></div>
                             </div>
                           </div>
-                          <
+                          
                           
                         
                       </div>
