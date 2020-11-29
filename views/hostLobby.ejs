@@ -61,7 +61,8 @@
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	background: #27AE60;
+  background: #892cdc;
+  font-family: 'Poppins';
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -71,7 +72,7 @@
 	margin: 10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #892cdc;
 }
 /*headings*/
 .fs-title {
@@ -132,7 +133,7 @@
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
+	background: #892cdc;
 	color: white;
 }
 .slidecontainer {
@@ -163,14 +164,14 @@
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #4CAF50; /* Green background */
+  background: #892cdc; /* Purple background */
   cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #4CAF50; /* Green background */
+  background: #892cdc; /* Purple background */
   cursor: pointer; /* Cursor on hover */
 }
  </style>
@@ -188,7 +189,7 @@
         <ul class="nav-menu">
             <li class="menu-active"><a href="/home">Home</a></li>
             <li><a href="/home#about">About</a></li>
-                <li class="menu-has-children"><a class="text-white"><strong> <%= user %> </strong></a>
+                <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
                         <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
                     </ul>
@@ -249,7 +250,7 @@
                     <input type="range" min="16" max="45" value="25" id="myRange">
                   </div>
                       <br>
-
+                      <a type="button" name="next" class="next action-button btn-success" href="/home" style="border-radius: 25px;">Cancel</a>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>
