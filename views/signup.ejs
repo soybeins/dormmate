@@ -241,7 +241,7 @@
                       <div class="col-lg-2"></div>
                       <div class="col-lg-8">
                         <h5>Username</h5>
-                        <input type="text" class="design text-uppercase" name="username" placeholder="username"required />
+                        <input type="text" class="design" name="username" placeholder="username"required />
                       </div>
                       <div class="col-lg-2"></div>
                   </div>
@@ -249,7 +249,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Email Address</h5>
-                        <input type="email" class ="design text-uppercase" name="email" placeholder="Email" required/>
+                        <input type="email" class ="design" name="email" placeholder="Email" required/>
                     </div>
                     <div class="col-lg-2"></div>
                   </div>
@@ -257,12 +257,12 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Password</h5>
-                        <input type="password" class ="design text-uppercase required" name="password" placeholder="Password"required />
+                        <input type="password" class ="design required" name="password" placeholder="Password"required />
                     </div>
                     <div class="col-lg-2"></div>
                   </div>
                   
-                  <a type="button" name="next" class="next action-button btn-success" href="/" style="border-radius: 25px;">Cancel</a>
+                  <!-- <a type="button" name="next" class="next action-button btn-success" href="/" style="border-radius: 25px;">Cancel</a> -->
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>
@@ -288,9 +288,6 @@
                               <div class="col-lg-3"></div>
                             </div>
                           </div>
-                          
-                          
-                        
                       </div>
                       <div class="col-lg-2"></div>
                   </div>
@@ -298,7 +295,7 @@
                       <div class="col-lg-2"></div>
                       <div class="col-lg-8">
                         <h5>First Name</h5>
-                        <input type="text" class="design text-uppercase" name="fname" placeholder="First Name" required/>
+                        <input type="text" class="design" name="fname" placeholder="First Name" required/>
                       </div>
                       <div class="col-lg-2"></div>
                   </div>
@@ -306,7 +303,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Last Name</h5>
-                      <input type="text" class="design text-uppercase" name="lname" placeholder="Last Name" required/>
+                      <input type="text" class="design" name="lname" placeholder="Last Name" required/>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
@@ -314,7 +311,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Birthdate</h5>
-                        <input required="" type="text" class="design text-uppercase" placeholder="bday" onfocus="(this.type='date')" required/>
+                        <input required="" type="text" class="design" placeholder="Birthdate" value="bday" onfocus="(this.type='date')" required/>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
@@ -340,7 +337,7 @@
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
                             <h5>Year Level</h5>
-                            <input type="text" class="input design text-uppercase" placeholder="Year Level">
+                            <input type="text" class="input design" placeholder="Year Level" name="schoollevel">
                         </div>
                         <div class="col-lg-2"></div>
                     </div>
@@ -348,7 +345,7 @@
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
                             <h5>Student ID Number/Code</h5>
-                            <input type="text" class="input design text-uppercase" placeholder="Student ID">
+                            <input type="text" class="input design" placeholder="Student ID" name ="schoolid">
                         </div>
                         <div class="col-lg-2"></div>
                     </div>
@@ -356,13 +353,11 @@
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
                             <h5>School Name</h5>
-                            <input type="text" class="input design text-uppercase" placeholder="School Name">
+                            <input type="text" class="input design" placeholder="School Name" name="schoolname">
                         </div>
                         <div class="col-lg-2"></div>
                     </div>
                 </div>
-
-               
                   <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius:25px"/>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius:25px"/>
                 </fieldset>
@@ -373,7 +368,7 @@
                       <div class="col-lg-5"></div>
                       <div class="col-lg-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="Smoker">
+                            <input type="checkbox" class="custom-control-input" id="Smoker" name="smoker">
                             <label class="custom-control-label" for="Smoker">Smoking</label>
                         </div>
                       </div>
@@ -383,7 +378,7 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="Pets">
+                          <input type="checkbox" class="custom-control-input" id="Pets" name="pets">
                           <label class="custom-control-label" for="Pets">Pets</label>
                       </div>
                     </div>
@@ -393,14 +388,14 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="Alcohol">
+                          <input type="checkbox" class="custom-control-input" id="Alcohol" name="alcohol">
                           <label class="custom-control-label" for="Alcohol">Alcohol</label>
                       </div>
                     </div>
                     <div class="col-lg-5"></div>
                 </div>
                   <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius: 25px;"/>
-                  <input type="submit" name="submit" class="submit action-button btn-success" style="border-radius: 25px; "/>
+                  <input type="submit" value="submit" class="submit action-button btn-success" style="border-radius: 25px; "/>
                 </fieldset>
               </form>
         </div>
@@ -504,11 +499,12 @@
         });
     });
     
-    $(".submit").click(function(){
-        return false;
-    })
+    $('.submit').on('click',(function(e) {
+       $( "#msform" ).submit();
+    }));
     
-     </script>
+
+  </script>
 </body>
 
 </html>

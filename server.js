@@ -124,15 +124,19 @@ app.post('/findUser', (req,res)=>{
     });
 });
 
-app.post('/create', (req,res)=>{
-    console.log(req.body);
+app.post('/createUser', (req,res)=>{
+    console.log("Data =" + req.body.username);
     let data = req.body;
-    db.query('INSERT into user(Email,Password) VALUES (?,?)',[data.username,data.password],(err,rows,fields)=>{
+    db.query('INSERT into users(Username,Email,Password) VALUES (?,?,?)',[data.username,data.email,data.password],(err,rows,fields)=>{
         if(err){
-            res.redirect('/');
+            res.redirect('/signup');
+            db.on('error', function(err) {
+                console.log("[mysql error]",err);
+              });
         }
         else{
-            throw err;
+            console.log("Successfully Inserted!");
+            res.render('login');
         }
     });            
 });
