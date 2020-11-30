@@ -87,6 +87,14 @@ app.get(('/hostL'), (req,res)=>{
     
 });
 
+app.get(('/joinRoom'), (req,res)=>{
+    if(!loggedIn){
+        res.render('index');       
+    }else{
+        res.render('applicantChat', {user:user});
+    }
+});
+
 app.get('/signout', (req,res)=>{
     loggedIn = false;
     user = null;
@@ -113,6 +121,7 @@ app.post('/findUser', (req,res)=>{
         }else{
             if(row[0].count == 1){
                 user = row;
+                loggedIn = true;
                 console.log("user count = " + user[0].count);
                 console.log("data found");
                 res.render('home',{user: user});
@@ -125,14 +134,20 @@ app.post('/findUser', (req,res)=>{
 });
 
 app.post('/createUser', (req,res)=>{
-    console.log("Data =" + req.body.username);
+    console.log(req.body);
     let data = req.body;
-    db.query('INSERT into users(Username,Email,Password) VALUES (?,?,?)',[data.username,data.email,data.password],(err,rows,fields)=>{
+
+    if(!data.username || !data.password){
+        console.log("Error creating user.");
+        return res.status(401).render('signup', {message:'Please provide an email and/or password.'});
+    }
+// ,Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets ?,?,?,?,?,?,?,?
+    var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday) \
+    VALUES (?,?,?,?,?,?,?)';
+    db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday],(err,rows,fields)=>{
         if(err){
-            res.redirect('/signup');
-            db.on('error', function(err) {
-                console.log("[mysql error]",err);
-              });
+            throw err
+            // res.redirect('/signup');
         }
         else{
             console.log("Successfully Inserted!");

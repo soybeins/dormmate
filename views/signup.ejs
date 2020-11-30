@@ -241,7 +241,7 @@
                       <div class="col-lg-2"></div>
                       <div class="col-lg-8">
                         <h5>Username</h5>
-                        <input type="text" class="design" name="username" placeholder="username"required />
+                        <input type="text" class="design" name="username" placeholder="username" required/>
                       </div>
                       <div class="col-lg-2"></div>
                   </div>
@@ -276,14 +276,14 @@
                               <div class="col-lg-3"></div>
                               <div class="col-lg-3">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input .gender-checkbox-male" id="Male">
-                                    <label class="custom-control-label" for="Male" name="male">Male</label>
+                                    <input type="checkbox" class="custom-control-input .gender-checkbox-male" name="gender" value="male" id="Male">
+                                    <label class="custom-control-label" for="Male" name="gender" value="male">Male</label>
                                 </div>
                               </div>
                               <div class="col-lg-3">
                               <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input .gender-checkbox-female" id="Female">
-                                  <label class="custom-control-label " for="Female" name="female">Female</label>
+                                  <input type="checkbox" class="custom-control-input .gender-checkbox-female"  name="gender" value="female" id="Female">
+                                  <label class="custom-control-label " for="Female" name="gender" value="female">Female</label>
                               </div>
                               <div class="col-lg-3"></div>
                             </div>
@@ -311,7 +311,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Birthdate</h5>
-                        <input required="" type="text" class="design" placeholder="Birthdate" value="bday" onfocus="(this.type='date')" required/>
+                        <input required="" type="text" class="design" placeholder="Birthdate" name="bday" onfocus="(this.type='date')" required/>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
@@ -322,11 +322,11 @@
                         <div class="row">
                             <div class="col">
                                 <h5 class="text-dark" for="Yes">Yes</h5>
-                                <input type="radio" class="input student-verified" id="Yes" name="student" value="Yes">
+                                <input type="radio" class="input student-verified" id="Yes" name="student" value="T">
                             </div>
                             <div class="col">
                                 <h5 class="text-dark" for="No">No</h5>
-                                <input type="radio" class="input student-not-verified" id="No" name="notstudent" value="No">     
+                                <input type="radio" class="input student-not-verified" id="No" name="notstudent" value="F">     
                             </div>
                         </div>  
                     </div>
@@ -368,7 +368,7 @@
                       <div class="col-lg-5"></div>
                       <div class="col-lg-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="Smoker" name="smoker">
+                            <input type="checkbox" class="custom-control-input" id="Smoker" value="Yes" name="smoker">
                             <label class="custom-control-label" for="Smoker">Smoking</label>
                         </div>
                       </div>
@@ -378,7 +378,7 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="Pets" name="pets">
+                          <input type="checkbox" class="custom-control-input" id="Pets" value="Yes" name="pets">
                           <label class="custom-control-label" for="Pets">Pets</label>
                       </div>
                     </div>
@@ -388,7 +388,7 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="Alcohol" name="alcohol">
+                          <input type="checkbox" class="custom-control-input" id="Alcohol" value="Yes" name="alcohol">
                           <label class="custom-control-label" for="Alcohol">Alcohol</label>
                       </div>
                     </div>
