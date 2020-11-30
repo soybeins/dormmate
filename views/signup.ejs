@@ -226,7 +226,7 @@
   <div class="container">
       <br><br><br><br>
         <div class="col-lg-12" style="width: 100%;">
-            <form id="msform">
+            <form id="msform" action="/createUser" method="POST">
                 <!-- progressbar -->
                 <ul id="progressbar">
                   <li class="active">Account Info</li>
@@ -249,7 +249,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Email Address</h5>
-                        <input type="email" class ="design text-uppercase" name="Email" placeholder="Email" required/>
+                        <input type="email" class ="design text-uppercase" name="email" placeholder="Email" required/>
                     </div>
                     <div class="col-lg-2"></div>
                   </div>
@@ -277,13 +277,13 @@
                               <div class="col-lg-3">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input .gender-checkbox-male" id="Male">
-                                    <label class="custom-control-label" for="Male" name="gender">Male</label>
+                                    <label class="custom-control-label" for="Male" name="male">Male</label>
                                 </div>
                               </div>
                               <div class="col-lg-3">
                               <div class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input .gender-checkbox-female" id="Female">
-                                  <label class="custom-control-label " for="Female" name="gender">Female</label>
+                                  <label class="custom-control-label " for="Female" name="female">Female</label>
                               </div>
                               <div class="col-lg-3"></div>
                             </div>
@@ -314,7 +314,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Birthdate</h5>
-                        <input required="" type="text" class="design text-uppercase" placeholder="Birthdate" onfocus="(this.type='date')" required/>
+                        <input required="" type="text" class="design text-uppercase" placeholder="bday" onfocus="(this.type='date')" required/>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
@@ -329,7 +329,7 @@
                             </div>
                             <div class="col">
                                 <h5 class="text-dark" for="No">No</h5>
-                                <input type="radio" class="input student-not-verified" id="No" name="student" value="No">     
+                                <input type="radio" class="input student-not-verified" id="No" name="notstudent" value="No">     
                             </div>
                         </div>  
                     </div>
@@ -374,7 +374,7 @@
                       <div class="col-lg-2">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="Smoker">
-                            <label class="custom-control-label" for="Smoker">Smoker</label>
+                            <label class="custom-control-label" for="Smoker">Smoking</label>
                         </div>
                       </div>
                       <div class="col-lg-5"></div>
@@ -400,7 +400,7 @@
                     <div class="col-lg-5"></div>
                 </div>
                   <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius: 25px;"/>
-                  <input type="submit" name="submit" class="submit action-button btn-success" value="SignUp" style="border-radius: 25px; "/>
+                  <input type="submit" name="submit" class="submit action-button btn-success" style="border-radius: 25px; "/>
                 </fieldset>
               </form>
         </div>

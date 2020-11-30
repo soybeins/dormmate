@@ -22,7 +22,7 @@ db.connect((err) =>{
 });
 
 //====== For User Log Session ======
-var user = null;
+let user;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -89,6 +89,7 @@ app.get(('/hostL'), (req,res)=>{
 
 app.get('/signout', (req,res)=>{
     loggedIn = false;
+    user = null;
     res.redirect('/');
 });
 
@@ -100,7 +101,7 @@ app.post('/findUser', (req,res)=>{
         return res.status(401).render('login', {message:'Please provide an email and/or password.'});
     }
 
-    var sql='SELECT count(UserID) as count,username FROM users WHERE username = ? && Password = ?';
+    var sql='SELECT count(UserID) as count,username FROM users WHERE USERNAME = ? && Password = ? ';
     db.query(sql,[data.username,data.password],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
@@ -112,7 +113,7 @@ app.post('/findUser', (req,res)=>{
         }else{
             if(row[0].count == 1){
                 user = row;
-                loggedIn = true;
+                console.log("user count = " + user[0].count);
                 console.log("data found");
                 res.render('home',{user: user});
             }else{
@@ -127,7 +128,7 @@ app.post('/create', (req,res)=>{
     console.log(req.body);
     let data = req.body;
     db.query('INSERT into user(Email,Password) VALUES (?,?)',[data.username,data.password],(err,rows,fields)=>{
-        if(!err){
+        if(err){
             res.redirect('/');
         }
         else{
@@ -135,6 +136,7 @@ app.post('/create', (req,res)=>{
         }
     });            
 });
+
 
 app.listen(8080);
 console.log("8080 is the port friends");
