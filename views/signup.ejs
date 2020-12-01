@@ -71,7 +71,6 @@
 	margin-bottom: 10px;
 	width: 100%;
 	box-sizing: border-box;
-	font-family: montserrat;
 	color: #2C3E50;
 	font-size: 13px;
 }
@@ -208,8 +207,6 @@
  </style>
 </head>
 
-
-
 <body>
     <header id="header" id="home">
         <div class="container">
@@ -217,7 +214,6 @@
           <div id="logo">
            <h1 class="text-white text-uppercase">Dormmate Sign-up</h1>
           </div>
-          <!-- #nav-menu-container -->
          </div>
         </div>
        </header>
@@ -236,12 +232,12 @@
                 <!-- fieldsets -->
                 <fieldset>
                   <h2 class="fs-title">Account Info</h2>
-                  <h3 class="fs-subtitle">This is step 1</h3>
+                  <h3 class="fs-subtitle">Please input the following information.</h3>
                   <div class="row">
                       <div class="col-lg-2"></div>
                       <div class="col-lg-8">
                         <h5>Username</h5>
-                        <input type="text" class="design" name="username" placeholder="username" required autofocus/>
+                        <input type="text" class="design" name="username" placeholder="Username" required autofocus/>
                       </div>
                       <div class="col-lg-2"></div>
                   </div>
@@ -257,7 +253,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <h5>Password</h5>
-                        <input type="password" class ="design required" name="password" placeholder="Password"required />
+                        <input type="password" class ="design required" name="password" placeholder="Password" required/>
                     </div>
                     <div class="col-lg-2"></div>
                   </div>
@@ -511,8 +507,7 @@
     
     $('.submit').on('click',(function(e) {
        $( "#msform" ).submit();
-    }));
-    
+    }));    
 
   </script>
 </body>

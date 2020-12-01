@@ -5,7 +5,7 @@ const express = require('express'),
       url = require('url');
 //====== Body Parser for input data from body ======
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine','ejs');
 app.use(express.static("public"));
 
@@ -135,14 +135,18 @@ app.post('/findUser', (req,res)=>{
 });
 
 app.post('/createUser', (req,res)=>{
-    console.log(req.body);
-    let data = req.body;
+    let data = req.body; 
+    (data.smoker == null)?data.smoker = "No":console.log("Not a Smoker");
+    (data.alcohol == null)?data.alcohol = "No":console.log("No Alcohol");
+    (data.pets == null)?data.pets = "No":console.log("No Pets Allowed");
+
+    console.log(data);
 
     if(!data.username || !data.password){
         console.log("Error creating user.");
         return res.status(401).render('signup', {message:'Please provide an email and/or password.'});
     }
-//  ?,?,?,?,?,?,?,?
+
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
@@ -153,7 +157,7 @@ app.post('/createUser', (req,res)=>{
         }
         else{
             console.log("Successfully Inserted!");
-            res.render('login');
+            res.redirect('login');
         }
     });            
 });
