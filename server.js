@@ -136,17 +136,16 @@ app.post('/findUser', (req,res)=>{
 
 app.post('/createUser', (req,res)=>{
     let data = req.body; 
-    (data.smoker == null)?data.smoker = "No":console.log("Not a Smoker");
-    (data.alcohol == null)?data.alcohol = "No":console.log("No Alcohol");
-    (data.pets == null)?data.pets = "No":console.log("No Pets Allowed");
+    (data.smoker == null)?data.smoker = "No":null;
+    (data.alcohol == null)?data.alcohol = "No":null;
+    (data.pets == null)?data.pets = "No":null;
 
     console.log(data);
 
     if(!data.username || !data.password || !data.email || !data.gender|| !data.student || !data.bday){
-        console.log("Error creating user.");
+        console.log("Error creating user. Incomplete data");
         return res.render('signup', {error:true,errorMessage:"Please provide all required inputs."});
     }
-
 
 
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
@@ -154,8 +153,10 @@ app.post('/createUser', (req,res)=>{
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
-            res.redirect('/signup',{error:err});
-            throw err
+            res.render('signup',{error:true});
+            db.on('error', function(err) {
+                console.log("[mysql error]",err);
+              });
         }
         else{
             console.log("Successfully Inserted!");

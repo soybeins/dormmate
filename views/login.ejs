@@ -62,25 +62,17 @@
                                     </div>
                                     <div class="div">
                                         <h5 class="text-white">Password</h5>
-                                        <input type="password" class="input" required>
-                                    </div>
-                              
-                                </div>
-                                <div class="input-div pass">
-                                    <div class="i">
-                                        <i class="fas fa-lock"></i>
-                                    </div>
-                                    <div class="div">
-                                        <h5 class="text-white">Confirm Password</h5>
                                         <input type="password" class="input" name="password" required>
                                     </div>
                               
                                 </div>
+
                                 <% if(typeof error != "undefined") {%>
                                     <div class="div">
-                                    <h5 style="color: red;"><%= "Error: User not found"; %></h5>
+                                        <h5 style="color: red;"><%= "Error: User not found"; %></h5>
                                    </div>
-                                    <% } %>
+                                <% } %>
+
                             <button type="submit" class="btn">Login</button>
                             <a href="/signup" class="text-white" style=" font-family:'Poppins', sans-serif;">Don't have an account?</a> 
                             <a href="/" class="text-white" style=" font-family:'Poppins', sans-serif;">Cancel</a>
