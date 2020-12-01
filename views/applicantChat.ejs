@@ -23,202 +23,202 @@
  <link rel="stylesheet" href="css/main.css">
 <style>
   .chat {
-                                            width: auto;
-                                            height: 400px;
-                                            border: solid 1px #EEE;
-                                            display: flex;
-                                            flex-direction: column;
-                                            padding: 10px;
-                                            overflow: auto;
-                                            overflow-y: scroll;
-                                          }
-                                          .chat-title {
-                                            flex: 0 1 45px;
-                                            position: relative;
-                                            z-index: 2;
-                                            background: #333;
-                                            color: white;
-                                            text-transform: uppercase;
-                                            text-align: left;
-                                            padding: 10px 10px 10px 50px;
-                                          }
-                                          .chat-title h1, .chat-title h2 {
-                                            font-weight: normal;
-                                            font-size: 14px;
-                                            margin: 0;
-                                            padding: 0;
-                                          }
-                                          .chat-title h2 {
-                                            color: black;
-                                            font-size: 12px;
-                                            letter-spacing: 1px;
-                                          }
-                                          .chat-title .avatar {
-                                            position: absolute;
-                                            z-index: 1;
-                                            top: 8px;
-                                            left: 9px;
-                                            border-radius: 30px;
-                                            width: 30px;
-                                            height: 30px;
-                                            overflow: hidden;
-                                            margin: 0;
-                                            padding: 0;
-                                            border: 2px solid rgba(255, 255, 255, 0.24);
-                                          }
-                                          .chat-title .avatar img {
-                                            width: 100%;
-                                            height: auto;
-                                          }
-                                          
-                                          .messages {
-                                            margin-top: 30px;
-                                            display: flex;
-                                            flex-direction: column;
-                                          }
-                                          
-                                          .message {
-                                            border-radius: 20px;
-                                            padding: 8px 15px;
-                                            margin-top: 5px;
-                                            margin-bottom: 5px;
-                                            display: inline-block;
-                                          }
-                                          
-                                          .yours {
-                                            align-items: flex-start;
-                                          }
-                                          
-                                          .yours .message {
-                                            margin-right: 25%;
-                                            background-color: rgba(226,109,48,1);
-                                            position: relative;
-                                            color: black;
-                                            font-size: 1.5vh;
-                                          }
-                                          
-                                          .yours .message.last:before {
-                                            content: "";
-                                            position: absolute;
-                                            z-index: 0;
-                                            bottom: 0;
-                                            left: -7px;
-                                            height: 20px;
-                                            width: 20px;
-                                            background:rgba(226,109,48,1);
-                                            border-bottom-right-radius: 15px;
-                                          }
-                                          .yours .message.last:after {
-                                            content: "";
-                                            position: absolute;
-                                            z-index: 1;
-                                            bottom: 0;
-                                            left: -10px;
-                                            width: 10px;
-                                            height: 20px;
-                                            background: white;
-                                            border-bottom-right-radius: 10px;
-                                          }
-                                          
-                                          .mine {
-                                            align-items: flex-end;
-                                          }
-                                          
-                                          .mine .message {
-                                            color: white;
-                                            margin-left: 25%;
-                                            background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
-                                            background-attachment: fixed;
-                                            position: relative;
-                                            font-size: 1.5vh;
-                                          }
-                                          
-                                          .mine .message.last:before {
-                                            content: "";
-                                            position: absolute;
-                                            z-index: 0;
-                                            bottom: 0;
-                                            right: -8px;
-                                            height: 20px;
-                                            width: 20px;
-                                            background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
-                                            background-attachment: fixed;
-                                            border-bottom-left-radius: 15px;
-                                          }
-                                          
-                                          .mine .message.last:after {
-                                            content: "";
-                                            position: absolute;
-                                            z-index: 1;
-                                            bottom: 0;
-                                            right: -10px;
-                                            width: 10px;
-                                            height: 20px;
-                                            background: white;
-                                            border-bottom-left-radius: 10px;
-                                          }
-                                          .demoScroll {
-                                            height: 300px;
-                                            overflow-y: auto;
-                                            width: 50px;
-                                          }
-                                          .h600 {
-                                            height: 600px;
-                                          }
-                                          .sc3::-webkit-scrollbar {
-                                            width: 10px;
-                                            height: 10px;
-                                          }
-                                          .sc3::-webkit-scrollbar-track {
-                                            background-color: transparent;
-                                            border-radius: 10px;
-                                          }
-                                          .sc3::-webkit-scrollbar-thumb {
-                                            background-color: rgba(0, 0, 0, 0.4);
-                                            border-radius: 10px;
-                                          }
-                                          .message-box {
-                                            flex: 0 1 40px;
-                                            width: 100%;
-                                            background: #333;
-                                            padding: 10px;
-                                            position: relative;
-                                          }
-                                          .message-box .message-input {
-                                            background: none;
-                                            border: none;
-                                            outline: none !important;
-                                            resize: none;
-                                            color: rgba(255, 255, 255, 0.7);
-                                            font-size: 1.5vh;
-                                            height: 5vh;
-                                            margin: 0;
-                                            min-width: 200px;
-                                            width: 100%;
-                                            max-width: 800px;
-                                          }
-                                          .message-box textarea:focus:-webkit-placeholder {
-                                            color: transparent;
-                                          }
-                                          .message-box .message-submit {
-                                            position: absolute;
-                                            z-index: 1;
-                                            top: 20px;
-                                            right: 10px;
-                                            color: #fff;
-                                            border: none;
-                                            background: #248A52;
-                                            font-size: 1.5vh;
-                                            text-transform: uppercase;
-                                            line-height: 1;
-                                            padding: 6px 10px;
-                                            border-radius: 10px;
-                                            outline: none !important;
-                                            transition: background 0.2s ease;
-                                          }
-                                          .message-box .message-submit:hover {
-                                            background: #1D7745;
-                                          }
+    width: auto;
+    height: 400px;
+    border: solid 1px #EEE;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow: auto;
+    overflow-y: scroll;
+    }
+    .chat-title {
+    flex: 0 1 45px;
+    position: relative;
+    z-index: 2;
+    background: #333;
+    color: white;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 10px 10px 50px;
+    }
+    .chat-title h1, .chat-title h2 {
+    font-weight: normal;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    }
+    .chat-title h2 {
+    color: black;
+    font-size: 12px;
+    letter-spacing: 1px;
+    }
+    .chat-title .avatar {
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: 9px;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.24);
+    }
+    .chat-title .avatar img {
+    width: 100%;
+    height: auto;
+    }
+    
+    .messages {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    }
+    
+    .message {
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    }
+    
+    .yours {
+    align-items: flex-start;
+    }
+    
+    .yours .message {
+    margin-right: 25%;
+    background-color: rgba(226,109,48,1);
+    position: relative;
+    color: black;
+    font-size: 1.5vh;
+    }
+    
+    .yours .message.last:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: -7px;
+    height: 20px;
+    width: 20px;
+    background:rgba(226,109,48,1);
+    border-bottom-right-radius: 15px;
+    }
+    .yours .message.last:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: -10px;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 10px;
+    }
+    
+    .mine {
+    align-items: flex-end;
+    }
+    
+    .mine .message {
+    color: white;
+    margin-left: 25%;
+    background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+    background-attachment: fixed;
+    position: relative;
+    font-size: 1.5vh;
+    }
+    
+    .mine .message.last:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    right: -8px;
+    height: 20px;
+    width: 20px;
+    background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+    background-attachment: fixed;
+    border-bottom-left-radius: 15px;
+    }
+    
+    .mine .message.last:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: -10px;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-left-radius: 10px;
+    }
+    .demoScroll {
+    height: 300px;
+    overflow-y: auto;
+    width: 50px;
+    }
+    .h600 {
+    height: 600px;
+    }
+    .sc3::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    }
+    .sc3::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+    }
+    .sc3::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    }
+    .message-box {
+    flex: 0 1 40px;
+    width: 100%;
+    background: #333;
+    padding: 10px;
+    position: relative;
+    }
+    .message-box .message-input {
+    background: none;
+    border: none;
+    outline: none !important;
+    resize: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5vh;
+    height: 5vh;
+    margin: 0;
+    min-width: 200px;
+    width: 100%;
+    max-width: 800px;
+    }
+    .message-box textarea:focus:-webkit-placeholder {
+    color: transparent;
+    }
+    .message-box .message-submit {
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 10px;
+    color: #fff;
+    border: none;
+    background: #248A52;
+    font-size: 1.5vh;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: 10px;
+    outline: none !important;
+    transition: background 0.2s ease;
+    }
+    .message-box .message-submit:hover {
+    background: #1D7745;
+    }
 </style>
 </head>
 

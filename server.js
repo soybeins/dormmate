@@ -101,6 +101,7 @@ app.get('/signout', (req,res)=>{
     res.redirect('/');
 });
 
+// ============= Functional Routes =========
 app.post('/findUser', (req,res)=>{
     console.log(req.body);
     let data = req.body;
@@ -141,13 +142,14 @@ app.post('/createUser', (req,res)=>{
         console.log("Error creating user.");
         return res.status(401).render('signup', {message:'Please provide an email and/or password.'});
     }
-// ,Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets ?,?,?,?,?,?,?,?
-    var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday) \
-    VALUES (?,?,?,?,?,?,?)';
-    db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday],(err,rows,fields)=>{
+//  ?,?,?,?,?,?,?,?
+    var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
+              Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
+            data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
+            res.redirect('/signup');
             throw err
-            // res.redirect('/signup');
         }
         else{
             console.log("Successfully Inserted!");
