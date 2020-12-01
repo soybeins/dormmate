@@ -154,7 +154,7 @@ app.post('/createUser', (req,res)=>{
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
             res.render('signup',{error:true});
-            db.on('error', function(err) {
+            db.on('error', function(err) { //rethrow errors
                 console.log("[mysql error]",err);
               });
         }
