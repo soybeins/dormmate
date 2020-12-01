@@ -107,10 +107,10 @@ app.post('/findUser', (req,res)=>{
     let data = req.body;
 
     if(!data.username || !data.password){
-        return res.status(401).render('login', {message:'Please provide an email and/or password.'});
+        return res.status(200).render('login', {error:'Please provide an email and/or password.'});
     }
 
-    var sql='SELECT count(UserID) as count,username FROM users WHERE USERNAME = ? && Password = ? ';
+    var sql='SELECT count(UserID) as count,username FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
     db.query(sql,[data.username,data.password],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
@@ -128,7 +128,7 @@ app.post('/findUser', (req,res)=>{
                 res.render('home',{user: user});
             }else{
                 console.log("data not found");
-                res.redirect('/login');
+                res.render('login',{error:'User not found'} );
             }
         }
     });
