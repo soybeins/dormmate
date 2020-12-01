@@ -107,7 +107,7 @@ app.post('/findUser', (req,res)=>{
     let data = req.body;
 
     if(!data.username || !data.password){
-        return res.status(200).render('login', {error:'Please provide an email and/or password.'});
+        return res.status(200).render('login', {error:'true'});
     }
 
     var sql='SELECT count(UserID) as count,username FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
@@ -142,17 +142,19 @@ app.post('/createUser', (req,res)=>{
 
     console.log(data);
 
-    if(!data.username || !data.password){
+    if(!data.username || !data.password || !data.email || !data.gender|| !data.student || !data.bday){
         console.log("Error creating user.");
-        return res.status(401).render('signup', {message:'Please provide an email and/or password.'});
+        return res.render('signup', {error:true,errorMessage:"Please provide all required inputs."});
     }
+
+
 
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
-            res.redirect('/signup');
+            res.redirect('/signup',{error:err});
             throw err
         }
         else{
@@ -161,6 +163,7 @@ app.post('/createUser', (req,res)=>{
         }
     });            
 });
+
 
 
 app.listen(8080);
