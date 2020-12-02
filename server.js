@@ -153,6 +153,7 @@ app.post('/createUser', (req,res)=>{
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
+            console.log("Value exists in db!");
             res.render('signup',{error:true});
             db.on('error', function(err) { //rethrow errors
                 console.log("[mysql error]",err);
