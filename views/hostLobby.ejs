@@ -216,7 +216,8 @@
       </div>
       
         <div class="col-lg-12" style="width: 100%;">
-            <form id="msform">
+            <form id="msform" action="/createLobby" method="POST">
+
                 <!-- progressbar -->
                 <ul id="progressbar">
                   <li class="active">Lobby Setup</li>
@@ -227,94 +228,99 @@
                 <fieldset>
                   <h2 class="fs-title">Create Lobby</h2>
                   <h3 class="fs-subtitle">This is step 1</h3>
-                  <input type="text" class="design text-uppercase" name="title" placeholder="Title" />
-                  <input type="text" class ="design text-uppercase" name="description" placeholder="Description" />
-                  <input type="number" class ="design text-uppercase" name="numberOfRoommates" placeholder="Number of Roommates" />
+                  <hr><label class ="text-dark text-uppercase">Lobby Details</label>
+                  <input type="hidden" value="<%= user[0].userid %>" name="userID">
+                  <input type="text" class="design text" name="title" placeholder="Title" required autofocus/>
+
+                  <!-- <label class ="text-dark text-uppercase">Lobby Description</label> -->
+                  <input type="text" class ="design text" name="description" placeholder="Description" required/>
+
+                  <!-- <label class ="text-dark text-uppercase">Passcode</label> -->
+                  <input type="text" class ="design text" name="password" placeholder="Passcode" required/>
+
+                  <!-- <hr><label class ="text-dark text-uppercase">Number of Roommates</label> -->
+                  <input type="text" class="design" placeholder="Date Created" name="date" onfocus="(this.type='date')" required/>
+                  <input type="number" class ="design text" name="roommates" placeholder="Number of Roommates" required/>
+
                   <label class ="text-dark text-uppercase" for="gender">Gender</label>
-                    <select class="design text-uppercase custom-select btn-success" style="width: 150px;"> 
-                      <option>Male</option> 
-                      <option>Female</option> 
+                    <select class="design text-uppercase custom-select" name="gender" style="width: 150px;"> 
+                      <option value="male">Male</option> 
+                      <option value="female">Female</option> 
                   </select>
                  <br><br>
-                 <div class="slidecontainer">
-                    <label class ="text-dark text-uppercase" >Age Range: </label>
-                    <label class ="text-dark text-uppercase" for="gender" id="demo"></label>
-                    <select class="design text-uppercase custom-select btn-success" style="width:150px;"> 
-                        <option value="andbelow">and below</option> 
-                        <option value="andabove">and above</option> 
-                    </select> 
-                    <div class="col-lg-12" style="left: 70px;">
-                        
-                      </div>
-                    <input type="range" min="16" max="45" value="25" id="myRange">
-                  </div>
-                      <br>
+        
+                  <div class="row">
+                    <div class="col">
+                      <label class ="text-dark text-uppercase" >Minimum Age Range: </label>
+                      <label class ="text-dark text-uppercase" id="demo"></label>
+                      <input type="range" min="16" max="45" name="minAge" id="myRange">
+                    </div>
+                    <div class="col">
+                      <label class ="text-dark text-uppercase" >Maximum Age Range: </label>
+                      <label class ="text-dark text-uppercase" id="demo2"></label>
+                      <input type="range" min="16" max="45" name="maxAge" id="myRange2">
+                    </div>
+                    </div>
+                    
+                    <hr>
                       <a type="button" name="next" class="next action-button btn-success" href="/home" style="border-radius: 25px;">Cancel</a>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>
                   <h2 class="fs-title">Preferences</h2>
                   <h3 class="fs-subtitle">Your desired preference for a roomate</h3>
-                  <label class ="text-dark text-uppercase" for="students">Students Only</label>
+                  <hr><label class ="text-dark text-uppercase" for="students">Students Only</label>
                   <div class="col-lg-12" style="left: 60;">
-                    <select class="design text-uppercase custom-select btn-success" style="width: 120px;"> 
-                      <option value="studentyes">Yes</option> 
-                      <option value="studentno">No</option> 
+                    <select class="design text-uppercase custom-select" name="studentsOnly" style="width: 120px;"> 
+                      <option value="Yes">Yes</option> 
+                      <option value="No">No</option> 
                   </select>
                   </div>
                   <br>
-                  <label class ="text-dark text-uppercase" for="pets">Pets Allowed</label>
+                  <label class ="text-dark text-uppercase" for="pets">No Pets Allowed</label>
                   <div class="col-lg-12">
-                    <select class = "design text-uppercase custom-select btn-success" name="pets" id="pets" style="width: 120px;">     
-                          <option value="dog">Dog</option>
-                          <option value="cat">Cat</option>
-                          <option value="horse">Horse</option>
+                    <select class = "design text-uppercase custom-select" name="pets" id="pets" style="width: 120px;">     
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
                      </select>
                   </div>
                   <br>
-                  <label class ="text-dark text-uppercase" for="smoking">Smoking</label>
+                  <label class ="text-dark text-uppercase" for="smoking">No Smoking</label>
                   <div class="col-lg-12">
-                    <select class="design text-uppercase custom-select btn-success" name="smoking" id="smoke" style="width: 120px;">
-                        <optgroup label="Smoking">
-                          <option value="vape">Vape Only</option>
-                          <option value="anySmoke">Any</option>
-                          <option value="na">Not Allowed</option>
-                        </optgroup>
+                    <select class="design text-uppercase custom-select" name="smoking" id="smoke" style="width: 120px;">
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
                      </select>
                   </div>
                   <br>
-                  <label class ="text-dark text-uppercase" for="Alcohol">Alcohol</label>
+                  <label class ="text-dark text-uppercase" for="Alcohol">No Alcohol</label>
                   <div class="col-lg-12">
-                    <select name="smoking" id="smoke" class="design text-uppercase custom-select btn-success" style="width: 120px;">
-                        <optgroup label="Smoking">
-                          <option value="ldo">Light Drinks Only</option>
-                          <option value="anyAlcohol">Any</option>
-                          <option value="ana">Alcohol Not Allowed</option>
-                        </optgroup>
+                    <select name="alcohol" id="smoke" class="design text-uppercase custom-select" style="width: 120px;">
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
                      </select>
                   </div>
-                  <br>
-                  <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius:25px"/>
+                  <hr>
+                  <input type="button" name="previous" class="previous action-button" value="Previous" style="border-radius:25px"/>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius:25px"/>
                 </fieldset>
                 <fieldset>
                   <h2 class="fs-title">Location</h2>
-                  <h3 class="fs-subtitle">Location Details</h3>
+                  <h3 class="fs-subtitle">Location Details</h3><hr>
                   <div class="row">
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="nameofPlace">Name of Place </label>
-                      <input type="text" class="design text-uppercase" name="name" placeholder="Name" />
-                      <label class ="text-dark text-uppercase"  for="descriptionPlace">Place Description </label>
-                      <input type="text" class="design text-uppercase" name="description" placeholder="Description" />
+                      <input type="text" class="design text" name="name" placeholder="Name" />
+             
                       <label class ="text-dark text-uppercase"  for="placeAddress">Location Address </label>
-                      <input type="text" class="design text-uppercase" name="address" placeholder="Address" />
+                      <input type="text" class="design text" name="address" placeholder="Address" />
                         <div class="row">
                           <div class="col-lg-6">
                             <label class ="text-dark text-uppercase"  for="Currency">Currency: </label>
-                            <select name="currency" id="currency" class="design text-uppercase custom-select btn-success" style="width: 120px;">
+                            <select name="currency" id="currency" class="design text-uppercase custom-select" style="width: 120px;">
                               <optgroup label="Currency">
-                                <option value="ldo">US Dollar</option>
-                                <option value="anyAlcohol">Php Peso</option>
+                                <option value="USD">US Dollar</option>
+                                <option value="PHP">Php Peso</option>
                               </optgroup>
                             </select>
                           </div><br><br><br>
@@ -322,50 +328,36 @@
                             <label class ="text-dark text-uppercase" for="Currency">Rent Amount: </label>
                             <input class="design text-uppercase" type ="number" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
                           </div>
-                        </div>    
+                        </div>
+                        
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
+                            <select name="wifi" id="wifi" class="design text-uppercase custom-select" style="width: 120px;">
+                              <optgroup label="wifi">
+                                <option value="T">Available</option>
+                                <option value="F">Not Available</option>
+                              </optgroup>
+                            </select>
+                          </div>
+                        </div>
                     </div>
   
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="locationImage">Location Image </label>
-                      <input class="design text-uppercase" type="file" accept="image/*" id="imageInput">
+                      <input class="design text" type="file" accept="image/*" id="imageInput">
                       <label class ="text-dark text-uppercase"  for="olBookLink">Online Booking Link </label>
-                      <input type="text" class="design text-uppercase" name="booklink" placeholder="Booking Link" />
+                      <input type="text" class="design text" name="booklink" placeholder="Booking Link" />
                       <label class ="text-dark text-uppercase"  for="email">Email </label>
-                      <input type="email" class="design text-uppercase" name="email" placeholder="Email" />
+                      <input type="email" class="design text" name="email" placeholder="Email" />
                       <label class ="text-dark text-uppercase"  for="telephone">Telephone</label>
-                      <input type="number" class="design text-uppercase" name="telephone" placeholder="Telephone" />
+                      <input type="number" class="design text" name="telephone" placeholder="Telephone" />
                     </div>
+
                   </div>
-                  <div class="row">
-                    <div class="col-lg-3">
-                      <label class ="text-dark text-uppercase"  for="roomatesNumber">Number of Roommates</label>
-                      <input type="number" class="design text-uppercase" name="roomatesNumber" style="height: 3vh;">
-                    </div>
-                    <div class="col-lg-3">
-                      <label class ="text-dark text-uppercase"  for="Currency">Pets </label><br>
-                            <select name="pets" id="pets" class="design text-uppercase custom-select btn-success" style="width: 120px;">
-                              <optgroup label="Pets">
-                                <option value="Dogs">Dogs</option>
-                                <option value="Cats">Cats</option>
-                                <option value="Horse">Horse</option>
-                              </optgroup>
-                            </select>
-                    </div>
-                    <div class="col-lg-3">
-                      <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
-                            <select name="wifi" id="wifi" class="design text-uppercase custom-select btn-success" style="width: 120px;">
-                              <optgroup label="wifi">
-                                <option value="wifiAvail">Available</option>
-                                <option value="wifiNA">Not Available</option>
-                              </optgroup>
-                            </select>
-                    </div>
-                    <div class="col-lg-3">
-                      <button href="#" class=" btn-danger" style="margin-top:5vh; border-radius: 25px;">Delete Location</button>
-                    </div>
-                  </div><br><br><br>
+                  <hr>
                   <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius: 25px;"/>
-                  <input type="submit" name="submit" class="submit action-button btn-success" value="Crete Lobby" style="border-radius: 25px; "/>
+                  <input type="submit" class="submit action-button btn-success" style="border-radius: 25px; "/>
                 </fieldset>
               </form>
         </div>
@@ -375,12 +367,29 @@
  <script>
      var slider = document.getElementById("myRange");
      var output = document.getElementById("demo");
-     output.innerHTML = slider.value; // Display the default slider value
+     var slider2 = document.getElementById("myRange2");
+     var output2 = document.getElementById("demo2");
+     var val1,val2;
+     output.innerHTML = slider.value;
+     output2.innerHTML = slider2.value;
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
+    slider.oninput = function() {
+      val1 = this.value;
+      output.innerHTML = this.value;
+    }
+    slider2.oninput = function() {
+      val2 = this.value;
+      output2.innerHTML = this.value;
+      
+      if(val1 > val2){
+        alert("Minimum must be lesser than maximum");
+        output.innerHTML = 16;
+        output2.innerHTML = 31;
+        val1 = slider.value = 16;
+        val2 = slider2.value = 31;
+      }
+    }
+ 
  </script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -479,9 +488,9 @@ slider.oninput = function() {
         });
     });
     
-    $(".submit").click(function(){
-        return false;
-    })
+    $('.submit').on('click',(function(e) {
+       $( "#msform" ).submit();
+    }));    
     
      </script>
 </body>

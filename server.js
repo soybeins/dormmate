@@ -23,6 +23,7 @@ db.connect((err) =>{
 
 //====== For User Log Session ======
 let user;
+let lobID;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -110,7 +111,7 @@ app.post('/findUser', (req,res)=>{
         return res.status(200).render('login', {error:'true'});
     }
 
-    var sql='SELECT count(UserID) as count,username FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
+    var sql='SELECT count(UserID) as count,username,userid FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
     db.query(sql,[data.username,data.password],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
@@ -139,14 +140,12 @@ app.post('/createUser', (req,res)=>{
     (data.smoker == null)?data.smoker = "No":null;
     (data.alcohol == null)?data.alcohol = "No":null;
     (data.pets == null)?data.pets = "No":null;
-
     console.log(data);
 
     if(!data.username || !data.password || !data.email || !data.gender|| !data.student || !data.bday){
         console.log("Error creating user. Incomplete data");
         return res.render('signup', {error:true,errorMessage:"Please provide all required inputs."});
     }
-
 
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
@@ -164,6 +163,41 @@ app.post('/createUser', (req,res)=>{
             res.redirect('login');
         }
     });            
+});
+
+app.post('/createLobby',(req,res)=>{
+    console.log(req.body);
+    let data = req.body;
+ 
+    var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
+        roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    
+    var sql2 = "INSERT INTO location(lobbyid,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?)";
+
+    db.query(sql1,[data.userID,data.password,data.title,data.description,data.date, 
+        data.roommates,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
+            console.log("Trying to create new lobby");
+            if(err){
+                console.log(err);
+                db.on('error', function(err) { //rethrow errors
+                    console.log("[mysql error]",err);
+                  });               
+            }else{
+                console.log("successfully inserted!");
+            }
+    });
+    db.query("SELECT lobbyid from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
+        if(!err){
+            lobID = rows[0].lobbyid;   
+            console.log(lobID);
+            db.query(sql2, [lobID,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
+                if(!err){
+                    console.log("successfully inserted location!");
+                }
+            });
+        }
+    });
+
 });
 
 
