@@ -61,7 +61,11 @@
                     <p class="text-white pt-20 pb-20">
                         <br> <strong>Find or Host one now!.</strong>
                     </p>
-                    <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;
+                    <% if(lobID > 0){ %>
+                    <a href="#" class="primary-btn text-uppercase">My Lobby</a> &nbsp;
+                    <% } else {%>
+                    <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;      
+                    <% }%>
                     <a href="/findL" class="primary-btn text-uppercase">Find</a>
                 </div>
                 <div class="col-lg-5 banner-right">

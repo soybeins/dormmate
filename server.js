@@ -1,3 +1,5 @@
+const e = require('express');
+
 const express = require('express'),
       app = express(),
       mysql = require('mysql'),
@@ -31,7 +33,7 @@ app.get('/', (req,res) => {
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('home', {user:user});
+        res.render('home', {user:user,lobID:lobID});
     }
 });
 
@@ -39,7 +41,7 @@ app.get('/home', (req,res) => {
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('home', {user:user});
+        res.render('home', {user:user,lobID:lobID});
     }
 });
 
@@ -47,7 +49,7 @@ app.get('/login', (req,res)=>{
     if(!loggedIn){
         res.render('login');       
     }else{
-        res.render('home', {user:user});
+        res.render('home', {user:user,lobID:lobID});
     } 
 });
 
@@ -55,7 +57,7 @@ app.get('/signup', (req,res)=>{
     if(!loggedIn){
         res.render('signup');       
     }else{
-        res.render('home', {user:user});
+        res.render('home', {user:user,lobID:lobID});
     } 
 });
 
@@ -64,7 +66,7 @@ app.get(('/findL'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('findLobby', {user:user});
+        res.render('findLobby', {user:user,lobID:lobID});
     }     
 });
 
@@ -73,7 +75,7 @@ app.get(('/room'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('room', {user:user});
+        res.render('room', {user:user,lobID:lobID});
     }
     
 });
@@ -83,7 +85,7 @@ app.get(('/hostL'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('hostLobby', {user:user});
+        res.render('hostLobby', {user:user,lobID:lobID});
     }
     
 });
@@ -92,13 +94,14 @@ app.get(('/joinRoom'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('applicantChat', {user:user});
+        res.render('applicantChat', {user:user,lobID:lobID});
     }
 });
 
 app.get('/signout', (req,res)=>{
     loggedIn = false;
     user = null;
+    lobID = null;
     res.redirect('/');
 });
 
@@ -126,7 +129,22 @@ app.post('/findUser', (req,res)=>{
                 loggedIn = true;
                 console.log("user count = " + user[0].count);
                 console.log("data found");
-                res.render('home',{user: user});
+                db.query("SELECT count(lobbyid) as count,lobbyid from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
+                    console.log("Searching if user has lobby.");
+                    if(err){
+                        console.log(err);      
+                    }else{
+                        if(row[0].count > 0){
+                            lobID = row[0].lobbyid;
+                            console.log(lobID);
+                            res.render('home',{user: user,lobID:lobID});
+                        }else{
+                            lobID=0;
+                            console.log(lobID);
+                            res.render('home',{user: user,lobID:lobID});
+                        }
+                    }
+                });
             }else{
                 console.log("data not found");
                 res.render('login',{error:'User not found'} );
@@ -168,7 +186,8 @@ app.post('/createUser', (req,res)=>{
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
- 
+
+
     var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
         roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
@@ -178,21 +197,18 @@ app.post('/createLobby',(req,res)=>{
         data.roommates,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
             console.log("Trying to create new lobby");
             if(err){
-                console.log(err);
-                db.on('error', function(err) { //rethrow errors
-                    console.log("[mysql error]",err);
-                  });               
+                console.log(err);         
             }else{
-                console.log("successfully inserted!");
+                console.log("successfully inserted lobby!");
             }
     });
     db.query("SELECT lobbyid from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
         if(!err){
             lobID = rows[0].lobbyid;   
-            console.log(lobID);
             db.query(sql2, [lobID,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
                 if(!err){
                     console.log("successfully inserted location!");
+                    res.render('home',{user: user,lobID:lobID});
                 }
             });
         }
