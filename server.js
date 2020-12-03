@@ -106,6 +106,8 @@ app.get('/signout', (req,res)=>{
 });
 
 // ============= Functional Routes =========
+
+//finding user route a.k.a. login with validation//
 app.post('/findUser', (req,res)=>{
     console.log(req.body);
     let data = req.body;
@@ -153,6 +155,7 @@ app.post('/findUser', (req,res)=>{
     });
 });
 
+//creating user route with validation//
 app.post('/createUser', (req,res)=>{
     let data = req.body; 
     (data.smoker == null)?data.smoker = "No":null;
@@ -183,6 +186,7 @@ app.post('/createUser', (req,res)=>{
     });            
 });
 
+//creating lobby route//
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
