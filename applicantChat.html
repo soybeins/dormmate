@@ -82,6 +82,7 @@
                                             padding: 8px 15px;
                                             margin-top: 5px;
                                             margin-bottom: 5px;
+                                            font-size:6vh;
                                             display: inline-block;
                                           }
                                           
@@ -219,6 +220,18 @@
                                           .message-box .message-submit:hover {
                                             background: #1D7745;
                                           }
+                                          .container-host{
+                                            height: auto;
+                                            justify-content: center;
+                                            align-items: center;
+                                          }
+                                          .btn-application{
+                                            border-radius: 22px;
+                                            border: none;
+                                          }
+                                          .name-and-time{
+                                            font-size: 1.2vh;
+                                          }
 </style>
 </head>
 
@@ -262,20 +275,80 @@
         <div class="col-lg-6">
             <a href="insideRoom.html" class="arrow-button"><span class="arrow-left slide-right">BACK</span></a>
         </div>
-        <div class="col-lg-12">
-
+        <div class="col-lg-12"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="column container-host">
+            <div class="chat-title sticky-top">
+              <h1 class="text-white">Soy Lebumfacil</h1>
+              <h2 class="text-white">Host</h2>
+              <figure class="avatar">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+            </div>
+            <br><h3>Current Applicants:</h3>
+            <div class="chat-title sticky-top">
+              <h1 class="text-white">Hosea Barriga</h1>
+              <h2 class="text-white">Applicant</h2>
+              <figure class="avatar">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+            </div><br>
+            <div class="chat-title sticky-top">
+              <h1 class="text-white">Mary Therese Alegre</h1>
+              <h2 class="text-white">Applicant</h2>
+              <figure class="avatar">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+            </div>
+            <br><h3>Pending Applications:</h3>
+            <div class="chat-title sticky-top">
+              <h1 class="text-white">James Karl Sia</h1>
+              <h2 class="text-white">Pending Applicant</h2><br>
+              <button class="btn-success btn-application">Accept</button>
+              <button class="btn-danger btn-application">Decline</button>
+              <figure class="avatar">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+            </div>
+          </div>
+          
         </div>
-        <div class="col-lg-12">
-            <div class="chat sc3">
-                <div class="chat-title sticky-top">
-                    <h1 class="text-white">Soy Lebumfacil</h1>
-                    <h2 class="text-white">Host</h2>
-                    <figure class="avatar">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
-                  </div>
-                <div class="mine messages">
+        <div class="col-lg-8">
+          <div class="chat sc3">
+              <div class="chat-title sticky-top">
+                  <h1 class="text-white">Soy Lebumfacil</h1>
+                  <h2 class="text-white">Host</h2>
+                  <figure class="avatar">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+                </div>
+              <div class="mine messages">
+                <div class="message last">
+                  <span class="name-and-time">Soy Lebumfacil 19:54<br></span>
+                  Mafumafu
+                  
+                 </div>
+                 
+              </div>
+              <div class="yours messages">
+                <div class="message">
+                  Hey!
+                </div>
+                <div class="message">
+                  You there?
+                </div>
+                <div class="message last">
+                  Hello, how's it going?
+                </div>
+              </div>
+              <div class="mine messages">
+                <div class="message">
+                  Allan Gamay D
+                </div> 
+                <div class="message last">
+                  How about you?
+                 </div>
+              </div>
+              <div class="mine messages">
                   <div class="message last">
-                    Mafumafu
+                    Dude
                    </div>
                 </div>
                 <div class="yours messages">
@@ -291,41 +364,17 @@
                 </div>
                 <div class="mine messages">
                   <div class="message">
-                    Allan Gamay D
+                    Great thanks!
                   </div> 
                   <div class="message last">
                     How about you?
                    </div>
                 </div>
-                <div class="mine messages">
-                    <div class="message last">
-                      Dude
-                     </div>
-                  </div>
-                  <div class="yours messages">
-                    <div class="message">
-                      Hey!
-                    </div>
-                    <div class="message">
-                      You there?
-                    </div>
-                    <div class="message last">
-                      Hello, how's it going?
-                    </div>
-                  </div>
-                  <div class="mine messages">
-                    <div class="message">
-                      Great thanks!
-                    </div> 
-                    <div class="message last">
-                      How about you?
-                     </div>
-                  </div>
-              </div>
-              <div class="message-box">
-                <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-                <button type="submit" class="message-submit">Send</button>
-              </div>
+            </div>
+            <div class="message-box">
+              <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+              <button type="submit" class="message-submit">Send</button>
+            </div>
         </div>
       </div>
      </div>
