@@ -80,6 +80,16 @@ app.get(('/room'), (req,res)=>{
     
 });
 
+app.get(('/myRoom'), (req,res)=>{
+    
+    if(!loggedIn){
+        res.render('index');       
+    }else{
+        res.render('myRoom', {user:user,lobID:lobID});
+    }
+    
+});
+
 app.get(('/hostL'), (req,res)=>{
     
     if(!loggedIn){
@@ -138,11 +148,11 @@ app.post('/findUser', (req,res)=>{
                     }else{
                         if(row[0].count > 0){
                             lobID = row[0].lobbyid;
-                            console.log(lobID);
+                            console.log("User has lobby = " + lobID);
                             res.render('home',{user: user,lobID:lobID});
                         }else{
                             lobID=0;
-                            console.log(lobID);
+                            console.log("User has no lobby = " + lobID);
                             res.render('home',{user: user,lobID:lobID});
                         }
                     }
@@ -170,6 +180,7 @@ app.post('/createUser', (req,res)=>{
 
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+              
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
@@ -190,31 +201,50 @@ app.post('/createUser', (req,res)=>{
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
-
+    var userid;
 
     var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
         roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
     var sql2 = "INSERT INTO location(lobbyid,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?)";
 
+    var sql3 = "INSERT INTO `roommate`(`LOBBYID`, `USERID`, `DEACTIVATE`, `KICKVOTES`) VALUES (?,?,'Active',0)";
+
     db.query(sql1,[data.userID,data.password,data.title,data.description,data.date, 
         data.roommates,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
-            console.log("Trying to create new lobby");
+            console.log("Trying to create 1 new lobby");
             if(err){
+                res.redirect('/hostL');
                 console.log(err);         
             }else{
                 console.log("successfully inserted lobby!");
             }
     });
-    db.query("SELECT lobbyid from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
+    db.query("SELECT lobbyid,lobbyhostid from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
+        console.log("2");
         if(!err){
             lobID = rows[0].lobbyid;   
+            userid = rows[0].lobbyhostid;
+            console.log(lobID);
             db.query(sql2, [lobID,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
+                console.log("3" + lobID);
                 if(!err){
                     console.log("successfully inserted location!");
-                    res.render('home',{user: user,lobID:lobID});
+                    db.query(sql3,[lobID,userid],(err,rows,fields) => {
+                        console.log("4");
+                        console.log(lobID);
+                        if(err){
+                            throw err;
+                        }else{
+                            console.log("successfully inserted as roommate!");
+                            console.log(lobID);
+                            console.log(user);
+                            res.render('home',{user: user,lobID:lobID});
+                        }
+                    });
+
                 }
-            });
+            });            
         }
     });
 
