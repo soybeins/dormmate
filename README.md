@@ -1,6 +1,6 @@
 # Dormmate: A Roommate Finding App with Live Chat
 
-![Photos of Roommates](https://lifeedited.com/wp-content/themes/artisan/img_resize/timthumb.php?src=https://lifeedited.com/wp-content/uploads/2013/07/roommates.jpg&w=945&zc=1)
+![Photos of Roommates](https://happenings.lpu.in/wp-content/uploads/2019/07/roommate.jpg)
 
 ## Abstract
 
