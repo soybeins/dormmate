@@ -1,6 +1,6 @@
 # Dormmate: A Roommate Finding App with Live Chat
 
-![Photos of Roommates](https://happenings.lpu.in/wp-content/uploads/2019/07/roommate.jpg)
+![Photos of Roommates](https://scontent.fceb2-1.fna.fbcdn.net/v/t1.0-9/70166737_107206194005939_764238504895971328_o.jpg?_nc_cat=106&ccb=2&_nc_sid=e3f864&_nc_eui2=AeHYRb6HpprpQXkG0iOcouIK9AVUAhRQk2D0BVQCFFCTYA-dMbeABRwp8ZegpvrXkyjt8WG6r_Oe6RtmB0rjaPe6&_nc_ohc=RH1vY2AT15gAX9t0y2K&_nc_ht=scontent.fceb2-1.fna&oh=5fae1b078415b1266c938bd0531eae47&oe=5FF19912)
 
 ## Abstract
 
