@@ -25,7 +25,7 @@ db.connect((err) =>{
 
 //====== For User Log Session ======
 let user;
-let lobID;
+let lobby;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -33,7 +33,7 @@ app.get('/', (req,res) => {
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('home', {user:user,lobID:lobID});
+        res.render('home', {user:user,lobby:lobby});
     }
 });
 
@@ -41,7 +41,7 @@ app.get('/home', (req,res) => {
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('home', {user:user,lobID:lobID});
+        res.render('home', {user:user,lobby:lobby});
     }
 });
 
@@ -49,7 +49,7 @@ app.get('/login', (req,res)=>{
     if(!loggedIn){
         res.render('login');       
     }else{
-        res.render('home', {user:user,lobID:lobID});
+        res.render('home', {user:user,lobby:lobby});
     } 
 });
 
@@ -57,7 +57,7 @@ app.get('/signup', (req,res)=>{
     if(!loggedIn){
         res.render('signup');       
     }else{
-        res.render('home', {user:user,lobID:lobID});
+        res.render('home', {user:user,lobby:lobby});
     } 
 });
 
@@ -66,7 +66,7 @@ app.get(('/findL'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('findLobby', {user:user,lobID:lobID});
+        res.render('findLobby', {user:user,lobby:lobby});
     }     
 });
 
@@ -75,7 +75,7 @@ app.get(('/room'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('room', {user:user,lobID:lobID});
+        res.render('room', {user:user,lobby:lobby});
     }
     
 });
@@ -85,7 +85,7 @@ app.get(('/myRoom'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('myRoom', {user:user,lobID:lobID});
+        res.render('myRoom', {user:user,lobby:lobby});
     }
     
 });
@@ -95,7 +95,7 @@ app.get(('/hostL'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('hostLobby', {user:user,lobID:lobID});
+        res.render('hostLobby', {user:user,lobby:lobby});
     }
     
 });
@@ -104,14 +104,14 @@ app.get(('/joinRoom'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('applicantChat', {user:user,lobID:lobID});
+        res.render('applicantChat', {user:user,lobby:lobby});
     }
 });
 
 app.get('/signout', (req,res)=>{
     loggedIn = false;
     user = null;
-    lobID = null;
+    lobby = null;
     res.redirect('/');
 });
 
@@ -141,19 +141,20 @@ app.post('/findUser', (req,res)=>{
                 loggedIn = true;
                 console.log("user count = " + user[0].count);
                 console.log("data found");
-                db.query("SELECT count(lobbyid) as count,lobbyid from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
+                db.query("SELECT count(lobbyid) as count,lobbyid,title,description,date,roommatemax, \
+                roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
                     console.log("Searching if user has lobby.");
                     if(err){
                         console.log(err);      
                     }else{
                         if(row[0].count > 0){
-                            lobID = row[0].lobbyid;
-                            console.log("User has lobby = " + lobID);
-                            res.render('home',{user: user,lobID:lobID});
+                            lobby = row;
+                            console.log("User has lobby = " + lobby[0].lobID);
+                            res.render('home',{user: user,lobby:lobby});
                         }else{
-                            lobID=0;
-                            console.log("User has no lobby = " + lobID);
-                            res.render('home',{user: user,lobID:lobID});
+                            lobby=0;
+                            console.log("User has no lobby = " + lobby);
+                            res.render('home',{user: user,lobby:lobby});
                         }
                     }
                 });
@@ -180,7 +181,7 @@ app.post('/createUser', (req,res)=>{
 
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-              
+
     db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
             data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
         if(err){
@@ -201,7 +202,6 @@ app.post('/createUser', (req,res)=>{
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
-    var userid;
 
     var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
         roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -220,26 +220,28 @@ app.post('/createLobby',(req,res)=>{
                 console.log("successfully inserted lobby!");
             }
     });
-    db.query("SELECT lobbyid,lobbyhostid from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
-        console.log("2");
-        if(!err){
-            lobID = rows[0].lobbyid;   
-            userid = rows[0].lobbyhostid;
-            console.log(lobID);
-            db.query(sql2, [lobID,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
-                console.log("3" + lobID);
+    db.query("SELECT lobbyid,lobbyhostid,title,description,date,roommatemax, \
+    roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
+        console.log("works");
+        if(err){
+            res.redirect('/hostL');
+             throw err;
+        }
+        else{
+            lobby = rows;
+            console.log(rows);
+            db.query(sql2, [lobby[0].lobbyid,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
                 if(!err){
                     console.log("successfully inserted location!");
-                    db.query(sql3,[lobID,userid],(err,rows,fields) => {
-                        console.log("4");
-                        console.log(lobID);
+                    db.query(sql3,[lobby[0].lobbyid,lobby[0].lobbyhostid],(err,rows,fields) => {
                         if(err){
+                            res.redirect('/hostL');
                             throw err;
                         }else{
                             console.log("successfully inserted as roommate!");
-                            console.log(lobID);
+                            console.log(lobby);
                             console.log(user);
-                            res.render('home',{user: user,lobID:lobID});
+                            res.render('home',{user: user,lobby: lobby});
                         }
                     });
 

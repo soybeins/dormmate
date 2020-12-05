@@ -118,20 +118,20 @@
         </div>
         <!-- Title -->
         <div class="col-12">
-            <h1 class="text-dark text">Looking for roomies ages between 9 and 10</h1>
+            <h2 class="text-dark text"> <%= lobby[0].title%></h2>
             <hr>
          </div>
         
          <!-- Creation Details -->
         <div class="col-lg-6" style="text-align: right;">        
             <strong>Created by</strong> : You<br>
-            <strong>Views</strong> : 134 <br>
-            <strong>Max Roommates</strong> : 4
+            <strong>Views</strong> :  <%= lobby[0].views%> <br>
+            <strong>Max Roommates</strong> :  <%= lobby[0].roommatemax%>
         </div>
         <div class="col-lg-6" style="text-align: left;">    
-            <strong>Created on</strong> : 03/12/2020 <br>
-            <strong>Age Minimum</strong> : 24<br>
-            <strong>Age Maximum</strong> : 34
+            <strong>Created on</strong> :  <%= lobby[0].date%> <br>
+            <strong>Age Minimum</strong> :  <%= lobby[0].agemin%><br>
+            <strong>Age Maximum</strong> :  <%= lobby[0].agemax%>
         </div>
 
 
@@ -141,7 +141,7 @@
 
         <div class="col-lg-12">
             <h5 class="text-dark text-uppercase">Description:</h5>
-            Looking for roommates in talamban campus. Preferrably a student with no vices. Stricly no pets allowed. Free Wifi
+            <%= lobby[0].description%>
         </div>
 
         <div class="col-lg-12"><br><br></div>
@@ -156,22 +156,22 @@
             <h5 class="text-dark text-uppercase">Maps:</h5>
             <iframe class= "maps" id="google-maps" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1962.3947691434173!2d123.9144718!3d10.3587063!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998914321a5a7%3A0x6ca3a71407181116!2sUniversity%20Of%20San%20Carlos!5e0!3m2!1sen!2sph!4v1605771808619!5m2!1sen!2sph" width="400" height="200" frameborder="1" style="border:0; width: auto;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
-        
+        <!-- Needs Continuation, Soy stopped here on 06/12/20 12:50am -->
         <div class="col-lg-12">
-            <br>
+            <br> 
             <h5 class="text-dark text-uppercase"> Additional Info:</h5>
             <br>
-            <!-- <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i>       </button> -->
-            <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i>       </button>
+            <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i></button>
+            <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i></button>
 
             <button class="btn btn-success" style="width: initial;">  Pets  <i class="fas fa-paw"></i>           </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i>           </button> -->
+            <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i>           </button>
 
             <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i>   </button> -->
+            <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i>   </button>
 
             <button class="btn btn-success" style="width: initial;">  Wifi <i class="fas fa-wifi"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i>   </button> -->
+            <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i>   </button>
         </div>
 
         <div class="col-lg-12"><hr></div>

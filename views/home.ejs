@@ -61,11 +61,12 @@
                     <p class="text-white pt-20 pb-20">
                         <br> <strong>Find or Host one now!.</strong>
                     </p>
-                    <% if(lobID > 0){ %>
-                    <a href="/myRoom" class="primary-btn text-uppercase">My Lobby</a> &nbsp;
-                    <% } else {%>
-                    <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;      
-                    <% }%>
+                    <% if(lobby  ==  0){ %>
+                        <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;  
+                     <% } else {%>
+                        <% if(lobby[0].lobbyid > 0) %>
+                        <a href="/myRoom" class="primary-btn text-uppercase">My Lobby</a> &nbsp;
+                    <% } %>
                     <a href="/findL" class="primary-btn text-uppercase">Find</a>
                 </div>
                 <div class="col-lg-5 banner-right">
