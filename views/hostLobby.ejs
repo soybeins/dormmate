@@ -390,6 +390,12 @@
       }
     }
  
+    $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+      if(e.keyCode == 13) {
+        e.preventDefault();
+      return false;
+      }
+    });    
  </script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

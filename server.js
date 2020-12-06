@@ -150,11 +150,13 @@ app.post('/findUser', (req,res)=>{
                         if(row[0].count > 0){
                             lobby = row;
                             console.log("User has lobby = " + lobby[0].lobID);
-                            res.render('home',{user: user,lobby:lobby});
+                            // res.render('home',{page: 'home',user: user,lobby:lobby});
+                            res.redirect('/home');
                         }else{
                             lobby=0;
                             console.log("User has no lobby = " + lobby);
-                            res.render('home',{user: user,lobby:lobby});
+                            // res.render('home',{page: 'home',user: user,lobby:lobby});
+                            res.redirect('/home');
                         }
                     }
                 });
@@ -241,7 +243,7 @@ app.post('/createLobby',(req,res)=>{
                             console.log("successfully inserted as roommate!");
                             console.log(lobby);
                             console.log(user);
-                            res.render('home',{user: user,lobby: lobby});
+                            res.redirect('/home');
                         }
                     });
 
