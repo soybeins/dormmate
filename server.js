@@ -61,16 +61,7 @@ app.get('/signup', (req,res)=>{
         res.render('home', {user:user,lobby:lobby});
     } 
 });
-
-app.get(('/findL'), (req,res)=>{
-    
-    if(!loggedIn){
-        res.render('index');       
-    }else{
-        res.render('findLobby', {user:user,lobby:lobby});
-    }     
-});
-
+ 
 app.get(('/viewRoom'), (req,res)=>{
     
     if(!loggedIn){
@@ -128,7 +119,7 @@ app.post('/findUser', (req,res)=>{
         return res.status(200).render('login', {error:'true'});
     }
 
-    var sql='SELECT count(UserID) as count,username,userid FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
+    var sql='SELECT count(UserID) as count,username,userid,profilepicture FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
     db.query(sql,[data.username,data.password],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
@@ -143,7 +134,7 @@ app.post('/findUser', (req,res)=>{
                 loggedIn = true;
                 console.log("user count = " + user[0].count);
                 console.log("data found");
-                db.query("SELECT count(lobbyid) as count,lobbyid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
+                db.query("SELECT count(lobbyid) as count,lobbyid,lobbyhostid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
                 roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
                     console.log("Searching if user has lobby.");
                     if(err){
@@ -231,7 +222,7 @@ app.post('/createLobby',(req,res)=>{
                 console.log("successfully inserted lobby!");
             }
     });
-    db.query("SELECT lobbyid,lobbyhostid,title,description,date,roommatemax, \
+    db.query("SELECT lobbyid,lobbyhostid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
     roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
         console.log("works");   
         if(err){
@@ -265,18 +256,46 @@ app.post('/createLobby',(req,res)=>{
 
 app.get('/enterMyRoom',(req,res)=> {
     var sql = "SELECT name,image,address,rentingbudget,bookinglink,email, \
-    telephone,wifi,upvotes,downvotes,finallocation FROM location WHERE lobbyid = ?";
+             telephone,wifi,upvotes,downvotes,finallocation FROM location WHERE lobbyid = ?";
 
+    var sql2= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
+             u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = 85";
     db.query(sql,[lobby[0].lobbyid],(err,rows,fields)=> {
         if(err){
             throw err
         }else{
             location = rows;
             console.log("Successfully got location details");
-            res.redirect('/myRoom');
+            db.query(sql2,(err,row)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(row);
+                    res.render('myRoom',{user:user,lobby:lobby,location:location,roommate:row});
+                }
+            });
         }
     });
 })
+
+app.get('/findL', (req,res)=>{
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE, \
+    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l where u.USERID = l.LOBBYHOSTID";
+
+    if(!loggedIn){
+        return res.render('index');       
+    }else{
+        db.query(sql,(err,row)=>{
+            console.log("Searching all lobbies...");
+            if (err){
+                throw err;
+            }else{
+                console.log(row);
+                res.render('findLobby', {user:user,lobby:lobby,lobbies:row});
+            }
+        });
+    }     
+});
 
 
 

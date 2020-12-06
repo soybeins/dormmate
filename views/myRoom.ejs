@@ -191,85 +191,28 @@
         <div class="col-lg-12"><hr></div>
 
         <div class="col-lg-12">
-            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: 5/5</h5>
+
+            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: <%= lobby[0].roommatecount%>/<%= lobby[0].roommatemax%></h5>
+            <% console.log("Roomates are")%>
+            <% console.log(roommate)%>
+            <% for(var i = 0;i < roommate.length;i++) {%>
+                <!-- <% var roomie = roommate[i]%> -->
             <div class="row">
                 <div class="profile-card">
+                    <% if(user[0].userid == lobby[0].lobbyhostid ){ %>
                     <span class="pro">Host</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Hosea Barriga</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-    
-                <div class="profile-card">
+                    <% }else {%>
                     <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Mary Therese Alegre</h5>
+                    <%}%>
+                    <img class="round" src='<%= roommate[i].PROFILEPICTURE%>' alt="user" />
+                    <h5 class="text-dark"><%= roommate[i].USERNAME%></h5>
                     <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
+                        <%= roommate[i].FIRSTNAME + ' ' + roommate[i].LASTNAME %><br>
+                        <i class="fas fa-thumbs-up"></i>&nbsp;<%= roommate[i].UPVOTE%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommate[i].DOWNVOTE%>
                     </div>
                 </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Monica Barrientos</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Allan Bargamento</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
+            <%}%>
+        
             </div>
         </div>
       </div>
