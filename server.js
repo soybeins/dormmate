@@ -26,6 +26,7 @@ db.connect((err) =>{
 //====== For User Log Session ======
 let user;
 let lobby;
+let location;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -142,7 +143,7 @@ app.post('/findUser', (req,res)=>{
                 console.log("user count = " + user[0].count);
                 console.log("data found");
                 db.query("SELECT count(lobbyid) as count,lobbyid,title,description,date,roommatemax, \
-                roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
+                roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
                     console.log("Searching if user has lobby.");
                     if(err){
                         console.log(err);      
@@ -206,14 +207,14 @@ app.post('/createLobby',(req,res)=>{
     let data = req.body;
 
     var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
-        roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
     var sql2 = "INSERT INTO location(lobbyid,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?)";
 
     var sql3 = "INSERT INTO `roommate`(`LOBBYID`, `USERID`, `DEACTIVATE`, `KICKVOTES`) VALUES (?,?,'Active',0)";
 
     db.query(sql1,[data.userID,data.password,data.title,data.description,data.date, 
-        data.roommates,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
+        data.roommates,1,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
             console.log("Trying to create 1 new lobby");
             if(err){
                 res.redirect('/hostL');
@@ -223,7 +224,7 @@ app.post('/createLobby',(req,res)=>{
             }
     });
     db.query("SELECT lobbyid,lobbyhostid,title,description,date,roommatemax, \
-    roommatecount,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
+    roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
         console.log("works");
         if(err){
             res.redirect('/hostL');
