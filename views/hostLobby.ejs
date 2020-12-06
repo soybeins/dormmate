@@ -228,15 +228,15 @@
                 <fieldset>
                   <h2 class="fs-title">Create Lobby</h2>
                   <h3 class="fs-subtitle">This is step 1</h3>
+                  <% if ( error == true ) { %>
+                        <h4 style="color: red;"> Error: failure in creating your lobby. Please fill-up all required fields  </h4>
+                  <% } %>
                   <hr><label class ="text-dark text-uppercase">Lobby Details</label>
                   <input type="hidden" value="<%= user[0].userid %>" name="userID">
                   <input type="text" class="design text" name="title" placeholder="Title" required autofocus/>
 
                   <!-- <label class ="text-dark text-uppercase">Lobby Description</label> -->
                   <input type="text" class ="design text" name="description" placeholder="Description" required/>
-
-                  <!-- <label class ="text-dark text-uppercase">Passcode</label> -->
-                  <input type="text" class ="design text" name="password" placeholder="Passcode" required/>
 
                   <!-- <hr><label class ="text-dark text-uppercase">Number of Roommates</label> -->
                   <input type="text" class="design" placeholder="Date Created" name="date" onfocus="(this.type='date')" required/>
@@ -316,11 +316,11 @@
                       <input type="text" class="design text" name="address" placeholder="Address" />
                         <div class="row">
                           <div class="col-lg-6">
-                            <label class ="text-dark text-uppercase"  for="Currency">Currency: </label>
-                            <select name="currency" id="currency" class="design text-uppercase custom-select" style="width: 120px;">
-                              <optgroup label="Currency">
-                                <option value="USD">US Dollar</option>
-                                <option value="PHP">Php Peso</option>
+                            <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
+                            <select name="wifi" id="wifi" class="design text-uppercase custom-select" style="width: 120px;">
+                              <optgroup label="wifi">
+                                <option value="T">Available</option>
+                                <option value="F">Not Available</option>
                               </optgroup>
                             </select>
                           </div><br><br><br>
@@ -329,29 +329,18 @@
                             <input class="design text-uppercase" type ="number" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
                           </div>
                         </div>
-                        
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
-                            <select name="wifi" id="wifi" class="design text-uppercase custom-select" style="width: 120px;">
-                              <optgroup label="wifi">
-                                <option value="T">Available</option>
-                                <option value="F">Not Available</option>
-                              </optgroup>
-                            </select>
-                          </div>
-                        </div>
+                  
                     </div>
   
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="locationImage">Location Image </label>
-                      <input class="design text" type="file" accept="image/*" id="imageInput">
+                      <input class="design text" type="text" placeholder="Please input image link only..." id="imageInput">
                       <label class ="text-dark text-uppercase"  for="olBookLink">Online Booking Link </label>
-                      <input type="text" class="design text" name="booklink" placeholder="Booking Link" />
+                      <input type="text" class="design text" name="booklink" placeholder="Booking Email.." />
                       <label class ="text-dark text-uppercase"  for="email">Email </label>
                       <input type="email" class="design text" name="email" placeholder="Email" />
-                      <label class ="text-dark text-uppercase"  for="telephone">Telephone</label>
-                      <input type="number" class="design text" name="telephone" placeholder="Telephone" />
+                      <label class ="text-dark text-uppercase"  for="telephone">Contact Number</label>
+                      <input type="text" class="design text" name="telephone" placeholder="Contact Number" />
                     </div>
 
                   </div>
@@ -390,12 +379,10 @@
       }
     }
  
-    $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
-      if(e.keyCode == 13) {
-        e.preventDefault();
-      return false;
-      }
-    });    
+    $(document).on("keydown", "form", function(event) { 
+    return event.key != "Enter";
+    });
+
  </script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

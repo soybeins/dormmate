@@ -26,7 +26,7 @@ db.connect((err) =>{
 //====== For User Log Session ======
 let user;
 let lobby;
-let location;
+let loc;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -71,7 +71,7 @@ app.get(('/findL'), (req,res)=>{
     }     
 });
 
-app.get(('/room'), (req,res)=>{
+app.get(('/viewRoom'), (req,res)=>{
     
     if(!loggedIn){
         res.render('index');       
@@ -86,7 +86,7 @@ app.get(('/myRoom'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('myRoom', {user:user,lobby:lobby});
+        res.render('myRoom', {user:user,lobby:lobby,location:location});
     }
     
 });
@@ -96,7 +96,7 @@ app.get(('/hostL'), (req,res)=>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        res.render('hostLobby', {user:user,lobby:lobby});
+        res.render('hostLobby', {user:user,lobby:lobby,error:false});
     }
     
 });
@@ -113,6 +113,7 @@ app.get('/signout', (req,res)=>{
     loggedIn = false;
     user = null;
     lobby = null;
+    loc = null;
     res.redirect('/');
 });
 
@@ -142,7 +143,7 @@ app.post('/findUser', (req,res)=>{
                 loggedIn = true;
                 console.log("user count = " + user[0].count);
                 console.log("data found");
-                db.query("SELECT count(lobbyid) as count,lobbyid,title,description,date,roommatemax, \
+                db.query("SELECT count(lobbyid) as count,lobbyid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
                 roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
                     console.log("Searching if user has lobby.");
                     if(err){
@@ -150,7 +151,7 @@ app.post('/findUser', (req,res)=>{
                     }else{
                         if(row[0].count > 0){
                             lobby = row;
-                            console.log("User has lobby = " + lobby[0].lobID);
+                            console.log("User has lobby = " + lobby[0].lobbyid);
                             // res.render('home',{page: 'home',user: user,lobby:lobby});
                             res.redirect('/home');
                         }else{
@@ -206,14 +207,21 @@ app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
 
-    var sql1 = "INSERT INTO lobby(lobbyhostid,password,title,description,date,roommatemax, \
-        roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
-    var sql2 = "INSERT INTO location(lobbyid,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?)";
+    if(!data.title|| !data.description|| !data.date|| !data.roommates|| !data.name|| !data.address){
+        console.log("Did not create lobby due to lack of information");
+        return res.render('hostLobby', {user:user,error:true});
+    }
+
+
+    var sql1 = "INSERT INTO lobby(lobbyhostid,title,description,date,roommatemax, \
+        roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    
+    var sql2 = "INSERT INTO location(lobbyid,name,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?,?)";
 
     var sql3 = "INSERT INTO `roommate`(`LOBBYID`, `USERID`, `DEACTIVATE`, `KICKVOTES`) VALUES (?,?,'Active',0)";
 
-    db.query(sql1,[data.userID,data.password,data.title,data.description,data.date, 
+    db.query(sql1,[data.userID,data.title,data.description,data.date, 
         data.roommates,1,0,data.minAge,data.maxAge,data.gender,data.studentsOnly,data.smoking,data.alcohol,data.pets], (err,row,fields)=>{
             console.log("Trying to create 1 new lobby");
             if(err){
@@ -225,7 +233,7 @@ app.post('/createLobby',(req,res)=>{
     });
     db.query("SELECT lobbyid,lobbyhostid,title,description,date,roommatemax, \
     roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",data.userID,(err,rows)=>{
-        console.log("works");
+        console.log("works");   
         if(err){
             res.redirect('/hostL');
              throw err;
@@ -233,7 +241,7 @@ app.post('/createLobby',(req,res)=>{
         else{
             lobby = rows;
             console.log(rows);
-            db.query(sql2, [lobby[0].lobbyid,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
+            db.query(sql2, [lobby[0].lobbyid,data.name,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
                 if(!err){
                     console.log("successfully inserted location!");
                     db.query(sql3,[lobby[0].lobbyid,lobby[0].lobbyhostid],(err,rows,fields) => {
@@ -254,6 +262,21 @@ app.post('/createLobby',(req,res)=>{
     });
 
 });
+
+app.get('/enterMyRoom',(req,res)=> {
+    var sql = "SELECT name,image,address,rentingbudget,bookinglink,email, \
+    telephone,wifi,upvotes,downvotes,finallocation FROM location WHERE lobbyid = ?";
+
+    db.query(sql,[lobby[0].lobbyid],(err,rows,fields)=> {
+        if(err){
+            throw err
+        }else{
+            location = rows;
+            console.log("Successfully got location details");
+            res.redirect('/myRoom');
+        }
+    });
+})
 
 
 
