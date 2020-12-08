@@ -111,12 +111,14 @@
 <!-- SOY STOPPED HERE ON 12:19 AM 07/12/2020   -->
       <% for(var i =0; i< lobbies.length;i++){ %>
       <div class="container-card ">
-        <div class='banner-img'></div>
+        <div class='banner-img' style="background-image: url('<%=lobbies[i].IMAGE %>')"></div>
         <img src='<%=lobbies[i].PROFILEPICTURE %>' alt='profile image' class="profile-img">
         <p class="roomNumber text-dark"><%=lobbies[i].TITLE %></p>
         <p class="description"><%=lobbies[i].DESCRIPTION %></p>
-        <strong>Views</strong> :  <%= lobbies[0].VIEWS%><br>
-        <strong>Room Members:</strong> <%= lobbies[0].ROOMMATECOUNT %>/<%= lobbies[0].ROOMMATEMAX %></h5>
+        <i class="fas fa-map-marker-alt"></i> &nbsp; <%= lobbies[i].ADDRESS %><br>
+        <strong>Created by</strong> :  <%= lobbies[i].USERNAME%><br>
+        <strong>Views</strong> :  <%= lobbies[i].VIEWS%><br>
+        <strong>Room Members:</strong> <%= lobbies[i].ROOMMATECOUNT %>/<%= lobbies[i].ROOMMATEMAX %></h5>
         <ul>
           <li><a href="/viewRoom"><i class="fas fa-door-open"></i> Enter</a></li>
 

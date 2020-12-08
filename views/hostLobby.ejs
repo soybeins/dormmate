@@ -174,6 +174,7 @@
   cursor: pointer; /* Cursor on hover */
 }
  </style>
+
 </head>
 
 <body>
@@ -229,17 +230,18 @@
                   <h2 class="fs-title">Create Lobby</h2>
                   <h3 class="fs-subtitle">This is step 1</h3>
                   <% if ( error == true ) { %>
-                        <h4 style="color: red;"> Error: failure in creating your lobby. Please fill-up all required fields  </h4>
+                        <h4 style="color: red;"> Error: Failure in creating your lobby. Please fill-up all required fields  </h4>
                   <% } %>
                   <hr><label class ="text-dark text-uppercase">Lobby Details</label>
+                  
                   <input type="hidden" value="<%= user[0].userid %>" name="userID">
+
                   <input type="text" class="design text" name="title" placeholder="Title" required autofocus/>
 
-                  <!-- <label class ="text-dark text-uppercase">Lobby Description</label> -->
                   <input type="text" class ="design text" name="description" placeholder="Description" required/>
 
-                  <!-- <hr><label class ="text-dark text-uppercase">Number of Roommates</label> -->
-                  <input type="text" class="design" placeholder="Date Created" name="date" onfocus="(this.type='date')" required/>
+                  <input type="hidden" name="date" value='<%= new Date() %>'/>
+
                   <input type="number" class ="design text" name="roommates" placeholder="Number of Roommates" required/>
 
                   <label class ="text-dark text-uppercase" for="gender">Gender</label>
@@ -378,12 +380,10 @@
         val2 = slider2.value = 31;
       }
     }
- 
-    $(document).on("keydown", "form", function(event) { 
-    return event.key != "Enter";
-    });
 
- </script>
+    document.getElementById("theDate").value = new Date();
+ 
+</script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
  <script src="js/vendor/bootstrap.min.js"></script>
@@ -407,7 +407,7 @@
     var current_fs, next_fs, previous_fs; //fieldsets
     var left, opacity, scale; //fieldset properties which we will animate
     var animating; //flag to prevent quick multi-click glitches
-    
+
     $(".next").click(function(){
         if(animating) return false;
         animating = true;

@@ -197,7 +197,6 @@ app.post('/createUser', (req,res)=>{
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
-
     
     if(!data.title|| !data.description|| !data.date|| !data.roommates|| !data.name|| !data.address){
         console.log("Did not create lobby due to lack of information");
@@ -259,14 +258,14 @@ app.get('/enterMyRoom',(req,res)=> {
              telephone,wifi,upvotes,downvotes,finallocation FROM location WHERE lobbyid = ?";
 
     var sql2= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
-             u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = 85";
+             u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = ?";
     db.query(sql,[lobby[0].lobbyid],(err,rows,fields)=> {
         if(err){
             throw err
         }else{
             location = rows;
             console.log("Successfully got location details");
-            db.query(sql2,(err,row)=>{
+            db.query(sql2,[lobby[0].lobbyid],(err,row)=>{
                 if(err){
                     console.log(err);
                 }else{
@@ -279,8 +278,8 @@ app.get('/enterMyRoom',(req,res)=> {
 })
 
 app.get('/findL', (req,res)=>{
-    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE, \
-    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l where u.USERID = l.LOBBYHOSTID";
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
 
     if(!loggedIn){
         return res.render('index');       
@@ -296,6 +295,24 @@ app.get('/findL', (req,res)=>{
         });
     }     
 });
+
+app.get('/deleteRoom',(req,res)=>{
+    console.log("Deleting room..");
+    var sql ="DELETE FROM `roommate` WHERE lobbyid = ?";
+    var sql1 ="DELETE FROM `location` WHERE lobbyid = ?";
+    var sql2 ="DELETE FROM `lobby` WHERE lobbyid = ?";
+
+    db.query(sql,[lobby[0].lobbyid],(err)=>{
+        db.query(sql1,[lobby[0].lobbyid],(err)=>{
+            db.query(sql2,[lobby[0].lobbyid],(err)=>{
+                if(!err){
+                    lobby = 0;
+                    res.redirect('/home');
+                }
+            });
+        });
+    });
+})
 
 
 
