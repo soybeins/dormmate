@@ -11,6 +11,10 @@
  <meta charset="UTF-8">
  <title>Dormmate</title>
 
+<style>
+
+</style>
+
  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
  <!--
 			CSS
@@ -78,20 +82,6 @@
         </div>
         <!-- End of Empty -->
   
-
-        <!-- <div class="container px-lg-5">
-          <div class="row mx-lg-n5">
-           <div class="col py-3 px-lg-5">
-
-            </div>
-            <h4 class="text-white">Lobby Details</h4>
-            <div class="col py-3 px-lg-5">
-
-            </div>
-          </div>
-        </div> -->
-
-
           <div class="container px-lg-5">
             <div class="row mx-lg-n5">
              <div class="col py-3 px-md-5">
@@ -99,7 +89,7 @@
               </div>
 
               <div class="col py-3 px-md-5">
-                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">JOIN ROOM</span></a>
+                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">JOIN ROOM CHAT</span></a>
               </div>
             </div>
           </div>
@@ -113,149 +103,87 @@
       <div class="row">
         <!-- Lobby Details -->
         <div class="col-12">
-            <h4 class="text-dark text-uppercase"><i class="fas fa-home"></i> &nbsp; Lobby Details</h4>
-        <br>
+            <h4 class="text-dark text-uppercase"><i class="fas fa-home"></i> &nbsp; Lobby Details </h4>
+            <br>
         </div>
         <!-- Title -->
         <div class="col-12">
-            <h1 class="text-dark text">Looking for roomies ages between 9 and 10</h1>
+            <h2 class="text-dark text"> <%= lob.title%></h2>
+            <strong>Created by</strong> :  <%= lob.username%> <br>
             <hr>
          </div>
         
-         <!-- Creation Details -->
-        <div class="col-lg-6" style="text-align: right;">        
-            <strong>Created by</strong> : Sasha Baron Cohen<br>
-            <strong>Views</strong> : 134 <br>
-            <strong>Max Roommates</strong> : 4
-        </div>
-        <div class="col-lg-6" style="text-align: left;">    
-            <strong>Created on</strong> : 03/12/2020 <br>
-            <strong>Age Minimum</strong> : 24<br>
-            <strong>Age Maximum</strong> : 34
-        </div>
-
-
-
-
-        <div class="col-lg-12"><hr></div>
 
         <div class="col-lg-12">
             <h5 class="text-dark text-uppercase">Description:</h5>
-            Looking for roommates in talamban campus. Preferrably a student with no vices. Stricly no pets allowed. Free Wifi
+            <%= lob.description %>
         </div>
+
+        <div class="col-lg-12"><hr></div>
+
+            <!-- Creation Details -->
+            <div class="col-lg-6" style="text-align: right;">     
+            <h5 class="text-dark text-uppercase">Lobby Info:</h5>   
+            <strong>Created on</strong> :  <%= lob.date%> <br>
+            <strong>Age Range</strong> :  <%= lob.agemin%> - <%= lob.agemax%> <br>
+            <strong>Lobby Views</strong> :  <%= lob.views%>  <br>
+            <strong>Max Roommates</strong> :  <%= lob.roommatemax%>
+            </div>
+            <div class="col-lg-6" style="text-align: left;">    
+            <h5 class="text-dark text-uppercase">Location Info:</h5>
+            <strong>Name of Place</strong> : <%= lob.name %><br>
+            <strong>Address</strong> : <%= lob.address %><br>
+            <strong>Booking Link</strong> : <%= lob.link %><br>
+            <strong>Contact Number</strong>: <%= lob.telephone %><br>
+            </div>
+
 
         <div class="col-lg-12"><br><br></div>
-
+<!-- 
         <div class="col-lg-6">
-            <h5 class="text-dark text-uppercase">Location Info:</h5>
-            <strong>Address</strong> :6000 Nasipit Road, Lungsod ng Cebu, Lalawigan ng Cebu<br>
-            <strong>Booking Link</strong> : none
-        </div>
+   
+        </div> -->
 
-        <div class="col-lg-6">
-            <h5 class="text-dark text-uppercase">Maps:</h5>
-            <iframe class= "maps" id="google-maps" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1962.3947691434173!2d123.9144718!3d10.3587063!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998914321a5a7%3A0x6ca3a71407181116!2sUniversity%20Of%20San%20Carlos!5e0!3m2!1sen!2sph!4v1605771808619!5m2!1sen!2sph" width="400" height="200" frameborder="1" style="border:0; width: auto;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        </div>
-        
         <div class="col-lg-12">
-            <br>
+            <img src='<%= lob.image %>'class="img-thumbnail">  
+        </div>
+        <!-- Needs Continuation, Soy stopped here on 06/12/20 12:50am -->
+        <div class="col-lg-12">
+            <br> 
             <h5 class="text-dark text-uppercase"> Additional Info:</h5>
             <br>
-            <!-- <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i>       </button> -->
-            <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i>       </button>
+            <% if(lob.nosmoking == 'T'){%>
+                <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i></button>
+            <% }else{ %>
+                <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i></button>
+            <% }%>
 
-            <button class="btn btn-success" style="width: initial;">  Pets  <i class="fas fa-paw"></i>           </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i>           </button> -->
+            <% if(lob.nopets == 'T'){%>  
+            <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i></button>
+            <% } else { %>
+            <button class="btn btn-success" style="width: initial;">  Pets  <i class="fas fa-paw"></i></button>
+            <% } %>
 
-            <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i>   </button> -->
-
-            <button class="btn btn-success" style="width: initial;">  Wifi <i class="fas fa-wifi"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i>   </button> -->
+            <% if(lob.noalcohol == 'T'){%> 
+            <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i></button>
+            <% } else {%>
+            <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i></button>
+            <% } %>
+            
+    
+            <% if(lob.wifi == 'T'){%> 
+                <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i></button>
+            <% } else {%>
+                <button class="btn btn-success" style="width: initial;">  Wifi <i class="fas fa-wifi"></i></button>
+            <% } %>
+            
         </div>
 
         <div class="col-lg-12"><hr></div>
 
         <div class="col-lg-12">
-            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: 5/5</h5>
-            <div class="row">
-                <div class="profile-card">
-                    <span class="pro">Host</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Hosea Barriga</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-    
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Mary Therese Alegre</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Monica Barrientos</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Allan Bargamento</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
+
+            <!-- NEED ROOMMATES IN EACH ROOM SOY STOPPED HERE ON 12:27AM 09/12/2020 -->
             </div>
         </div>
       </div>
@@ -267,7 +195,12 @@
  </section>
  <!-- End banner Area -->
 
-
+  <script>
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+</script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
  <script src="js/vendor/bootstrap.min.js"></script>

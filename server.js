@@ -62,16 +62,6 @@ app.get('/signup', (req,res)=>{
     } 
 });
  
-app.get(('/viewRoom'), (req,res)=>{
-    
-    if(!loggedIn){
-        res.render('index');       
-    }else{
-        res.render('room', {user:user,lobby:lobby});
-    }
-    
-});
-
 app.get(('/myRoom'), (req,res)=>{
     
     if(!loggedIn){
@@ -278,8 +268,9 @@ app.get('/enterMyRoom',(req,res)=> {
 })
 
 app.get('/findL', (req,res)=>{
-    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
-    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET,loc.BOOKINGLINK, \
+    loc.EMAIL,loc.TELEPHONE,loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
 
     if(!loggedIn){
         return res.render('index');       
@@ -314,6 +305,16 @@ app.get('/deleteRoom',(req,res)=>{
     });
 })
 
+app.post(('/viewRoom'), (req,res)=>{
+    console.log(req.body);
+    let data = req.body
+    if(!loggedIn){
+        res.render('index');       
+    }else{
+        res.render('room', {user:user,lobby:lobby,lob:data});
+    }
+    
+});
 
 
 app.listen(8080);

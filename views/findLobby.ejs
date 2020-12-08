@@ -102,7 +102,7 @@
              <button class="btn btn-danger">Filter<i class="fas fa-magic ml-1"></i></button> 
           </div> -->
         </div>
-
+        <hr>
       </div>
 
 
@@ -120,7 +120,38 @@
         <strong>Views</strong> :  <%= lobbies[i].VIEWS%><br>
         <strong>Room Members:</strong> <%= lobbies[i].ROOMMATECOUNT %>/<%= lobbies[i].ROOMMATEMAX %></h5>
         <ul>
-          <li><a href="/viewRoom"><i class="fas fa-door-open"></i> Enter</a></li>
+          <li>       
+            
+            <form action="/viewRoom" method="POST">  
+              <input type="hidden" value="<%= lobbies[i].USERID %>" name="userid">
+              <input type="hidden" value="<%= lobbies[i].LOBBYID %>" name="lobbyid">
+              <input type="hidden" value="<%= lobbies[i].USERNAME %>" name="username">
+              <input type="hidden" value="<%= lobbies[i].IMAGE %>" name="image">
+              <input type="hidden" value="<%= lobbies[i].ADDRESS %>" name="address">
+              <input type="hidden" value="<%= lobbies[i].RENTINGBUDGET %>" name="rent">
+              <input type="hidden" value="<%= lobbies[i].BOOKINGLINK %>" name="link">
+              <input type="hidden" value="<%= lobbies[i].EMAIL %>" name="email">
+              <input type="hidden" value="<%= lobbies[i].TELEPHONE %>" name="telephone">
+              <input type="hidden" value="<%= lobbies[i].WIFI %>" name="wifi">
+              <input type="hidden" value="<%= lobbies[i].NAME %>" name="name">
+              <input type="hidden" value="<%= lobbies[i].TITLE %>" name="title">
+              <input type="hidden" value="<%= lobbies[i].DESCRIPTION %>" name="description">
+              <input type="hidden" value="<%= lobbies[i].VIEWS %>" name="views">
+              <input type="hidden" value="<%= lobbies[i].NOSMOKING %>" name="nosmoking">
+              <input type="hidden" value="<%= lobbies[i].NOALCOHOL %>" name="noalcohol">
+              <input type="hidden" value="<%= lobbies[i].NOPETS %>" name="nopets">
+              <input type="hidden" value="<%= lobbies[i].DATE %>" name="date">
+              <input type="hidden" value="<%= lobbies[i].ROOMMATEMAX %>" name="roommatemax">
+              <input type="hidden" value="<%= lobbies[i].ROOMMATECOUNT %>" name="roommatecount">
+              <input type="hidden" value="<%= lobbies[i].AGEMIN %>" name="agemin">
+              <input type="hidden" value="<%= lobbies[i].AGEMAX %>" name="agemax">
+              <input type="hidden" value="<%= lobbies[i].STUDENTSONLY %>" name="studOnly">
+              <input type="hidden" value="<%= lobbies[i].GENDERSELECT %>" name="gender">
+              <button type="submit"  class="btn btn-success" style="padding:.5rem;border-radius:25px;background: none;color: rgb(51, 43, 43);" placeholder="Enter"> 
+                <i class="fas fa-door-open"></i>Enter
+              </button>              
+            </form>
+          </li>
 
           <li><a href="#"><i class="fas fa-bookmark"></i></a></li>
         </ul>
