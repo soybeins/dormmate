@@ -239,8 +239,8 @@
                   <input type="text" class="design text" name="title" placeholder="Title" required autofocus/>
 
                   <input type="text" class ="design text" name="description" placeholder="Description" required/>
-
-                  <input type="hidden" name="date" value='<%= new Date() %>'/>
+                    <% var date = new Date() %>
+                  <input type="hidden" name="date" value='<%= date.toISOString().slice(0,10); %>'/>
 
                   <input type="number" class ="design text" name="roommates" placeholder="Number of Roommates" required/>
 

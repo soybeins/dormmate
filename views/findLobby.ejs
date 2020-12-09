@@ -73,6 +73,9 @@
           </div>
         </div>
       </div>
+ 
+
+    
       <!-- End of Empty -->
 
       <!-- Search form -->
@@ -84,10 +87,24 @@
           <h4 class="text-white">Search for Lobbies & &nbsp;</h4>
           <h4 class="text-white">Filter Lobbies </h4>
           <div class="col py-3 px-lg-5">
-
+         
           </div>
         </div>
       </div>
+
+      <% if(lobbies.length == 0){ %>
+        <div class="container px-lg-5">
+          <div class="row mx-lg-n5">
+            <div class="col py-3 px-lg-5">
+            </div>
+         
+              <h3>Sorry, no rooms found with that location.... </h3>
+           
+            <div class="col py-3 px-lg-5">
+            </div>
+          </div>
+        </div>
+        <% } %>
 
       <div class="container px-lg-5">
         <div class="row mx-lg-n5">
@@ -109,6 +126,7 @@
       <!-- Cards -->
     <div class="wrapper-flex">
 <!-- SOY STOPPED HERE ON 12:19 AM 07/12/2020   -->
+
       <% for(var i =0; i< lobbies.length && lobbies[i].ADDRESS ;i++){ %>
       <div class="container-card ">
         <div class='banner-img' style="background-image: url('<%=lobbies[i].IMAGE %>')"></div>
