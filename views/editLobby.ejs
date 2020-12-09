@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-us" class="no-js">
+
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+ <link rel="shortcut icon" href="img/fav.png">
+ <meta name="author" content="codepixer">
+ <meta name="description" content="">
+ <meta name="keywords" content="">
+ <meta charset="UTF-8">
+ <title>Dormmate</title>
+
+ <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+ <!--  CSS	============================================= -->
+ <link rel="stylesheet" href="css/linearicons.css">
+ <link rel="stylesheet" href="css/font-awesome.min.css">
+ <link rel="stylesheet" href="css/bootstrap.css">
+ <link rel="stylesheet" href="css/magnific-popup.css">
+ <link rel="stylesheet" href="css/nice-select.css">
+ <link rel="stylesheet" href="css/animate.min.css">
+ <link rel="stylesheet" href="css/owl.carousel.css">
+ <link rel="stylesheet" href="css/main.css">
+
+ <style>
+     #msform {
+	width: auto;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+	width: 100px;
+  background: #892cdc;
+  font-family: 'Poppins';
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #892cdc;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #892cdc;
+	color: white;
+}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #892cdc; /* Purple background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #892cdc; /* Purple background */
+  cursor: pointer; /* Cursor on hover */
+}
+ </style>
+
+</head>
+
+<body>
+
+ <header id="header" id="home">
+  <div class="container">
+   <div class="row align-items-center justify-content-between d-flex">
+    <div id="logo">
+      <a href="/home"> <h1 class="text-white text-uppercase">Dormmate</h1> </a>
+    </div>
+    <nav id="nav-menu-container">
+        <ul class="nav-menu">
+            <li class="menu-active"><a href="/home">Home</a></li>
+            <li><a href="/home#about">About</a></li>
+                <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
+                    <ul>
+                        <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                    </ul>
+                </li>
+        </ul>
+    </nav>
+    <!-- #nav-menu-container -->
+   </div>
+  </div>
+ </header>
+ <!-- #header -->
+
+
+ <!-- start banner Area -->
+ <section id="home">
+  <div class="container">   
+
+    <div class="container px-lg-5">
+        <div class="row mx-lg-n5">
+          <div class="col py-3 px-lg-5">
+          </div>
+          <div class="col py-3 px-lg-5">
+          </div>
+        </div>
+      </div>
+      
+        <div class="col-lg-12" style="width: 100%;">
+            <form id="msform" action="/updateLobby" method="POST">
+
+                <!-- progressbar -->
+                <ul id="progressbar">
+                  <li class="active">Lobby Setup</li>
+                  <li>Preferences</li>
+                  <li>Location</li>
+                </ul>
+                <!-- fieldsets -->
+                <fieldset>
+                  <h2 class="fs-title">Update Lobby</h2>
+                  <h3 class="fs-subtitle">Please provide sufficient information</h3>
+                  <% if ( error == true ) { %>
+                        <h4 style="color: red;"> Error: Failure in creating your lobby. Please fill-up all required fields  </h4>
+                  <% } %>
+                  <hr><label class ="text-dark text-uppercase">Lobby Details</label>
+                  
+                  <input type="hidden" value="<%= lobby[0].lobbyid %>" name="lobbyid">
+
+                  <input type="text" class="design text"  value="<%= lobby[0].title %>" name="title" placeholder="<%= lobby[0].title %>" required autofocus/>
+
+                  <input type="text" class ="design text"value="<%= lobby[0].description %>" name="description" placeholder="<%= lobby[0].description %>" required/>
+
+                  <input type="number" class ="design text"  value="<%= lobby[0].roommatemax %>" name="roommates" placeholder="<%= lobby[0].roommatemax %>" required/>
+
+                  <label class ="text-dark text-uppercase" for="gender">Gender</label>
+                    <select class="design text-uppercase custom-select"  value="<%= lobby[0].gender %>" name="gender" style="width: 150px;"> 
+                      <option value="male">Male</option> 
+                      <option value="female">Female</option> 
+                  </select>
+                 <br><br>
+        
+                  <div class="row">
+                    <div class="col">
+                      <label class ="text-dark text-uppercase" >Minimum Age Range: </label>
+                      <label class ="text-dark text-uppercase" id="demo"></label>
+                      <input type="range" min="16" max="45"  name="minAge" id="myRange">
+                    </div>
+                    <div class="col">
+                      <label class ="text-dark text-uppercase" >Maximum Age Range: </label>
+                      <label class ="text-dark text-uppercase" id="demo2"></label>
+                      <input type="range" min="16" max="45"  name="maxAge" id="myRange2">
+                    </div>
+                    </div>
+                    
+                    <hr>
+                      <a type="button" name="next" class="next action-button btn-success" href="/enterMyRoom" style="border-radius: 25px;">Cancel</a>
+                  <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
+                </fieldset>
+                <fieldset>
+                  <h2 class="fs-title">Preferences</h2>
+                  <h3 class="fs-subtitle">Your desired preference for a roomate</h3>
+                  <hr><label class ="text-dark text-uppercase" for="students">Students Only</label>
+                  <div class="col-lg-12" style="left: 60;">
+                    <select class="design text-uppercase custom-select" name="studentsOnly" style="width: 120px;"> 
+                      <option value="Yes">Yes</option> 
+                      <option value="No">No</option> 
+                  </select>
+                  </div>
+                  <br>
+                  <label class ="text-dark text-uppercase" for="pets">No Pets Allowed</label>
+                  <div class="col-lg-12">
+                    <select class = "design text-uppercase custom-select" name="pets" id="pets" style="width: 120px;">     
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
+                     </select>
+                  </div>
+                  <br>
+                  <label class ="text-dark text-uppercase" for="smoking">No Smoking</label>
+                  <div class="col-lg-12">
+                    <select class="design text-uppercase custom-select" name="smoking" id="smoke" style="width: 120px;">
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
+                     </select>
+                  </div>
+                  <br>
+                  <label class ="text-dark text-uppercase" for="Alcohol">No Alcohol</label>
+                  <div class="col-lg-12">
+                    <select name="alcohol" id="smoke" class="design text-uppercase custom-select" style="width: 120px;">
+                          <option value="T">Yes</option>
+                          <option value="F">No</option>
+                     </select>
+                  </div>
+                  <hr>
+                  <input type="button" name="previous" class="previous action-button" value="Previous" style="border-radius:25px"/>
+                  <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius:25px"/>
+                </fieldset>
+                <fieldset>
+                  <h2 class="fs-title">Location</h2>
+                  <h3 class="fs-subtitle">Location Details</h3><hr>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label class ="text-dark text-uppercase"  for="nameofPlace">Name of Place </label>
+                      <input type="text" class="design text" value="<%= location[0].name %>" name="name" placeholder="<%= location[0].name %>" />
+             
+                      <label class ="text-dark text-uppercase"  for="placeAddress">Location Address </label>
+                      <input type="text" class="design text" value="<%= location[0].address %>" name="address" placeholder="<%= location[0].address %>" />
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
+                            <select name="wifi" id="wifi" class="design text-uppercase custom-select" style="width: 120px;">
+                              <optgroup label="wifi">
+                                <option value="T">Available</option>
+                                <option value="F">Not Available</option>
+                              </optgroup>
+                            </select>
+                          </div><br><br><br>
+                          <div class="col-lg-6">
+                            <label class ="text-dark text-uppercase" for="Currency">Rent Amount: </label>
+                            <input class="design text-uppercase" type ="number" value="<%= location[0].rentingbudget %>" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
+                          </div>
+                        </div>
+                  
+                    </div>
+  
+                    <div class="col-lg-6">
+                      <label class ="text-dark text-uppercase"  for="locationImage">Location Image </label>
+                      <input class="design text" type="text"  value="<%= location[0].image %>"" name="image" placeholder="Please input image link only..." id="imageInput">
+                      <label class ="text-dark text-uppercase"  for="olBookLink">Online Booking Link </label>
+                      <input type="text" class="design text" value="<%= location[0].bookinglink %>" name="booklink" placeholder="Booking Email.." />
+                      <label class ="text-dark text-uppercase"  for="email">Email </label>
+                      <input type="email" class="design text" value="<%= location[0].email %>"  name="email" placeholder="Email" />
+                      <label class ="text-dark text-uppercase"  for="telephone">Contact Number</label>
+                      <input type="text" class="design text" value="<%= location[0].telephone %>" name="telephone" placeholder="Contact Number" />
+                    </div>
+
+                  </div>
+                  <hr>
+                  <input type="button" name="previous" class="previous action-button btn-success" value="Previous" style="border-radius: 25px;"/>
+                  <input type="submit" class="submit action-button btn-success" style="border-radius: 25px; "/>
+                </fieldset>
+              </form>
+        </div>
+   </div>
+ </section>
+ <!-- End banner Area -->
+ <script>
+     var slider = document.getElementById("myRange");
+     var output = document.getElementById("demo");
+     var slider2 = document.getElementById("myRange2");
+     var output2 = document.getElementById("demo2");
+     var val1,val2;
+     output.innerHTML = slider.value;
+     output2.innerHTML = slider2.value;
+
+    slider.oninput = function() {
+      val1 = this.value;
+      output.innerHTML = this.value;
+    }
+    slider2.oninput = function() {
+      val2 = this.value;
+      output2.innerHTML = this.value;
+      
+      if(val1 > val2){
+        alert("Minimum must be lesser than maximum");
+        output.innerHTML = 16;
+        output2.innerHTML = 31;
+        val1 = slider.value = 16;
+        val2 = slider2.value = 31;
+      }
+    }
+
+    document.getElementById("theDate").value = new Date();
+ 
+</script>
+ <script src="js/vendor/jquery-2.2.4.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="js/vendor/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+ <script src="js/easing.min.js"></script>
+ <script src="js/hoverIntent.js"></script>
+ <script src="js/superfish.min.js"></script>
+ <script src="js/jquery.ajaxchimp.min.js"></script>
+ <script src="js/jquery.magnific-popup.min.js"></script>
+ <script src="js/owl.carousel.min.js"></script>
+ <script src="js/jquery.sticky.js"></script>
+ <script src="js/jquery.nice-select.min.js"></script>
+ <script src="js/parallax.min.js"></script>
+ <script src="js/waypoints.min.js"></script>
+ <script src="js/jquery.counterup.min.js"></script>
+ <script src="js/mail-script.js"></script>
+ <script src="js/main.js"></script>
+ <script>
+     
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $(".next").click(function(){
+        if(animating) return false;
+        animating = true;
+        
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+        
+        //activate next step on progressbar using the index of next_fs
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        
+        //show the next fieldset
+        next_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale current_fs down to 80%
+                scale = 1 - (1 - now) * 0.2;
+                //2. bring next_fs from the right(50%)
+                left = (now * 50)+"%";
+                //3. increase opacity of next_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({
+            'transform': 'scale('+scale+')',
+            'position': 'absolute'
+          });
+                next_fs.css({'left': left, 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+    
+    $(".previous").click(function(){
+        if(animating) return false;
+        animating = true;
+        
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+        
+        //de-activate current step on progressbar
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+        
+        //show the previous fieldset
+        previous_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale previous_fs from 80% to 100%
+                scale = 0.8 + (1 - now) * 0.2;
+                //2. take current_fs to the right(50%) - from 0%
+                left = ((1-now) * 50)+"%";
+                //3. increase opacity of previous_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({'left': left});
+                previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+    
+    $('.submit').on('click',(function(e) {
+       $( "#msform" ).submit();
+    }));    
+    
+     </script>
+</body>
+
+</html>

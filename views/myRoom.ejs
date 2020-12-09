@@ -124,7 +124,14 @@
       <div class="row">
         <!-- Lobby Details -->
         <div class="col-12">
-            <h4 class="text-dark text-uppercase"><i class="fas fa-home"></i> &nbsp; Lobby Details &nbsp; <i style="color: red;" class="fas fa-trash-alt"  data-toggle="modal" data-target="#exampleModal"></i></h4>
+            <h4 class="text-dark text-uppercase"><i class="fas fa-home"></i> &nbsp; Lobby Details &nbsp; <i style="color: red;" class="fas fa-trash-alt"  data-toggle="modal" data-target="#exampleModal"></i> 
+            <form action="/editMyRoom" method="POST">  
+                <input type="hidden" value="<% lobby[0].lobbyid%>">
+                <button type="submit" class="btn" style="background-color:white;border: none;width: 10rem;padding-top: .5rem;padding-bottom: .5rem;color:rgb(26, 76, 37);">
+                  <i class="fas fa-edit"></i> Update Lobby
+                </button> 
+              </form>
+            </h4>
             <br>
         </div>
         <!-- Title -->

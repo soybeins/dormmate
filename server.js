@@ -293,7 +293,7 @@ app.post('/findL', (req,res)=>{
     loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
     l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS \
     from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID where loc.address LIKE ? \
-    AND l.GENDERSELECT in (?,?) AND l.STUDENTSONLY REGEXP ? AND l.NOSMOKING REGEXP ? AND l.NOALCOHOL REGEXP ? AND l.NOPETS REGEXP ?";
+    AND l.GENDERSELECT in (?,?)AND loc.WIFI REGEXP ? AND l.STUDENTSONLY REGEXP ? AND l.NOSMOKING REGEXP ? AND l.NOALCOHOL REGEXP ? AND l.NOPETS REGEXP ?";
     var gender2;
     let locFil = req.body.locFil;
     let gender = req.body.gender;
@@ -317,15 +317,17 @@ app.post('/findL', (req,res)=>{
         gender2 = gender;
     }
 
+    console.log(wifi);
+
     if(!loggedIn){
         return res.render('index');       
     }else{
-        db.query(sql,[locFil,gender,gender2,studOnly,nosmoking,noalcohol,nopets],(err,row)=>{
+        db.query(sql,[locFil,gender,gender2,wifi,studOnly,nosmoking,noalcohol,nopets],(err,row)=>{
             console.log("Searching all lobbies...");
             if (err){
                 throw err;
             }else{
-                console.log(row);
+                // console.log(row);
                 res.render('findLobby', {user:user,lobby:lobby,lobbies:row,locFil:locFil});
             }
         });
@@ -351,28 +353,57 @@ app.get('/deleteRoom',(req,res)=>{
 })
 
 app.get(('/viewRoom'), (req,res)=>{
-    // console.log(req.body.views);
-    // let data = req.body
-
-    // db.query("update lobby set views = ? where lobbyid = ?",[++data.views,data.lobbyid],()=>{})
-
-    // var sql1= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
-    // u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = ?";
-
-    // if(!loggedIn){
-    //     res.render('index');       
-    // }else{
-    //     db.query(sql1,[data.lobbyid],(err,row)=>{
-    //         if(err){
-    //             throw err
-    //         }else{
-    //             let roomie = row;
-    //             res.render('room', {user:user,lobby:lobby,lob:data,roommate:row});
-    //         }
-    //     })
-    // }
     // INSERT viewRoom code below 
 });
+
+app.post('/editMyRoom',(req,res)=>{
+    if(!loggedIn){
+        res.render('index');       
+    }else{
+        res.render('editLobby', {user:user,lobby:lobby,location:location,error:false});
+    }
+})
+
+app.post('/updateLobby',(req,res)=>{
+    console.log(req.body);
+    data = req.body;
+    var sql = "update lobby set title = ?,description = ?,roommatemax = ?, genderselect = ?, agemin = ?, agemax = ?, studentsonly = ?, \
+            nosmoking = ?,nopets = ?,noalcohol = ? where lobbyid = ?";
+    var sql2 = "update location set name = ?,address = ?,wifi = ?, rentingbudget = ?, image = ?, bookinglink = ?, email = ?, telephone = ? where lobbyid = ?";
+
+    db.query(sql,[data.title,data.description,data.roommates,data.gender,data.minAge,data.maxAge,data.studentsOnly,data.smoking,
+            data.pets,data.alcohol,lobby[0].lobbyid],(err)=>{
+        if(err){
+            throw err;
+        }else{
+            db.query(sql2,[data.name,data.address,data.wifi,data.rentAmount,data.image,data.booklink,data.email,data.telephone,data.lobbyid],(err)=>{
+                if(!err){
+                    db.query("SELECT count(lobbyid) as count,lobbyid,lobbyhostid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
+                    roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
+                        console.log("Searching if user has lobby.");
+                        if(err){
+                            console.log(err);      
+                        }else{
+                            if(row[0].count > 0){
+                                lobby = row;
+                                console.log("User has lobby = " + lobby[0].lobbyid);
+                                res.redirect('/home');
+                            }else{
+                                lobby=0;
+                                console.log("User has no lobby = " + lobby);
+                                res.redirect('/home');
+                            }
+                        }
+                    });
+                }
+
+            })
+        }
+
+    })
+
+
+})
 
 
 app.listen(8080);
