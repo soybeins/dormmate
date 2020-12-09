@@ -3285,6 +3285,30 @@
      content: '\25c4';
      padding-right: 0.5em;
    }
-   
+   /* Hoseas Addition */
+   .btn-male {
+    background-color: #37f;
+  }
+   .btn-female {
+     background-color: #f57;
+   }
 
+   .avatar-img {
+    width: 8rem;
+    clip-path: circle(60px at center);
+    box-shadow: -2px 10px 76px -20px rgba(0,0,0,0.75);
+   }
+   .filter-card{
+    padding: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: white;
+    text-align: center;
+    border-radius: 1rem;
+    position: relative;
+    width: 1080px;
+    margin-top: 1rem;
+    /* margin-bottom: 1rem; */
+  }
+  
    
