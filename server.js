@@ -247,8 +247,9 @@ app.get('/enterMyRoom',(req,res)=> {
     var sql2= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
              u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = ?";
   
+    // Update views code //
     db.query("select views from lobby where lobbyid = ?",[lobby[0].lobbyid],(err,row)=>{ if(!err) {lobby[0].views = row[0].views}})
-
+    // ================= //
     db.query(sql,[lobby[0].lobbyid],(err,rows,fields)=> {
         if(err){
             throw err
@@ -268,8 +269,8 @@ app.get('/enterMyRoom',(req,res)=> {
 })
 
 app.get('/findL', (req,res)=>{
-    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET,loc.BOOKINGLINK, \
-    loc.EMAIL,loc.TELEPHONE,loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET,\
+    loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
     l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS \
     from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
  
@@ -281,7 +282,6 @@ app.get('/findL', (req,res)=>{
             if (err){
                 throw err;
             }else{
-                // console.log(row);
                 res.render('findLobby', {user:user,lobby:lobby,lobbies:row,locFil:false});
             }
         });
@@ -289,30 +289,43 @@ app.get('/findL', (req,res)=>{
 });
 
 app.post('/findL', (req,res)=>{
-    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET,loc.BOOKINGLINK, \
-    loc.EMAIL,loc.TELEPHONE,loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET, \
+    loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
     l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS \
-    from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID where loc.address LIKE ?";
- 
+    from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID where loc.address LIKE ? \
+    AND l.GENDERSELECT in (?,?) AND l.STUDENTSONLY REGEXP ? AND l.NOSMOKING REGEXP ? AND l.NOALCOHOL REGEXP ? AND l.NOPETS REGEXP ?";
+    var gender2;
     let locFil = req.body.locFil;
-    console.log("Location is:");
-    console.log(locFil);
-    if(!locFil){
-        locFil="% %";
-    }else{
-        locFil = "%" + locFil + "%";
-    }
+    let gender = req.body.gender;
+    let wifi = req.body.wifi;
+    let studOnly = req.body.studentsonly;
+    let nopets = req.body.nopets;
+    let nosmoking = req.body.nosmoking;
+    let noalcohol = req.body.noalcohol;
 
+    (!locFil)? locFil="% %":locFil = "%" + locFil + "%";
+    (wifi=="---")? wifi="^[a-z]":wifi = "^[" + wifi + "]";
+    (studOnly=="---")? studOnly="^[a-z]":studOnly = "^[" + studOnly + "]";
+    (nosmoking=="---")? nosmoking="^[a-z]":nosmoking = "^[" + nosmoking + "]";
+    (noalcohol=="---")? noalcohol="^[a-z]":noalcohol = "^[" + noalcohol + "]";
+    (nopets=="---")? nopets="^[a-z]":nopets = "^[" + nopets + "]";
+
+    if(gender == "---"){
+        gender = "Male";
+        gender2 = "Female";
+    }else{
+        gender2 = gender;
+    }
 
     if(!loggedIn){
         return res.render('index');       
     }else{
-        db.query(sql,[locFil],(err,row)=>{
+        db.query(sql,[locFil,gender,gender2,studOnly,nosmoking,noalcohol,nopets],(err,row)=>{
             console.log("Searching all lobbies...");
             if (err){
                 throw err;
             }else{
-                // console.log(row);
+                console.log(row);
                 res.render('findLobby', {user:user,lobby:lobby,lobbies:row,locFil:locFil});
             }
         });
@@ -337,28 +350,28 @@ app.get('/deleteRoom',(req,res)=>{
     });
 })
 
-app.post(('/viewRoom'), (req,res)=>{
-    console.log(req.body.views);
-    let data = req.body
+app.get(('/viewRoom'), (req,res)=>{
+    // console.log(req.body.views);
+    // let data = req.body
 
-    db.query("update lobby set views = ? where lobbyid = ?",[++data.views,data.lobbyid],()=>{})
+    // db.query("update lobby set views = ? where lobbyid = ?",[++data.views,data.lobbyid],()=>{})
 
-    var sql1= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
-    u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = ?";
+    // var sql1= "SELECT r.USERID,r.ROOMMATEID,r.LOBBYID,u.FIRSTNAME,u.LASTNAME,u.PROFILEPICTURE,\
+    // u.USERNAME,u.UPVOTE,u.DOWNVOTE from roommate r join users u on r.USERID = u.USERID where r.LOBBYID = ?";
 
-    if(!loggedIn){
-        res.render('index');       
-    }else{
-        db.query(sql1,[data.lobbyid],(err,row)=>{
-            if(err){
-                throw err
-            }else{
-                let roomie = row;
-                res.render('room', {user:user,lobby:lobby,lob:data,roommate:row});
-            }
-        })
-    }
-    
+    // if(!loggedIn){
+    //     res.render('index');       
+    // }else{
+    //     db.query(sql1,[data.lobbyid],(err,row)=>{
+    //         if(err){
+    //             throw err
+    //         }else{
+    //             let roomie = row;
+    //             res.render('room', {user:user,lobby:lobby,lob:data,roommate:row});
+    //         }
+    //     })
+    // }
+    // INSERT viewRoom code below 
 });
 
 

@@ -168,7 +168,6 @@
       <div class="container px-lg-5">
         <div class="row mx-lg-n5">
          <div class="col py-3 px-lg-5">
-           <!--   <input class="form-control" type="text" placeholder="Search using Location, Budget, Room Size.." aria-label="Search"> -->
           </div>
           <h4 class="text-white">Search for Lobbies & &nbsp;</h4>
           <h4 class="text-white">Filter Lobbies </h4>
@@ -184,31 +183,13 @@
             <div class="col py-3 px-lg-5">
             </div>
          
-              <h3>Sorry, no rooms found with that location.... </h3>
+              <h3>Sorry, no rooms found with those values.... </h3>
            
             <div class="col py-3 px-lg-5">
             </div>
           </div>
         </div>
         <% } %>
-
-      <!-- <div class="container px-lg-5">
-        <div class="row mx-lg-n5">
-          <div class="col py-3 px-lg-5">
-  
-            <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2" action="/findL" method="POST">
-                <input class="form-control mr-3 w-75" type="text" name="locFil" placeholder="Search by Location...">
-           
-                  <button type="submit" class="btn-sm btn-danger" style="padding:.6rem;border:none;border-radius:10px;background-color: rebeccapurple;">Search
-                    <i class="fas fa-search ml-2"></i></button> 
-            </form>
-          </div>
-      
-        </div>
-        <hr>
-      </div> -->
-
-    <!--Filter Card-->
 
     <div class="container px-lg-5">
       <div class="row mx-lg-n5 ">
@@ -237,6 +218,7 @@
           <h5>Gender&nbsp;<i class="fas fa-venus-mars "></i></h5>
           <select name="gender" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Please select gender">
+              <option>---</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </optgroup>
@@ -245,14 +227,16 @@
           <h5>Students Only &nbsp;<i class="fas fa-user-graduate"></i></h5>
           <select name="studentsonly" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Please select">
+              <option>---</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </optgroup>
           </select>
           <br><br>
           <h5>Free Wifi&nbsp;<i class="fas fa-wifi "></i></h5>
-          <select name="gender" class="design text-uppercase custom-select" style="width: 120px;">
+          <select name="wifi" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Please select">
+              <option>---</option>
               <option value="T">Yes</option>
               <option value="F">No</option>
             </optgroup>
@@ -265,6 +249,7 @@
           <h5>No Smoking&nbsp;<i class="fas fa-smoking "></i></h5>
           <select name="nosmoking" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Choose">
+              <option>---</option>
               <option value="T">Yes</option>
               <option value="F">No</option>
             </optgroup>
@@ -273,6 +258,7 @@
           <h5>No Alcohol&nbsp;<i class="fas fa-wine-bottle "></i></h5>
           <select name="noalcohol" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Choose">
+              <option>---</option>
               <option value="T">Yes</option>
               <option value="F">No</option>
             </optgroup>
@@ -281,12 +267,14 @@
           <h5>No Pets&nbsp;<i class="fas fa-paw "></i></h5>
           <select name="nopets" class="design text-uppercase custom-select" style="width: 120px;">
             <optgroup label="Choose">
+              <option>---</option>
               <option value="T">Yes</option>
               <option value="F">No</option>
             </optgroup>
           </select>
         </div>
-      </form>   
+      </form>
+      
       </div>
      </div>
 
@@ -295,48 +283,41 @@
     <div class="wrapper-flex">
 <!-- SOY STOPPED HERE ON 12:19 AM 07/12/2020   -->
 
-      <% for(var i =0; i< lobbies.length && lobbies[i].ADDRESS ;i++){ %>
+      <% for(var i =0; i< lobbies.length;i++){ %>
       <div class="container-card ">
         <div class='banner-img' style="background-image: url('<%=lobbies[i].IMAGE %>')"></div>
         <img src='<%=lobbies[i].PROFILEPICTURE %>' alt='profile image' class="profile-img">
         <p class="roomNumber text-dark"><%=lobbies[i].TITLE %></p>
+        <strong>Created by</strong> :  <%= lobbies[i].USERNAME%><br>
+        <% if(lobbies[i].NOSMOKING == 'F'){%>
+          <i class="fas fa-smoking"></i>
+          <% } %>
+          <% if(lobbies[i].NOPETS == 'F'){%>  
+          <i class="fas fa-paw"></i>
+          <% } %>
+  
+          <% if(lobbies[i].NOALCOHOL == 'F'){%> 
+          <i class="fas fa-wine-bottle"></i>
+          <% }%> 
+  
+          <% if(lobbies[i].WIFI == 'T'){%> 
+           <i class="fas fa-wifi"></i>
+          <% } %>
+            
+  
         <p class="description"><%=lobbies[i].DESCRIPTION %></p>
         <i class="fas fa-map-marker-alt"></i> &nbsp; <%= lobbies[i].ADDRESS %><br>
-        <strong>Created by</strong> :  <%= lobbies[i].USERNAME%><br>
+        <strong>Rent</strong> : Php <%= lobbies[i].RENTINGBUDGET%><br>
         <strong>Views</strong> :  <%= lobbies[i].VIEWS%><br>
         <strong>Room Members:</strong> <%= lobbies[i].ROOMMATECOUNT %>/<%= lobbies[i].ROOMMATEMAX %></h5>
+        <br>
         <ul>
           <li>       
-            
-            <form action="/viewRoom" method="POST">  
-              <input type="hidden" value="<%= lobbies[i].USERID %>" name="userid">
-              <input type="hidden" value="<%= lobbies[i].LOBBYID %>" name="lobbyid">
-              <input type="hidden" value="<%= lobbies[i].USERNAME %>" name="username">
-              <input type="hidden" value="<%= lobbies[i].IMAGE %>" name="image">
-              <input type="hidden" value="<%= lobbies[i].ADDRESS %>" name="address">
-              <input type="hidden" value="<%= lobbies[i].RENTINGBUDGET %>" name="rent">
-              <input type="hidden" value="<%= lobbies[i].BOOKINGLINK %>" name="link">
-              <input type="hidden" value="<%= lobbies[i].EMAIL %>" name="email">
-              <input type="hidden" value="<%= lobbies[i].TELEPHONE %>" name="telephone">
-              <input type="hidden" value="<%= lobbies[i].WIFI %>" name="wifi">
-              <input type="hidden" value="<%= lobbies[i].NAME %>" name="name">
-              <input type="hidden" value="<%= lobbies[i].TITLE %>" name="title">
-              <input type="hidden" value="<%= lobbies[i].DESCRIPTION %>" name="description">
-              <input type="hidden" value="<%= lobbies[i].VIEWS %>" name="views">
-              <input type="hidden" value="<%= lobbies[i].NOSMOKING %>" name="nosmoking">
-              <input type="hidden" value="<%= lobbies[i].NOALCOHOL %>" name="noalcohol">
-              <input type="hidden" value="<%= lobbies[i].NOPETS %>" name="nopets">
-              <input type="hidden" value="<%= lobbies[i].DATE %>" name="date">
-              <input type="hidden" value="<%= lobbies[i].ROOMMATEMAX %>" name="roommatemax">
-              <input type="hidden" value="<%= lobbies[i].ROOMMATECOUNT %>" name="roommatecount">
-              <input type="hidden" value="<%= lobbies[i].AGEMIN %>" name="agemin">
-              <input type="hidden" value="<%= lobbies[i].AGEMAX %>" name="agemax">
-              <input type="hidden" value="<%= lobbies[i].STUDENTSONLY %>" name="studOnly">
-              <input type="hidden" value="<%= lobbies[i].GENDERSELECT %>" name="gender">
-              <button type="submit"  class="btn btn-success" style="padding:.5rem;border-radius:25px;background: none;color: rgb(51, 43, 43);" placeholder="Enter"> 
+      
+              <a href="/viewRoom?id=<%= lobbies[i].LOBBYID %>"  class="btn btn-success" style="padding:.5rem;border-radius:25px;background: none;color: rgb(51, 43, 43);" placeholder="Enter"> 
                 <i class="fas fa-door-open"></i>Enter
-              </button>              
-            </form>
+              </a>              
+        
           </li>
 
           <li><a href="#"><i class="fas fa-bookmark"></i></a></li>
