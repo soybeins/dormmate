@@ -12,6 +12,9 @@
  <title>Dormmate - Find Lobbies</title>
 
  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+ <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <!--
 			CSS
 			============================================= -->
@@ -23,6 +26,89 @@
  <link rel="stylesheet" href="css/animate.min.css">
  <link rel="stylesheet" href="css/owl.carousel.css">
  <link rel="stylesheet" href="css/main.css">
+ 
+ <script>
+    $(document).ready(function() {
+      //Filter Lobby
+           $(".filter").hide();
+           $(".filter-close").hide();
+           $(".filter-search").focus(function(){
+               $(".filter-search").hide();
+               $(".filter").show(400);
+               $(".filter-close").show();
+           });
+           $(".filter-close").focus(function(){
+               $(".filter-close").hide();
+               $(".filter-search").show();
+               $(".filter").hide(400);
+           });
+      //Gender Buttons btn-gender
+           $(".btn-gender-male").hide();
+           $(".btn-gender-female").hide();
+           $(".btn-gender-any").focus(function(){
+               $(".btn-gender-any").hide();
+               $(".btn-gender-male").show();
+           });
+           $(".btn-gender-male").focus(function(){
+               $(".btn-gender-male").hide();
+               $(".btn-gender-female").show();
+           });
+           $(".btn-gender-female").focus(function(){
+               $(".btn-gender-female").hide();
+               $(".btn-gender-any").show();
+           });
+      //Student Buttons btn-student
+           $(".btn-student-yes").hide();
+           $(".btn-student-any").focus(function(){
+               $(".btn-student-any").hide();
+               $(".btn-student-yes").show();
+           });
+           $(".btn-student-yes").focus(function(){
+               $(".btn-student-yes").hide();
+               $(".btn-student-any").show();
+           });
+      //Wifi buttons btn-wifi
+           $(".btn-wifi-yes").hide();
+           $(".btn-wifi-any").focus(function(){
+               $(".btn-wifi-any").hide();
+               $(".btn-wifi-yes").show();
+           });
+           $(".btn-wifi-yes").focus(function(){
+               $(".btn-wifi-yes").hide();
+               $(".btn-wifi-any").show();
+           });
+      //Smoking buttons btn-smoking
+           $(".btn-smoking-no").hide();
+           $(".btn-smoking-any").focus(function(){
+               $(".btn-smoking-any").hide();
+               $(".btn-smoking-no").show();
+           });
+           $(".btn-smoking-no").focus(function(){
+               $(".btn-smoking-no").hide();
+               $(".btn-smoking-any").show();
+           });
+      //Alcohol buttons btn-alcohol
+           $(".btn-alcohol-no").hide();
+           $(".btn-alcohol-any").focus(function(){
+               $(".btn-alcohol-any").hide();
+               $(".btn-alcohol-no").show();
+           });
+           $(".btn-alcohol-no").focus(function(){
+               $(".btn-alcohol-no").hide();
+               $(".btn-alcohol-any").show();
+           });
+      //Pets buttons btn-pets
+           $(".btn-pets-no").hide();
+           $(".btn-pets-any").focus(function(){
+               $(".btn-pets-any").hide();
+               $(".btn-pets-no").show();
+           });
+           $(".btn-pets-no").focus(function(){
+               $(".btn-pets-no").hide();
+               $(".btn-pets-any").show();
+           });
+   });
+</script>
 </head>
 
 <body>
@@ -90,43 +176,129 @@
       </div>
 
       <div class="container px-lg-5">
-        <div class="row mx-lg-n5">
-          <div class="col py-3 px-lg-5">
-            <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
-                <input class="form-control mr-3 w-75" type="text" placeholder="Name, Location, Budget, Smokers, Alcoholics, Student Dorms, Free Wifi.." aria-label="Search">
-                  <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
-                  <button class="btn-sm btn-danger" style="border: none;">Filter<i class="fas fa-search ml-2"></i></button> 
-            </form>
-          </div>
-          <!-- <div class="col py-3 px-lg-5">
-             <button class="btn btn-danger">Filter<i class="fas fa-magic ml-1"></i></button> 
-          </div> -->
+        <div class="row mx-lg-n5 ">
+              <div class="offset-sm-0 offset-md-1 offset-lg-1 col-sm-8 col-md-7 col-lg-7">
+                  <form class="form-inline d-flex justify-content-end md-form form-sm active-pink active-pink-2 mt-2">
+                    <input class="form-control  w-100 mb-2 mt-1" type="text" placeholder="Search Location" aria-label="Search">
+                    <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                  </form>
+                </div>
+                
+                <div class="col-sm-4 col-md-3 mt-2 text-left">
+                    <button class="filter-search btn-sm btn-danger w-100 mt-1 px-3 py-2 rounded" style="border: none;"><i class="fas fa-search-minus mx-1"></i> Filter</button> 
+                    <button class="filter-close btn-sm btn-secondary w-100 mt-1 px-3 py-2 rounded" style="border: none;"><i class="fas fa-times-circle mx-1"></i> Cancel</button> 
+              </div>
         </div>
-
       </div>
 
+    <!--Filter Card-->
+     <div class="filter filter-card offset-sm-1 col-sm-10 offset-lg-2 col-lg-8"> 
+      <h5 class="text-dark text-uppercase"> <i class="fas fa-search-minus"> </i> &nbsp;Select Filters:</h5>
+      <div class="col-lg-12"><hr></div>
+      <div class="row">
+        <div class="offset-sm-0 col-sm-12 col-md-6 offset-lg-1 col-lg-4">
+            <br>
+            <button class="btn btn-secondary btn-gender-any" style="width: 100%;"> <i class="fas fa-venus-mars"></i> &nbsp; Any Gender </button>
+            <button class="btn btn-male btn-gender-male" style="width: 100%;"> <i class="fas fa-mars "></i> &nbsp; Male only</button>
+            <button class="btn btn-female btn-gender-female" style="width: 100%;"> <i class="fas fa-venus "></i> &nbsp; Female only</button>
+            <br> <br>
+
+            <button class="btn btn-secondary btn-student-any" style="width: 100%;"> <i class="fas fa-user-graduate"></i> &nbsp; Students </button>
+            <button class="btn btn-success btn-student-yes" style="width: 100%;"> <i class="fas fa-user-graduate "></i> &nbsp; Students only </button>
+            <br> <br>
+            
+            <button class="btn btn-secondary btn-wifi-any" style="width: 100%;"> <i class="fas fa-wifi"></i> &nbsp; Wifi </button>
+            <button class="btn btn-success btn-wifi-yes" style="width: 100%;"> <i class="fas fa-wifi "></i> &nbsp; Have Wifi </button>
+        </div>
+        <div class="offset-sm-0 col-sm-12 col-md-6 offset-lg-2 col-lg-4"> 
+            <br>
+            <button class="btn btn-secondary btn-smoking-any" style="width: 100%;"> <i class="fas fa-smoking"></i> &nbsp; Smoking </button>
+            <button class="btn btn-danger btn-smoking-no" style="width: 100%;"> <i class="fas fa-smoking"></i> &nbsp; No Smoking </button>
+            <br> <br>
+
+            <button class="btn btn-secondary btn-alcohol-any" style="width: 100%;"> <i class="fas fa-wine-bottle"></i> &nbsp; Alcohol </button>
+            <button class="btn btn-danger btn-alcohol-no" style="width: 100%;"> <i class="fas fa-wine-bottle"></i> &nbsp; No Alcohol </button>
+            <br> <br>            
+            <button class="btn btn-secondary btn-pets-any" style="width: 100%;"> <i class="fas fa-paw"></i> &nbsp; Pets  </button>
+            <button class="btn btn-danger btn-pets-no" style="width: 100%;"> <i class="fas fa-paw"></i> &nbsp; No Pets  </button>
+        </div>
+      </div>
+     </div>
 
       <!-- Cards -->
     <div class="wrapper-flex">
-<!-- SOY STOPPED HERE ON 12:19 AM 07/12/2020   -->
-      <% for(var i =0; i< lobbies.length;i++){ %>
-      <div class="container-card ">
-        <div class='banner-img' style="background-image: url('<%=lobbies[i].IMAGE %>')"></div>
-        <img src='<%=lobbies[i].PROFILEPICTURE %>' alt='profile image' class="profile-img">
-        <p class="roomNumber text-dark"><%=lobbies[i].TITLE %></p>
-        <p class="description"><%=lobbies[i].DESCRIPTION %></p>
-        <i class="fas fa-map-marker-alt"></i> &nbsp; <%= lobbies[i].ADDRESS %><br>
-        <strong>Created by</strong> :  <%= lobbies[i].USERNAME%><br>
-        <strong>Views</strong> :  <%= lobbies[i].VIEWS%><br>
-        <strong>Room Members:</strong> <%= lobbies[i].ROOMMATECOUNT %>/<%= lobbies[i].ROOMMATEMAX %></h5>
+     <div class="container-card ">
+      <div class='banner-img'></div>
+      <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+      <p class="roomNumber text-dark">Room #1</p>
+      <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
+      <ul>
+        <li><a href="/room"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+        <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+        <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
+      </ul>
+     </div>
+
+     <div class="container-card heartbeat">
+      <div class='banner-img'></div>
+      <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+      <p class="roomNumber text-dark">Room #2</p>
+      <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
+      <ul>
+        <li><a href="#"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+        <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+        <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
+      </ul>
+      <div class='banner-img'></div>
+     </div>
+
+     <div class="container-card heartbeat">
+      <div class='banner-img'></div>
+      <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+      <p class="roomNumber text-dark">Room #3</p>
+      <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
+      <ul>
+        <li><a href="#"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+        <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+        <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
+      </ul>
+     </div>
+
+     <div class="container-card heartbeat">
+      <div class='banner-img'></div>
+      <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+      <p class="roomNumber text-dark">Room #4</p>
+      <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
+      <ul>
+        <li><a href="#"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+        <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+        <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
+      </ul>
+     </div>
+
+     <div class="container-card heartbeat">
+        <div class='banner-img'></div>
+        <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+        <p class="roomNumber text-dark">Room #4</p>
+        <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
         <ul>
-          <li><a href="/viewRoom"><i class="fas fa-door-open"></i> Enter</a></li>
-
-          <li><a href="#"><i class="fas fa-bookmark"></i></a></li>
+          <li><a href="#"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+          <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+          <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
         </ul>
-      </div>
-      <% } %>
+       </div>
 
+       <div class="container-card heartbeat">
+        <div class='banner-img'></div>
+        <img src='https://images.unsplash.com/photo-1444011283387-7b0f76371f12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='profile image' class="profile-img">
+        <p class="roomNumber text-dark">Room #4</p>
+        <p class="description">Hi there! My name is Anna and I am a book lover, traveler and professional blogger. Follow me to stay connected!</p>
+        <ul>
+          <li><a href="#"><i class="fas fa-sign-in-alt"></i> Join</a></li>
+          <li><a href="#"><i class="fas fa-flag-checkered"></i> Report</a></li>
+          <li><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
+        </ul>
+       </div>
     </div>
    </div>   
  </section>
