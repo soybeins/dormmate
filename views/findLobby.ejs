@@ -82,7 +82,7 @@
            <!--   <input class="form-control" type="text" placeholder="Search using Location, Budget, Room Size.." aria-label="Search"> -->
           </div>
           <h4 class="text-white">Search for Lobbies & &nbsp;</h4>
-          <h4 class="text-white">Filter Lobbies</h4>
+          <h4 class="text-white">Filter Lobbies </h4>
           <div class="col py-3 px-lg-5">
 
           </div>
@@ -92,24 +92,24 @@
       <div class="container px-lg-5">
         <div class="row mx-lg-n5">
           <div class="col py-3 px-lg-5">
-            <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
-                <input class="form-control mr-3 w-75" type="text" placeholder="Name, Location, Budget, Smokers, Alcoholics, Student Dorms, Free Wifi.." aria-label="Search">
-                  <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
-                  <button class="btn-sm btn-danger" style="border: none;">Filter<i class="fas fa-search ml-2"></i></button> 
+  
+            <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2" action="/findL" method="POST">
+                <input class="form-control mr-3 w-75" type="text" name="locFil" placeholder="Search by Location...">
+           
+                  <button type="submit" class="btn-sm btn-danger" style="padding:.6rem;border:none;border-radius:10px;background-color: rebeccapurple;">Search
+                    <i class="fas fa-search ml-2"></i></button> 
             </form>
           </div>
-          <!-- <div class="col py-3 px-lg-5">
-             <button class="btn btn-danger">Filter<i class="fas fa-magic ml-1"></i></button> 
-          </div> -->
+      
         </div>
         <hr>
       </div>
-
+     
 
       <!-- Cards -->
     <div class="wrapper-flex">
 <!-- SOY STOPPED HERE ON 12:19 AM 07/12/2020   -->
-      <% for(var i =0; i< lobbies.length;i++){ %>
+      <% for(var i =0; i< lobbies.length && lobbies[i].ADDRESS ;i++){ %>
       <div class="container-card ">
         <div class='banner-img' style="background-image: url('<%=lobbies[i].IMAGE %>')"></div>
         <img src='<%=lobbies[i].PROFILEPICTURE %>' alt='profile image' class="profile-img">
