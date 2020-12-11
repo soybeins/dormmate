@@ -1,0 +1,523 @@
+  
+<!DOCTYPE html>
+<html lang="en-us" class="no-js">
+
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+ <link rel="shortcut icon" href="img/fav.png">
+ <meta name="author" content="codepixer">
+ <meta name="description" content="">
+ <meta name="keywords" content="">
+ <meta charset="UTF-8">
+ <title>ROOMMATE</title>
+
+ <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+ <!-- CSS ============================================= -->
+ <link rel="stylesheet" href="css/linearicons.css">
+ <link rel="stylesheet" href="css/font-awesome.min.css">
+ <link rel="stylesheet" href="css/bootstrap.css">
+
+ <link rel="stylesheet" href="css/main.css">
+<style>
+  .chat {
+width: auto;
+height: 507px;
+border-left: solid 15px #EEE;
+display: flex;
+flex-direction: column;
+padding: 10px;
+overflow: auto;
+overflow-y: scroll;
+border-color: #83779A;
+}
+
+hr{
+  margin-top: 0px;
+}
+
+.chat-title {
+flex: 0 1 45px;
+position: relative;
+z-index: 2;
+background: rgb(255, 250, 250);
+color: white;
+text-transform: uppercase;
+text-align: left;
+padding: 0px 0px 0px 50px;
+}
+.chat-title h1, .chat-title h2 {
+font-weight: normal;
+font-size: 14px;
+margin: 0;
+padding: 0;
+}
+.chat-title h2 {
+color: black;
+font-size: 10px;
+letter-spacing: 1px;
+}
+.chat-title .avatar {
+position: absolute;
+z-index: 1;
+top: 0px;
+left: 9px;
+border-radius: 30px;
+width: 30px;
+height: 30px;
+overflow: hidden;
+margin: 0;
+padding: 0;
+border: 2px solid rgba(255, 255, 255, 0.24);
+}
+.chat-title .avatar img {
+width: 100%;
+height: auto;
+}
+
+.chat-title-host {
+flex: 0 1 45px;
+position: relative;
+z-index: 2;
+background:#83779A;
+color: white;
+text-transform: uppercase;
+text-align: left;
+padding: 10px 10px 10px 50px;
+}
+.chat-title-host h1, .chat-title h2 {
+font-weight: normal;
+font-size: 14px;
+margin: 0;
+padding: 0;
+}
+.chat-title-host h2 {
+color: black;
+font-size: 10px;
+letter-spacing: 1px;
+}
+.chat-title-host .avatar {
+position: absolute;
+z-index: 1;
+top: 8px;
+left: 9px;
+border-radius: 30px;
+width: 30px;
+height: 30px;
+overflow: hidden;
+margin: 0;
+padding: 0;
+border: 2px solid rgba(255, 255, 255, 0.24);
+}
+.chat-title-host .avatar img {
+width: 100%;
+height: auto;
+}
+
+.messages {
+margin-top: 7px;
+display: flex;
+flex-direction: column;
+}
+
+.message {
+border-radius: 20px;
+padding: 8px 15px;
+font-size:6vh;
+display: inline-block;
+}
+
+.yours {
+align-items: flex-start;
+}
+
+.yours .message {
+margin-right: 25%;
+background-color: #C3C3E5;
+position: relative;
+color: black;
+font-size: 1.5vh;
+text-align: left;
+}
+
+.yours .message.last:before {
+content: "";
+position: absolute;
+z-index: 0;
+bottom: 0;
+left: -7px;
+height: 20px;
+width: 20px;
+background:rgba(226,109,48,1);
+border-bottom-right-radius: 15px;
+}
+.yours .message.last:after {
+content: "";
+position: absolute;
+z-index: 1;
+bottom: 0;
+left: -10px;
+width: 10px;
+height: 20px;
+background: white;
+border-bottom-right-radius: 10px;
+}
+
+.mine {
+align-items: flex-end;
+}
+
+.mine .message {
+color: white;
+margin-left: 25%;
+background: linear-gradient(to bottom, #443266 0%, #443266 100%);
+background-attachment: fixed;
+position: relative;
+font-size: 1.5vh;
+text-align: left;
+}
+
+.mine .message.last:before {
+content: "";
+position: absolute;
+z-index: 0;
+bottom: 0;
+right: -8px;
+height: 20px;
+width: 20px;
+background: linear-gradient(to bottom, #630a1677 0%, #443266 100%);
+background-attachment: fixed;
+border-bottom-left-radius: 15px;
+}
+
+.mine .message.last:after {
+content: "";
+position: absolute;
+z-index: 1;
+bottom: 0;
+right: -10px;
+width: 10px;
+height: 20px;
+background: white;
+border-bottom-left-radius: 10px;
+}
+
+.current {
+  align-items: flex-end;
+}
+
+.current .message {
+  color: white;
+  margin-left: 25%;
+  background: linear-gradient(to bottom, #443266 0%, #443266 100%);
+  background-attachment: fixed;
+  position: relative;
+  font-size: 1.5vh;
+  text-align: left;
+}
+
+.current .message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+  background-attachment: fixed;
+  border-bottom-left-radius: 15px;
+}
+
+.current .message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: -10px;
+  width: 10px;
+  height: 20px;
+  background: white;
+  border-bottom-left-radius: 10px;
+}
+
+.demoScroll {
+height: 300px;
+overflow-y: auto;
+width: 50px;
+}
+.h600 {
+height: 600px;
+}
+::-webkit-scrollbar {
+width: 10px;
+height: 10px;
+}
+::-webkit-scrollbar-track {
+background-color: transparent;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+background-color:#D1D1EB;
+/* border-radius: 10px; */
+}
+.message-box {
+flex: 0 1 40px;
+width: 100%;
+background: #83779A;
+padding: 10px 0px 0px 16px;
+position: relative;
+}
+.message-box .message-input {
+background: #A7A1C4;
+border: none;
+outline: none !important;
+resize: none;
+color: rgba(0, 0, 0, 0.7);
+font-size: 1.5vh;
+height: 5vh;
+padding-left: 10px;
+margin: 0;
+min-width: 200px;
+width: 100%;
+max-width: 800px;
+}
+.message-box textarea:focus:-webkit-placeholder {
+color: transparent;
+}
+.message-box .message-submit {
+position: absolute;
+z-index: 1;
+top: 15px;
+right: 5px;
+color: #fff;
+border: none;
+background: #8e4ab6;
+font-size: 1.5vh;
+text-transform: uppercase;
+line-height: 1;
+padding: 6px 10px;
+border-radius: 10px;
+outline: none !important;
+transition: background 0.2s ease;
+}
+.message-box .message-submit:hover {
+background: #5e118a;
+}
+
+.container-host{
+height: auto;
+justify-content: center;
+align-items: center;
+}
+.btn-application{
+border-radius: 5px;
+padding: 3px; 
+font-size: 13px;
+border: none;
+}
+
+.name-and-time{
+font-size: 1.2vh;
+}
+
+.row .des{
+  border: solid 15px; 
+  border-radius: 5px;
+  border-color: #83779A;
+}
+
+.side-bar{
+  width: auto;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+.chatmessages{
+  padding: 0px;
+}
+
+.col-lg-4{
+  padding: 0px;
+}
+
+</style>
+</head>
+
+<body>
+
+ <header id="header" id="home">
+  <div class="container">
+   <div class="row align-items-center justify-content-between d-flex">
+    <div id="logo">
+     <h1 class="text-white text-uppercase">DORMMATE</h1>
+    </div>
+    <nav id="nav-menu-container">
+      <ul class="nav-menu">
+          <li class="menu-active"><a href="/home">Home</a></li>
+          <li><a href="/home#about">About</a></li>
+              <li class="menu-has-children"><a class="text-white"><strong> <%= current[0].username %> </strong></a>
+                  <ul>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/signout">Sign-Out</a></li>                      
+                  </ul>
+              </li>
+      </ul>
+    </nav>
+    <!-- #nav-menu-container -->
+   </div>
+  </div>
+ </header>
+ <!-- #header -->
+
+
+ <!-- start banner Area -->
+ <section id="home">
+  <div class="container">
+   <div class="row fullscreen d-flex align-items-center">
+    <div class="wrapper-flex" style="width: 100%;">
+      <div class="container px-lg-5">
+        <div class="row mx-lg-n5">
+         <div class="col py-3 px-md-5">
+          </div>
+          <div class="col py-3 px-md-5">
+          </div>
+        </div>
+     </div>
+     <div class="container px-lg-5">
+      <div class="row mx-lg-n5">
+       <div class="col py-3 px-md-5">
+        </div>
+        <div class="col py-3 px-md-5">
+        </div>
+      </div>
+   </div>
+     <div class="container-card-for-insideRoom">
+      <div class="row">
+        <div class="container px-lg-5">
+        </div>
+          <a href="/viewRoom?id=<%= lobby[0].LOBBYID %>" style="width: 60px; height: 25px; border-radius:25px;background-color: rgb(123, 88, 158); color:#EEE;"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a><br><br>
+        <div class="col-lg-12"></div>
+      </div>
+      <div class="row des">
+        <div class="col-lg-4 side-bar">
+          <div class="column container-host">
+                <div class="chat-title-host sticky-top">
+                  <h1 class="text-white"><%= host[0].firstname %> <%= host[0].lastname %></h1>
+                  <h2 class="text-white">Host</h2>
+                  <figure class="avatar">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+                </div>
+            <br><h3 style="text-align: left;">&nbsp;<i class="fas fa-users"></i> Roommates</h3>
+            <hr style="margin-top: 10px;">
+            <% for(var x = 0; x < roomies.length; x++){ %>
+              <% if (roomies[x].userid != host[0].userid){ %>
+                  <div class="chat-title sticky-top">
+                    <div class = "row">
+                      <div class = "col-md-6">
+                        <h1 class="text-black"><%= roomies[x].firstname %> <%= roomies[x].lastname %></h1>
+                        <h2 class="text-black" style="font-size: 9px;">Member</h2>
+                      </div>
+                      <% if(current[0].userid === host[0].userid){ %>
+                        <div class = "col-md-6">
+                          <a href = "/kick?id=<%= roomies[x].userid %>" class="btn-success btn-application" style="background-color: rgb(135, 135, 210); text-transform: capitalize; margin-left: 30px;">&nbsp;&nbsp;Kick&nbsp;&nbsp;</a>
+                        </div>
+                      <% } %>
+                    </div>
+                    <figure class="avatar">
+                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg"/>
+                    </figure>
+                  </div><br>
+                  <hr>
+              <% } %>
+            <% } %>
+            <% if (current[0].userid === host[0].userid){ %>  
+              <br><h3 style="text-align: left;">&nbsp;<i class="fa fa-book"></i> Applications</h3>
+              <hr style="margin-top: 10px;">
+              <% if(applicants != 0){ %>
+                <% for(var x = 0; x < applicants.length; x++){ %>
+                  <% if(applicants[x].APPROVED != 'T' && applicants[x].APPROVED != 'F'){ %>
+                    <div class="chat-title sticky-top">
+                      <div class = "row">
+                        <div class="col-md-6">
+                          <h1 class="text-black"><%= applicants[x].FIRSTNAME %> <%= applicants[x].LASTNAME %></h1>
+                          <h2 class="text-black" style="font-size: 9px;">Pending Applicant</h2><br>
+                        </div>
+                        <div class = "col-md-6">
+                          <a href = "/accept?id=<%= applicants[x].APPLICANTID%>" class="btn-success btn-application" style="background-color: rgb(135, 135, 210); text-transform: capitalize;">Accept</a>
+                          <a href = "/decline?id=<%= applicants[x].APPLICANTID%>" class="btn-danger btn-application" style="background-color: rgb(206, 91, 118); text-transform: capitalize;">Decline</a>
+                        </div>
+                      </div>
+                      <figure class="avatar">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" />
+                      </figure>
+                    </div>
+                    <hr>
+                  <% } %>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+        <div class="col-lg-8 chatmessages">
+          <div class="chat sc3">
+              <% if(chat.length > 0){ %>
+                <% for(var x = 0; x < chat.length; x++){ %>
+                  <% if(chat[x].USERID != current[0].userid){ %>
+                    <div class="yours messages">
+                        <div class = "message">
+                          <%= chat[x].CHATMESSAGE %><br>
+                          <span class="name-and-time"><%= chat[x].FIRSTNAME %> • <%= chat[x].DATE %> • <%= chat[x].TIME %></span>
+                        </div>
+                    </div>
+                  <% }else if(chat[x].USERID === current[0].userid){ %>
+                    <div class="mine messages">
+                        <div class = "message">
+                            <%= chat[x].CHATMESSAGE %> <br>
+                            <span class= "name-and-time"><%= chat[x].FIRSTNAME %> • <%= chat[x].DATE %> • <%= chat[x].TIME %></span>
+                        </div>
+                    </div>
+                  <% } %>
+                <% } %>
+              <% } %>
+                    <div class="current messages">
+                    </div>
+            </div>
+            <form id="chat-form" class = "message-box">
+              <input id="msg" type="text" class = "message-input" placeholder="Enter Message" required autocomplete="off"/>
+              <button id="btn" class="message-submit"><i class="fas fa-paper-plane"></i> Send</button>
+            </form>
+        </div>
+      </div>
+     </div>
+
+     </div>
+    </div>
+   </div>
+ </section>
+ <!-- End banner Area -->
+ <script src="/socket.io/socket.io.js"></script>
+ <script src="js/mains.js"></script>
+
+ <script src="js/chat.js"></script>
+ <script src="js/main.js"></script>
+ <script src="js/vendor/jquery-2.2.4.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="js/vendor/bootstrap.min.js"></script>
+ <script src="js/easing.min.js"></script>
+ <script src="js/hoverIntent.js"></script>
+ <script src="js/superfish.min.js"></script>
+ <script src="js/jquery.ajaxchimp.min.js"></script>
+ <script src="js/jquery.magnific-popup.min.js"></script>
+ <script src="js/owl.carousel.min.js"></script>
+ <script src="js/jquery.sticky.js"></script>
+ <script src="js/jquery.nice-select.min.js"></script>
+ <script src="js/parallax.min.js"></script>
+ <script src="js/waypoints.min.js"></script>
+ <script src="js/jquery.counterup.min.js"></script>
+</body>
+</html>

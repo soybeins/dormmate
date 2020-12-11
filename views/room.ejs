@@ -12,9 +12,7 @@
  <title>Dormmate</title>
 
  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
- <!--
-			CSS
-			============================================= -->
+ <!-- CSS ============================================= -->
  <link rel="stylesheet" href="css/linearicons.css">
  <link rel="stylesheet" href="css/font-awesome.min.css">
  <link rel="stylesheet" href="css/bootstrap.css">
@@ -31,7 +29,7 @@
   <div class="container">
    <div class="row align-items-center justify-content-between d-flex">
     <div id="logo">
-        <a href="/home"> <h1 class="text-white text-uppercase">Dormmate</h1> </a>
+     <h1 class="text-white text-uppercase">Dormmate</h1>
     </div>
     <nav id="nav-menu-container">
         <ul class="nav-menu">
@@ -39,7 +37,8 @@
             <li><a href="/home#about">About</a></li>
                 <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
-                        <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/signout">Sign-Out</a></li>                       
                     </ul>
                 </li>
         </ul>
@@ -78,31 +77,42 @@
         </div>
         <!-- End of Empty -->
   
-
-        <!-- <div class="container px-lg-5">
-          <div class="row mx-lg-n5">
-           <div class="col py-3 px-lg-5">
-
-            </div>
-            <h4 class="text-white">Lobby Details</h4>
-            <div class="col py-3 px-lg-5">
-
-            </div>
-          </div>
-        </div> -->
-
-
-          <div class="container px-lg-5">
+        <div class="container px-lg-5">
             <div class="row mx-lg-n5">
-             <div class="col py-3 px-md-5">
-                <a href="/findL" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
-              </div>
-
-              <div class="col py-3 px-md-5">
-                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">JOIN ROOM</span></a>
-              </div>
+                <div class="col py-3 px-md-5">
+                    <a href="/findL" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
+                </div>
+                <% if(applicant.length === 1){ %>
+                    <% if(applicant[0].APPROVED === 'W' || applicant[0].APPROVED === 'F'){ %>
+                    <div class="col py-3 px-md-5">
+                        <a href="   " class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right"><i class="fas fa-lock"></i>&nbsp;&nbsp;CHATROOM</span></a>
+                    </div>
+                    <% }else{ %>
+                        <div class="col py-3 px-md-5">
+                            <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right"><i class="fas fa-comments"></i>&nbsp;&nbsp;ENTER CHATROOM</span></a>
+                        </div>
+                    <% } %>
+                <% } %>
+                <% var y = 'F' %>
+                <% if(roommates.length > 0 && applicant.length != 1){ %>  
+                    <% for(var x = 0; x < lobby[0].ROOMMATECOUNT; x++){ %>
+                        <% if(roommates[x].userid === user[0].userid){ %>     
+                            <div class="col py-3 px-md-5">
+                                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right"><i class="fas fa-comments"></i>&nbsp;&nbsp;ENTER CHATROOM</span></a>
+                            </div>
+                            <% x = lobby[0].ROOMMATECOUNT %>
+                            <% y = 'T' %>
+                        <% } %>
+                    <% } %>
+                    
+                    <% if(y === 'F'){ %>
+                        <div class="col py-3 px-md-5">
+                            <a href="" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right"><i class="fas fa-lock"></i>&nbsp;&nbsp;CHATROOM</span></a>
+                        </div>
+                    <% } %>
+                <% } %>
             </div>
-          </div>
+        </div>
  
  <!-- start banner Area -->
  <section id="home">
@@ -111,151 +121,142 @@
     <div class="wrapper-flex" style="width: 100%;">
      <div class="container-card-for-insideRoom">
       <div class="row">
-        <!-- Lobby Details -->
-        <div class="col-12">
-            <h4 class="text-dark text-uppercase"><i class="fas fa-home"></i> &nbsp; Lobby Details</h4>
-        <br>
-        </div>
-        <!-- Title -->
-        <div class="col-12">
-            <h1 class="text-dark text">Looking for roomies ages between 9 and 10</h1>
-            <hr>
-         </div>
-        
-         <!-- Creation Details -->
-        <div class="col-lg-6" style="text-align: right;">        
-            <strong>Created by</strong> : Sasha Baron Cohen<br>
-            <strong>Views</strong> : 134 <br>
-            <strong>Max Roommates</strong> : 4
+        <div class='col-lg-12'>
+            <h1 class="text-dark text-uppercase"><%= lobby[0].TITLE %></h1>
+            <h4 class="text-dark text-uppercase" style=" border: 1px solid grey;"></h4>
+        </div><br><br>
+        <% if(user[0].userid != lobby[0].LOBBYHOSTID && applicant.length != 1 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX && y != 'T'){ %>
+            <div class = "col-lg-12">
+               <br> <a href="/apply" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Request to Join Chatroom</a><br>
+            </div>
+        <% }else if(applicant.length === 1 && applicant[0].APPROVED != 'T' && applicant[0].APPROVED != 'F' && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX){ %>
+            <div class = "col-lg-12">
+              <br><a href="/cancel" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Cancel Request to Join Chatroom</a><br>
+            </div>                              
+        <% } %> 
+        <% if(applicant.length === 1 && applicant[0].APPROVED === 'F'){ %>
+            <div class = "col-lg-12">
+                <br><span class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Request Declined <br> <small style="font-size: 10px;">cannot request anymore</small></span><br>
+            </div>
+        <% } %>  
+        <% if(lobby[0].ROOMMATECOUNT === lobby[0].ROOMMATEMAX && y === 'F'){ %>
+            <div class = "col-lg-12">
+                <br><span class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Lobby is Full <br> <small style="font-size: 10px;">cannot request anymore</small></span><br>
+            </div>
+        <% } %>
+        <% if(roommates.length > 0){ %>  
+            <% for(var x = 0; x < lobby[0].ROOMMATECOUNT; x++){ %>
+                <% if(roommates[x].userid === user[0].userid && roommates[x].userid != lobby[0].LOBBYHOSTID){ %>     
+                    <div class = "col-lg-12">
+                        <br> <a href="/leave?id=<%= user[0].userid %>" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Leave Lobby</a><br>
+                    </div>
+                    <% x = lobby[0].ROOMMATECOUNT %>
+                <% } %>
+            <% } %>
+        <% } %>
+        <div class="col-lg-12"><hr></div>
+        <div class="col-lg-6" style="text-align: right;"> 
+        <% if(roommates.length > 0){ %>  
+            <% for(var x = 0; x < lobby[0].ROOMMATECOUNT; x++){ %>
+                <% if(roommates[x].userid === lobby[0].LOBBYHOSTID){ %>     
+                    <b style="color: black;">Created by</b> : <%= roommates[0].firstname %> <%= roommates[0].lastname %><br>
+                <% } %>
+            <% } %>
+        <% } %>
+        <b style="color: black;">Views</b> : <%= lobby[0].VIEWS %> <br>
         </div>
         <div class="col-lg-6" style="text-align: left;">    
-            <strong>Created on</strong> : 03/12/2020 <br>
-            <strong>Age Minimum</strong> : 24<br>
-            <strong>Age Maximum</strong> : 34
+            <b style="color: black;">Created on</b> : <%= lobby[0].DATEANDTIME %> <br>
+            <b style="color: black;">Max Roommates</b> : <%= lobby[0].ROOMMATEMAX %>
         </div>
-
-
-
-
-        <div class="col-lg-12"><hr></div>
-
+        <div class="col-lg-12"><hr></div><br> 
         <div class="col-lg-12">
             <h5 class="text-dark text-uppercase">Description:</h5>
-            Looking for roommates in talamban campus. Preferrably a student with no vices. Stricly no pets allowed. Free Wifi
+            <%= lobby[0].DESCRIPTION %> <br><br>
+            <b style="color: black;">PERSONAL PREFERENCE:</b> <br><br>
+            <b style="color: black;">Gender:</b> <%= lobby[0].GENDERSELECT %> <br>
+            <b style="color: black;">Age Range:</b> <%= lobby[0].AGEMIN %> - <%= lobby[0].AGEMAX %><br>
+            <% if (lobby[0].STUDENTSONLY === 'Yes'){ %>
+                <b style="color: black;">Students Only</b> <br>
+            <% }else if(lobby[0].STUDENTSONLY === 'Verified Only'){ %>
+                <b style="color: black;">Verified Students Only</b> <br>
+            <% } %>
+            <% if (lobby[0].NOSMOKING === 'T'){ %>
+                <b style="color: black;"> No Smoking <i class="fas fa-smoking-ban"></i></b> <br>
+            <% }else if(lobby[0].NOSMOKING === 'Outdoor Only'){ %>
+                <b style="color: black;">Smoking Allowed Outside Only <i class="fas fa-smoking"></i></b>  <br>
+            <% }else{ %>
+                <b style="color: black;"> Smoking Allowed (Indoor/Outdoor) <i class="fas fa-smoking"></i></b> <br>
+            <% } %>
+            <% if (lobby[0].NOALCOHOL === 'T'){ %>
+                <b style="color: black;">No Alcohol Allowed <i class="fa fa-exclamation-triangle"></i></b> <br>
+            <% }else if(lobby[0].NOSMOKING === 'Outdoor Only'){ %>
+                <b style="color: black;">Alcohol Allowed Outside Only <i class="fas fa-wine-bottle"></i></b> <br>
+            <% }else{ %>
+                <b style="color: black;"> Alcohol Allowed (Indoor/Outdoor) <i class="fas fa-wine-bottle"></i></b> <br>
+            <% } %>
+            <% if (lobby[0].NOPETS === 'T'){ %>
+                <b style="color: black;">No Pets Allowed <i class="fa fa-ban" aria-hidden="true"></i></b> <br>
+            <% }else if(lobby[0].NOPETS === 'F'){ %>
+                <b style="color: black;">Pets Allowed <i class="fa fa-paw" aria-hidden="true"></i></b><br>
+            <% } %>
+            <br>
+            <b style="color: black;">Lobby Status:</b> <%= lobby[0].SEARCHSTATE %>
+               
         </div>
-
         <div class="col-lg-12"><br><br></div>
-
         <div class="col-lg-6">
-            <h5 class="text-dark text-uppercase">Location Info:</h5>
-            <strong>Address</strong> :6000 Nasipit Road, Lungsod ng Cebu, Lalawigan ng Cebu<br>
-            <strong>Booking Link</strong> : none
-        </div>
+            <h5 class="text-dark text-uppercase">Location:</h5>
+            <%= lobby[0].ADDRESS %> <br><br>
 
+            <b style="color: black;">ROOM INFORMATION:</b> <br><br>
+            <img src="<%= lobby[0].IMAGE %>" width="250" height="150"><br>
+            <b style="color: black;">Name:</b> <%= lobby[0].NAME %> <br>
+            <b style="color: black;">Renting Budget:</b> <%= lobby[0].RENTINGBUDGET %> Php <br>
+            <b style="color: black;">Booking Link:</b> <a href="<%= lobby[0].BOOKINGLINK %>" target="_blank"><%= lobby[0].BOOKINGLINK %></a> <br>
+            <b style="color: black;">Email:</b> <%= lobby[0].EMAIL %><br>
+            <b style="color: black;">Telephone No.:</b> <%= lobby[0].TELEPHONE %><br>
+            <% if(lobby[0].WIFI === 'F'){ %>
+                <b style="color: black;">No WIFI <i class="fas fa-exclamation"></i></b>
+            <% }else{ %>
+                <b style="color: black;"><i class="fa fa-wifi" aria-hidden="true"></i> Free WIFI</b>
+            <% } %>
+            <br><br><b style="color: black;">Room Rating: &nbsp;&nbsp;</b><i class="fas fa-thumbs-up"></i>&nbsp;<%= lobby[0].UPVOTES%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= lobby[0].DOWNVOTES%>
+
+        </div>
         <div class="col-lg-6">
             <h5 class="text-dark text-uppercase">Maps:</h5>
             <iframe class= "maps" id="google-maps" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1962.3947691434173!2d123.9144718!3d10.3587063!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998914321a5a7%3A0x6ca3a71407181116!2sUniversity%20Of%20San%20Carlos!5e0!3m2!1sen!2sph!4v1605771808619!5m2!1sen!2sph" width="400" height="200" frameborder="1" style="border:0; width: auto;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
-        
         <div class="col-lg-12">
-            <br>
-            <h5 class="text-dark text-uppercase"> Additional Info:</h5>
-            <br>
-            <!-- <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i>       </button> -->
-            <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i>       </button>
-
-            <button class="btn btn-success" style="width: initial;">  Pets  <i class="fas fa-paw"></i>           </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i>           </button> -->
-
-            <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i>   </button> -->
-
-            <button class="btn btn-success" style="width: initial;">  Wifi <i class="fas fa-wifi"></i>   </button>
-            <!-- <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i>   </button> -->
+            <br><br>
         </div>
-
-        <div class="col-lg-12"><hr></div>
-
         <div class="col-lg-12">
-            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: 5/5</h5>
+            <h5 class="text-dark text-uppercase">Room Members: <%= lobby[0].ROOMMATECOUNT %>/<%= lobby[0].ROOMMATEMAX %></h5>
             <div class="row">
-                <div class="profile-card">
-                    <span class="pro">Host</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Hosea Barriga</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
+            <% for(var x = 0; x < lobby[0].ROOMMATECOUNT; x++){ %>
+                <% if(roommates[x].userid === lobby[0].LOBBYHOSTID){ %>
+                    <div class="profile-card">
+                        <span class="pro">Host</span>
+                        <img class="round" src="<%= roommates[x].profilepicture %>" alt="user" />
+                        <h5 class="text-dark"><%= roommates[x].username %></h5>
+                        <div class="col-lg-12">
+                            <%= roommates[x].firstname %>  <%= roommates[x].lastname %>
+                            <br><i class="fas fa-thumbs-up"></i>&nbsp;<%= roommates[x].upvote%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommates[x].downvote%>
+                        </div>
                     </div>
-                </div>
-    
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Mary Therese Alegre</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
+                <% }else if(roommates[x].userid != lobby[0].LOBBYHOSTID){ %>
+                    <div class="profile-card">
+                        <span class="verified">Member</span>
+                        <img class="round" src="<%= roommates[x].profilepicture %>" alt="user" />
+                        <h5 class="text-dark"><%= roommates[x].username %></h5>
+                        <div class="col-lg-12">
+                            <%= roommates[x].firstname %>  <%= roommates[x].lastname %>
+                            <br><i class="fas fa-thumbs-up"></i>&nbsp;<%= roommates[x].upvote%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommates[x].downvote%>
+                        </div>
                     </div>
-                </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Monica Barrientos</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <span class="verified">Member</span>
-                    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-                    <h5 class="text-dark">Allan Bargamento</h5>
-                    <div class="col-lg-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
-                </div>
+                <% } %>
+            <% } %>
             </div>
         </div>
       </div>

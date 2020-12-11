@@ -39,7 +39,8 @@
             <li><a href="/home#about">About</a></li>
                 <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
-                        <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                      <li><a href="/profile">Profile</a></li>
+                      <li><a href="/signout">Sign-Out</a></li>                        
                     </ul>
                 </li>
         </ul>
@@ -99,7 +100,7 @@
               </div>
 
               <div class="col py-3 px-md-5">
-                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">JOIN ROOM CHAT</span></a>
+                <a href="/joinRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right"><i class="fas fa-comments"></i>&nbsp;&nbsp;ENTER CHATROOM</span></a>
               </div>
             </div>
           </div>
@@ -118,14 +119,14 @@
         </div>
         <!-- Title -->
         <div class="col-12">
-            <h2 class="text-dark text"> <%= lobby[0].title%></h2>
+            <h2 class="text-dark text"> <%= lobby[0].TITLE%></h2>
             <hr>
          </div>
         
 
         <div class="col-lg-12">
             <h5 class="text-dark text-uppercase">Description:</h5>
-            <%= lobby[0].description%>
+            <%= lobby[0].DESCRIPTION%>
         </div>
 
         <div class="col-lg-12"><hr></div>
@@ -133,17 +134,17 @@
             <!-- Creation Details -->
             <div class="col-lg-6" style="text-align: right;">     
             <h5 class="text-dark text-uppercase">Lobby Info:</h5>   
-            <strong>Created on</strong> :  <%= lobby[0].date%> <br>
-            <strong>Age Range</strong> :  <%= lobby[0].agemin%> - <%= lobby[0].agemax%> <br>
-            <strong>Lobby Views</strong> :  <%= lobby[0].views%>  <br>
-            <strong>Max Roommates</strong> :  <%= lobby[0].roommatemax%>
+            <strong>Created on</strong> :  <%= lobby[0].DATE%> <br>
+            <strong>Age Range</strong> :  <%= lobby[0].AGEMIN%> - <%= lobby[0].AGEMAX%> <br>
+            <strong>Lobby Views</strong> :  <%= lobby[0].VIEWS%>  <br>
+            <strong>Max Roommates</strong> :  <%= lobby[0].ROOMMATEMAX%>
             </div>
             <div class="col-lg-6" style="text-align: left;">    
             <h5 class="text-dark text-uppercase">Location Info:</h5>
-            <strong>Name of Place</strong> : <%= location[0].name %><br>
-            <strong>Address</strong> : <%= location[0].address %><br>
-            <strong>Booking Link</strong> : <%= location[0].bookinglink %><br>
-            <strong>Contact Number</strong>: <%= location[0].telephone %><br>
+            <strong>Name of Place</strong> : <%= lobby[0].NAME %><br>
+            <strong>Address</strong> : <%= lobby[0].ADDRESS %><br>
+            <strong>Booking Link</strong> : <%= lobby[0].BOOKINGLINK %><br>
+            <strong>Contact Number</strong>: <%= lobby[0].TELEPHONE %><br>
             </div>
 
 
@@ -154,33 +155,33 @@
         </div> -->
 
         <div class="col-lg-12">
-            <img src='<%= location[0].image %>'class="img-thumbnail">  
+            <img src='<%= lobby[0].IMAGE %>'class="img-thumbnail">  
         </div>
         <!-- Needs Continuation, Soy stopped here on 06/12/20 12:50am -->
         <div class="col-lg-12">
             <br> 
             <h5 class="text-dark text-uppercase"> Additional Info:</h5>
             <br>
-            <% if(lobby[0].nosmoking == 'T'){%>
+            <% if(lobby[0].NOSMOKING == 'T'){%>
                 <button class="btn btn-danger" style="width: initial;">  No Smoking <i class="fas fa-smoking"></i></button>
             <% }else{ %>
                 <button class="btn btn-success" style="width: initial;">  Smoking <i class="fas fa-smoking"></i></button>
             <% }%>
 
-            <% if(lobby[0].nopets == 'T'){%>  
+            <% if(lobby[0].NOPETS == 'T'){%>  
             <button class="btn btn-danger" style="width: initial;">  No Pets  <i class="fas fa-paw"></i></button>
             <% } else { %>
             <button class="btn btn-success" style="width: initial;">  Pets  <i class="fas fa-paw"></i></button>
             <% } %>
 
-            <% if(lobby[0].noalcohol == 'T'){%> 
+            <% if(lobby[0].NOALCOHOL == 'T'){%> 
             <button class="btn btn-danger" style="width: initial;">  No Alcohol <i class="fas fa-wine-bottle"></i></button>
             <% } else {%>
             <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i></button>
             <% } %>
             
     
-            <% if(lobby[0].noalcohol == 'T'){%> 
+            <% if(lobby[0].NOALCOHOL == 'T'){%> 
                 <button class="btn btn-danger" style="width: initial;">  No Wifi <i class="fas fa-wifi"></i></button>
             <% } else {%>
                 <button class="btn btn-success" style="width: initial;">  Wifi <i class="fas fa-wifi"></i></button>
@@ -192,23 +193,22 @@
 
         <div class="col-lg-12">
 
-            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: <%= lobby[0].roommatecount%>/<%= lobby[0].roommatemax%></h5>
+            <h5 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp;Room Members: <%= lobby[0].ROOMMATECOUNT%>/<%= lobby[0].ROOMMATEMAX%></h5>
             <% console.log("Roomates are")%>
             <% console.log(roommate)%>
             <% for(var i = 0;i < roommate.length;i++) {%>
-                <!-- <% var roomie = roommate[i]%> -->
             <div class="row">
                 <div class="profile-card">
-                    <% if(user[0].userid == lobby[0].lobbyhostid ){ %>
+                    <% if(user[0].userid == lobby[0].LOBBYHOSTID ){ %>
                     <span class="pro">Host</span>
                     <% }else {%>
                     <span class="verified">Member</span>
                     <%}%>
-                    <img class="round" src='<%= roommate[i].PROFILEPICTURE%>' alt="user" />
-                    <h5 class="text-dark"><%= roommate[i].USERNAME%></h5>
+                    <img class="round" src='<%= roommate[i].profilepicture%>' alt="user" />
+                    <h5 class="text-dark"><%= roommate[i].username%></h5>
                     <div class="col-lg-12">
-                        <%= roommate[i].FIRSTNAME + ' ' + roommate[i].LASTNAME %><br>
-                        <i class="fas fa-thumbs-up"></i>&nbsp;<%= roommate[i].UPVOTE%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommate[i].DOWNVOTE%>
+                        <%= roommate[i].firstname + ' ' + roommate[i].lastname %><br>
+                        <i class="fas fa-thumbs-up"></i>&nbsp;<%= roommate[i].upvote%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommate[i].downvote%>
                     </div>
                 </div>
             <%}%>

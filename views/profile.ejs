@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us" class="no-js">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link rel="shortcut icon" href="img/fav.png">
+    <meta name="author" content="codepixer">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <title>Dormmate by Team Mafumafu</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!-- choi mao ni css	============================================= -->
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <header id="header" id="home">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    <a href="/home"> <h1 class="text-white text-uppercase">Dormmate</h1> </a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                            <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
+                                <ul>
+                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/signout">Sign-Out</a></li>                       
+                                </ul>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- #header -->
+
+  
+  <!-- start banner Area -->
+  <section id="home">
+    <div class="container">
+     <div class="row fullscreen d-flex align-items-center justify-content-start"> 
+      <!-- Empty Containers -->
+      <div class="container px-lg-5">
+          <div class="row mx-lg-n5">
+            <div class="col py-3 px-lg-5">
+  
+            </div>
+            <div class="col py-3 px-lg-5">
+       
+            </div>
+          </div>
+        </div>
+     
+        <div class="container px-lg-5">
+          <div class="row mx-lg-n5">
+            <div class="col py-3 px-lg-5">
+  
+            </div>
+            <div class="col py-3 px-lg-5">
+       
+            </div>
+          </div>
+        </div>
+        <!-- End of Empty -->
+
+          <div class="container px-lg-5">
+            <div class="row mx-lg-n5">
+             <div class="col py-3 px-md-5">
+                <a href="/home" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
+              </div>
+
+              <div class="col py-3 px-md-5">
+                <a href="/viewRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">LOBBY</span></a>
+              </div>
+            </div>
+          </div>
+ 
+ <!-- start banner Area -->
+ <section id="home">
+  <div class="container">
+   <div class="row fullscreen d-flex align-items-center">
+    <div class="wrapper-flex" style="width: 100%;">
+     <div class="container-card-for-insideRoom">
+      <div class="row">
+        <!-- Lobby Details -->
+        <div class="col-12">
+            <h4 class="text-dark text-uppercase"><i class="fas fa-user"></i> &nbsp; Profile</h4>
+        <br>
+        </div>
+        
+        <div class="col-lg-12"><hr></div>
+
+        <!-- Title -->
+        <div class="col-12"><br>
+            <div class="row">
+               <div class="col-sm-12 col-md-3">
+                    <img src='<%= prof[0].PROFILEPICTURE %>' alt='profile image' width="250" height="250" class="avatar-img">
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-7 pt-4 bg-light rounded">
+                    <div class = "col-12">
+                        <h3 class="text-dark text text-left mt-2"> <%= prof[0].FIRSTNAME %> <%= prof[0].LASTNAME %></h3>
+                    </div>
+                    <div class = "col-12 mt-1 ml-4">
+                        <h4 class="text-dark text-left text mt-3"> <%= prof[0].USERNAME %> </h4>
+                        <p class="text-dark text-left text mt-2 ml-2"> <%= prof[0].EMAIL %> </p>
+                    </div>
+                </div>
+                <div class ="offset-sm-1 col-sm-10 offset-md-9 col-md-3 offset-lg-0 col-lg-2 mt-3">
+                <ul class="nav-menu">    
+                    <li class="menu-has-children btn btn-info" style="padding: 3px;"><a class="text-white"><strong><i class="fas fa-user-edit"></i>&nbsp;&nbsp;&nbsp;EDIT </strong></a>
+                        <ul>
+                            <li><a href="/editAccount?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Account Info</span></a></li>
+                            <li><a href="/editPersonal?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Personal Info</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+                </div>
+            </div>
+         </div>
+        
+        <div class="col-lg-12"><br><hr></div>
+        <div class="col-lg-12">
+            <br> 
+            <h5 class="text-dark text-uppercase"> <i class="fas fa-user-tag"> </i> &nbsp;About Me:</h5>
+            <div class="row mt-4">
+                <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">Gender</h5></div>
+                <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].GENDER %> </p></div>
+            </div>
+            <div class="row mt-1">
+                <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">Birthday</h5></div>
+                <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].BIRTHDAY %> </p></div>
+            </div>
+            <div class="row mt-1">
+                <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">Occupation</h5></div>
+                <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].OCCUPATION %> </p></div>
+            </div>
+            
+        </div>
+        <% if(prof[0].VERIFIEDSTUDENT === 'T'){ %>
+            <div class="col-lg-12"><br><hr></div>
+            <div class="col-lg-12">
+                <br>
+                <h5 class="text-dark text-uppercase"> <i class="fas fa-user-graduate"> </i> &nbsp;Student Info:</h5>
+                <br>
+                <div class="row mt-4">
+                    <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">Validated</h5></div>
+                    <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> 
+                        <% if(prof[0].VERIFIEDSTUDENT === 'T'){ %>
+                            <p class="text-left text-success"> <i class="fas fa-user-check"> </i> &nbsp; True </p>
+                        <% }else{ %>
+                            <p class="text-left text-danger"> <i class="fas fa-user-clock"> </i> &nbsp; Pending... </p>
+                        <% } %> 
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Name</h5></div>
+                    <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLNAME %> </p></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School ID or Code</h5></div>
+                    <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLID %> </p></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Level</h5></div>
+                    <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLLEVEL %> </p></div>
+                </div>
+            </div>
+        <% } %>
+        <div class="col-lg-12"><br><hr></div>
+
+        <div class="col-lg-12">
+            <br> 
+            <h5 class="text-dark text-uppercase"> <i class="fas fa-heart"> </i> &nbsp;My Lifestyle:</h5>
+            <br>
+            <% if(prof[0].SMOKING === 'Yes'){%>
+                <button class="btn btn-success " style="width: initial;">  Smoking <i class="fas fa-smoking"></i></button>
+            <% }else{ %>
+                <button class="btn btn-danger" style="width: initial;"><i class="fa fa-ban" aria-hidden="true"></i>  Smoking <i class="fas fa-smoking"></i></button>
+            <% }%>
+
+            <% if(prof[0].PETS === 'Yes'){%>  
+            <button class="btn btn-success" style="width: initial;"> Pets  <i class="fas fa-paw"></i></button>
+            <% } else { %>
+            <button class="btn btn-danger" style="width: initial;">  Pets  <i class="fas fa-paw"></i></button>
+            <% } %>
+
+            <% if(prof[0].ALCOHOL === 'Yes'){%> 
+            <button class="btn btn-success" style="width: initial;">  Alcohol <i class="fas fa-wine-bottle"></i></button>
+            <% } else {%>
+            <button class="btn btn-danger" style="width: initial;"><i class="fa fa-ban" aria-hidden="true"></i>  Alcohol <i class="fas fa-wine-bottle"></i></button>
+            <% } %>
+            
+        </div>
+
+        <div class="col-lg-12"><br><hr></div>
+
+        
+      </div>
+     </div>
+
+     </div>
+    </div>
+   </div>
+ </section>
+ <!-- End banner Area -->
+
+
+ <script src="js/vendor/jquery-2.2.4.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="js/vendor/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+ <script src="js/easing.min.js"></script>
+ <script src="js/hoverIntent.js"></script>
+ <script src="js/superfish.min.js"></script>
+ <script src="js/jquery.ajaxchimp.min.js"></script>
+ <script src="js/jquery.magnific-popup.min.js"></script>
+ <script src="js/owl.carousel.min.js"></script>
+ <script src="js/jquery.sticky.js"></script>
+ <script src="js/jquery.nice-select.min.js"></script>
+ <script src="js/parallax.min.js"></script>
+ <script src="js/waypoints.min.js"></script>
+ <script src="js/jquery.counterup.min.js"></script>
+ <script src="js/mail-script.js"></script>
+ <script src="js/main.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+</body>
+
+</html>

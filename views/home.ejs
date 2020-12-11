@@ -35,7 +35,8 @@
                         <li><a href="#about">About</a></li>
                             <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                                 <ul>
-                                    <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/signout">Sign-Out</a></li>                   
                                 </ul>
                             </li>
                     </ul>
@@ -64,7 +65,7 @@
                     <% if(lobby  ==  0){ %>
                         <a href="/hostL" class="primary-btn text-uppercase">Host</a> &nbsp;  
                      <% } else {%>
-                        <a href="/enterMyRoom" class="primary-btn text-uppercase">My Lobby</a> &nbsp;
+                        <a href="/viewRoom" class="primary-btn text-uppercase">My Lobby</a> &nbsp;
                     <% } %>
                     <a href="/findL" class="primary-btn text-uppercase">Find</a>
                 </div>
