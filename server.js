@@ -33,7 +33,6 @@ db.connect((err) =>{
 //====== For User Log Session ======
 let user;
 let lobby;
-let loc;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -295,7 +294,6 @@ app.post('/findUser', (req,res)=>{
                         }else{
                             lobby=0;
                             console.log("User has no lobby = " + lobby);
-                            // res.render('home',{page: 'home',user: user,lobby:lobby});
                             res.redirect('/home');
                         }
                     }
@@ -340,7 +338,7 @@ app.post('/createUser', (req,res)=>{
     });            
 });
 
-//creating lobby route//
+//creating lobby route with validation//
 app.post('/createLobby',(req,res)=>{
     console.log(req.body);
     let data = req.body;
@@ -354,7 +352,7 @@ app.post('/createLobby',(req,res)=>{
     var sql1 = "INSERT INTO lobby(lobbyhostid,title,description,date,roommatemax, \
         roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
-    var sql2 = "INSERT INTO location(lobbyid,name,address,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?,?)";
+    var sql2 = "INSERT INTO location(lobbyid,name,address,image,rentingbudget,bookinglink,email,telephone,wifi) VALUES (?,?,?,?,?,?,?,?,?)";
 
     var sql3 = "INSERT INTO `roommate`(`LOBBYID`, `USERID`, `DEACTIVATE`, `KICKVOTES`) VALUES (?,?,'Active',0)";
 
@@ -378,7 +376,7 @@ app.post('/createLobby',(req,res)=>{
         else{
             lobby = rows;
             console.log(rows);
-            db.query(sql2, [lobby[0].lobbyid,data.name,data.address,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
+            db.query(sql2, [lobby[0].lobbyid,data.name,data.address,data.image,data.rentAmount,data.booklink,data.email,data.telephone,data.wifi], (err,rows,fields)=>{
                 if(!err){
                     console.log("successfully inserted location!");
                     db.query(sql3,[lobby[0].lobbyid,lobby[0].lobbyhostid],(err,rows,fields) => {
@@ -401,9 +399,11 @@ app.post('/createLobby',(req,res)=>{
 });
 
 app.get('/findL', (req,res)=>{
-    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
-    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
-
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET,\
+    loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS \
+    from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID";
+ 
     if(!loggedIn){
         return res.render('index');       
     }else{
@@ -412,8 +412,53 @@ app.get('/findL', (req,res)=>{
             if (err){
                 throw err;
             }else{
-                console.log(row);
-                res.render('findLobby', {user:user,lobby:lobby,lobbies:row});
+                res.render('findLobby', {user:user,lobby:lobby,lobbies:row,locFil:false});
+            }
+        });
+    }     
+});
+
+app.post('/findL', (req,res)=>{
+    var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET, \
+    loc.WIFI,loc.NAME,l.LOBBYID,l.TITLE,l.DESCRIPTION,l.VIEWS,DATE_FORMAT(l.DATE,'%y-%m-%d') as DATE,\
+    l.ROOMMATEMAX,l.ROOMMATECOUNT,l.AGEMIN,l.AGEMAX,l.STUDENTSONLY,l.GENDERSELECT,l.VIEWS,l.NOSMOKING,l.NOALCOHOL,l.NOPETS \
+    from users u join lobby l on u.USERID = l.LOBBYHOSTID join location loc on l.LOBBYID = loc.LOBBYID where loc.address LIKE ? \
+    AND l.GENDERSELECT in (?,?)AND loc.WIFI REGEXP ? AND l.STUDENTSONLY REGEXP ? AND l.NOSMOKING REGEXP ? AND l.NOALCOHOL REGEXP ? AND l.NOPETS REGEXP ?";
+    var gender2;
+    let locFil = req.body.locFil;
+    let gender = req.body.gender;
+    let wifi = req.body.wifi;
+    let studOnly = req.body.studentsonly;
+    let nopets = req.body.nopets;
+    let nosmoking = req.body.nosmoking;
+    let noalcohol = req.body.noalcohol;
+
+    (!locFil)? locFil="% %":locFil = "%" + locFil + "%";
+    (wifi=="---")? wifi="^[a-z]":wifi = "^[" + wifi + "]";
+    (studOnly=="---")? studOnly="^[a-z]":studOnly = "^[" + studOnly + "]";
+    (nosmoking=="---")? nosmoking="^[a-z]":nosmoking = "^[" + nosmoking + "]";
+    (noalcohol=="---")? noalcohol="^[a-z]":noalcohol = "^[" + noalcohol + "]";
+    (nopets=="---")? nopets="^[a-z]":nopets = "^[" + nopets + "]";
+
+    if(gender == "---"){
+        gender = "Male";
+        gender2 = "Female";
+    }else{
+        gender2 = gender;
+    }
+
+    console.log(wifi);
+
+    if(!loggedIn){
+        return res.render('index');       
+    }else{
+        db.query(sql,[locFil,gender,gender2,wifi,studOnly,nosmoking,noalcohol,nopets],(err,row)=>{
+            console.log("Searching all lobbies...");
+            if (err){
+                throw err;
+            }else{
+                // console.log(row);
+                res.render('findLobby', {user:user,lobby:lobby,lobbies:row,locFil:locFil});
             }
         });
     }     

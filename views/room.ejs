@@ -11,6 +11,10 @@
  <meta charset="UTF-8">
  <title>Dormmate</title>
 
+<style>
+
+</style>
+
  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
  <!-- CSS ============================================= -->
  <link rel="stylesheet" href="css/linearicons.css">
@@ -225,8 +229,11 @@
 
         </div>
         <div class="col-lg-6">
-            <h5 class="text-dark text-uppercase">Maps:</h5>
-            <iframe class= "maps" id="google-maps" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1962.3947691434173!2d123.9144718!3d10.3587063!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998914321a5a7%3A0x6ca3a71407181116!2sUniversity%20Of%20San%20Carlos!5e0!3m2!1sen!2sph!4v1605771808619!5m2!1sen!2sph" width="400" height="200" frameborder="1" style="border:0; width: auto;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+   
+        </div> -->
+
+        <div class="col-lg-12">
+            <img src='<%= lob.image %>'class="img-thumbnail">  
         </div>
         <div class="col-lg-12">
             <br><br>
@@ -268,7 +275,12 @@
  </section>
  <!-- End banner Area -->
 
-
+  <script>
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+</script>
  <script src="js/vendor/jquery-2.2.4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
  <script src="js/vendor/bootstrap.min.js"></script>

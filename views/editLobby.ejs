@@ -191,8 +191,7 @@
             <li><a href="/home#about">About</a></li>
                 <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
-                      <li><a href="/profile">Profile</a></li>
-                      <li><a href="/signout">Sign-Out</a></li>                        
+                        <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
                     </ul>
                 </li>
         </ul>
@@ -218,7 +217,7 @@
       </div>
       
         <div class="col-lg-12" style="width: 100%;">
-            <form id="msform" action="/createLobby" method="POST">
+            <form id="msform" action="/updateLobby" method="POST">
 
                 <!-- progressbar -->
                 <ul id="progressbar">
@@ -228,25 +227,23 @@
                 </ul>
                 <!-- fieldsets -->
                 <fieldset>
-                  <h2 class="fs-title">Create Lobby</h2>
-                  <h3 class="fs-subtitle">This is step 1</h3>
+                  <h2 class="fs-title">Update Lobby</h2>
+                  <h3 class="fs-subtitle">Please provide sufficient information</h3>
                   <% if ( error == true ) { %>
                         <h4 style="color: red;"> Error: Failure in creating your lobby. Please fill-up all required fields  </h4>
                   <% } %>
                   <hr><label class ="text-dark text-uppercase">Lobby Details</label>
                   
-                  <input type="hidden" value="<%= user[0].userid %>" name="userID">
+                  <input type="hidden" value="<%= lobby[0].lobbyid %>" name="lobbyid">
 
-                  <input type="text" class="design text" name="title" placeholder="Title" required autofocus/>
+                  <input type="text" class="design text"  value="<%= lobby[0].title %>" name="title" placeholder="<%= lobby[0].title %>" required autofocus/>
 
-                  <input type="text" class ="design text" name="description" placeholder="Description" required/>
-                    <% var date = new Date() %>
-                  <input type="hidden" name="date" value='<%= date.toISOString().slice(0,10); %>'/>
+                  <input type="text" class ="design text"value="<%= lobby[0].description %>" name="description" placeholder="<%= lobby[0].description %>" required/>
 
-                  <input type="number" class ="design text" name="roommates" placeholder="Number of Roommates" required/>
+                  <input type="number" class ="design text"  value="<%= lobby[0].roommatemax %>" name="roommates" placeholder="<%= lobby[0].roommatemax %>" required/>
 
                   <label class ="text-dark text-uppercase" for="gender">Gender</label>
-                    <select class="design text-uppercase custom-select" name="gender" style="width: 150px;"> 
+                    <select class="design text-uppercase custom-select"  value="<%= lobby[0].gender %>" name="gender" style="width: 150px;"> 
                       <option value="male">Male</option> 
                       <option value="female">Female</option> 
                   </select>
@@ -256,17 +253,17 @@
                     <div class="col">
                       <label class ="text-dark text-uppercase" >Minimum Age Range: </label>
                       <label class ="text-dark text-uppercase" id="demo"></label>
-                      <input type="range" min="16" max="45" name="minAge" id="myRange">
+                      <input type="range" min="16" max="45"  name="minAge" id="myRange">
                     </div>
                     <div class="col">
                       <label class ="text-dark text-uppercase" >Maximum Age Range: </label>
                       <label class ="text-dark text-uppercase" id="demo2"></label>
-                      <input type="range" min="16" max="45" name="maxAge" id="myRange2">
+                      <input type="range" min="16" max="45"  name="maxAge" id="myRange2">
                     </div>
                     </div>
                     
                     <hr>
-                      <a type="button" name="next" class="next action-button btn-success" href="/home" style="border-radius: 25px;">Cancel</a>
+                      <a type="button" name="next" class="next action-button btn-success" href="/enterMyRoom" style="border-radius: 25px;">Cancel</a>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>
@@ -313,10 +310,10 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="nameofPlace">Name of Place </label>
-                      <input type="text" class="design text" name="name" placeholder="Name" />
+                      <input type="text" class="design text" value="<%= location[0].name %>" name="name" placeholder="<%= location[0].name %>" />
              
                       <label class ="text-dark text-uppercase"  for="placeAddress">Location Address </label>
-                      <input type="text" class="design text" name="address" placeholder="Address" />
+                      <input type="text" class="design text" value="<%= location[0].address %>" name="address" placeholder="<%= location[0].address %>" />
                         <div class="row">
                           <div class="col-lg-6">
                             <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
@@ -329,7 +326,7 @@
                           </div><br><br><br>
                           <div class="col-lg-6">
                             <label class ="text-dark text-uppercase" for="Currency">Rent Amount: </label>
-                            <input class="design text-uppercase" type ="number" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
+                            <input class="design text-uppercase" type ="number" value="<%= location[0].rentingbudget %>" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
                           </div>
                         </div>
                   
@@ -337,13 +334,13 @@
   
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="locationImage">Location Image </label>
-                      <input class="design text" type="text" name="image" placeholder="Please input image link only..." id="imageInput">
+                      <input class="design text" type="text"  value="<%= location[0].image %>"" name="image" placeholder="Please input image link only..." id="imageInput">
                       <label class ="text-dark text-uppercase"  for="olBookLink">Online Booking Link </label>
-                      <input type="text" class="design text" name="booklink" placeholder="Booking Email.." />
+                      <input type="text" class="design text" value="<%= location[0].bookinglink %>" name="booklink" placeholder="Booking Email.." />
                       <label class ="text-dark text-uppercase"  for="email">Email </label>
-                      <input type="email" class="design text" name="email" placeholder="Email" />
+                      <input type="email" class="design text" value="<%= location[0].email %>"  name="email" placeholder="Email" />
                       <label class ="text-dark text-uppercase"  for="telephone">Contact Number</label>
-                      <input type="text" class="design text" name="telephone" placeholder="Contact Number" />
+                      <input type="text" class="design text" value="<%= location[0].telephone %>" name="telephone" placeholder="Contact Number" />
                     </div>
 
                   </div>
