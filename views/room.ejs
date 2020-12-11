@@ -129,7 +129,7 @@
             <h1 class="text-dark text-uppercase"><%= lobby[0].TITLE %></h1>
             <h4 class="text-dark text-uppercase" style=" border: 1px solid grey;"></h4>
         </div><br><br>
-        <% if(user[0].userid != lobby[0].LOBBYHOSTID && applicant.length != 1 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX && y != 'T'){ %>
+        <% if(lobby < 0 && user[0].userid != lobby[0].LOBBYHOSTID && applicant.length != 1 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX && y != 'T'){ %>
             <div class = "col-lg-12">
                <br> <a href="/apply" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Request to Join Chatroom</a><br>
             </div>
@@ -151,8 +151,27 @@
         <% if(roommates.length > 0){ %>  
             <% for(var x = 0; x < lobby[0].ROOMMATECOUNT; x++){ %>
                 <% if(roommates[x].userid === user[0].userid && roommates[x].userid != lobby[0].LOBBYHOSTID){ %>     
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to leave?</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Are you sure you want to continue?
+                            </div>
+                            <div class="modal-footer">
+                              <a href="/leave?id=<%= user[0].userid %>"><button type="button" class="btn btn-primary" style="background-color:red">Yes</button></a>
+                              <a href="/viewRoom"><button type="button" class="btn btn-primary" style="background-color:rgb(79, 79, 79)">Cancel</button></a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                     <div class = "col-lg-12">
-                        <br> <a href="/leave?id=<%= user[0].userid %>" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Leave Lobby</a><br>
+                        <br> <button class="btn" data-toggle="modal" data-target="#exampleModal" style="width: initial; color: black; background-color: #c3c3e590;">Leave Lobby</a><br>
                     </div>
                     <% x = lobby[0].ROOMMATECOUNT %>
                 <% } %>
@@ -170,7 +189,7 @@
         <b style="color: black;">Views</b> : <%= lobby[0].VIEWS %> <br>
         </div>
         <div class="col-lg-6" style="text-align: left;">    
-            <b style="color: black;">Created on</b> : <%= lobby[0].DATEANDTIME %> <br>
+            <b style="color: black;">Created on</b> : <%= lobby[0].DATE %> <br>
             <b style="color: black;">Max Roommates</b> : <%= lobby[0].ROOMMATEMAX %>
         </div>
         <div class="col-lg-12"><hr></div><br> 
@@ -233,7 +252,7 @@
         </div> -->
 
         <div class="col-lg-12">
-            <img src='<%= lob.image %>'class="img-thumbnail">  
+            <img src='<%= lobby[0].image %>'class="img-thumbnail">  
         </div>
         <div class="col-lg-12">
             <br><br>

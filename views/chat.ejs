@@ -349,6 +349,7 @@ font-size: 1.2vh;
 </head>
 
 <body>
+  
 
  <header id="header" id="home">
   <div class="container">
@@ -416,6 +417,25 @@ font-size: 1.2vh;
             <hr style="margin-top: 10px;">
             <% for(var x = 0; x < roomies.length; x++){ %>
               <% if (roomies[x].userid != host[0].userid){ %>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to kick <%= roomies[x].firstname %> <%= roomies[x].lastname %>?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to continue?
+                      </div>
+                      <div class="modal-footer">
+                        <a href="/kick?id=<%= roomies[x].userid%>"><button type="button" class="btn btn-primary" style="background-color:red">Yes</button></a>
+                        <a href="/joinRoom"><button type="button" class="btn btn-primary" style="background-color:rgb(79, 79, 79)">Cancel</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                   <div class="chat-title sticky-top">
                     <div class = "row">
                       <div class = "col-md-6">
@@ -424,7 +444,7 @@ font-size: 1.2vh;
                       </div>
                       <% if(current[0].userid === host[0].userid){ %>
                         <div class = "col-md-6">
-                          <a href = "/kick?id=<%= roomies[x].userid %>" class="btn-success btn-application" style="background-color: rgb(135, 135, 210); text-transform: capitalize; margin-left: 30px;">&nbsp;&nbsp;Kick&nbsp;&nbsp;</a>
+                          <button class="btn-success btn-application" data-toggle="modal" data-target="#exampleModal" style="background-color: rgb(135, 135, 210); text-transform: capitalize; margin-left: 30px;">&nbsp;&nbsp;Kick&nbsp;&nbsp;</button>
                         </div>
                       <% } %>
                     </div>
@@ -438,7 +458,7 @@ font-size: 1.2vh;
             <% if (current[0].userid === host[0].userid){ %>  
               <br><h3 style="text-align: left;">&nbsp;<i class="fa fa-book"></i> Applications</h3>
               <hr style="margin-top: 10px;">
-              <% if(applicants != 0){ %>
+              <% if(applicants != 0 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX){ %>
                 <% for(var x = 0; x < applicants.length; x++){ %>
                   <% if(applicants[x].APPROVED != 'T' && applicants[x].APPROVED != 'F'){ %>
                     <div class="chat-title sticky-top">
@@ -459,6 +479,15 @@ font-size: 1.2vh;
                     <hr>
                   <% } %>
                 <% } %>
+              <% }else if(applicants === 0){ %>
+                <div class="chat-title sticky-top">
+                  <div class = "row">
+                    <div class="col-md-6">
+                      <h1 class="text-black">LOBBY IS FULL</h1>
+                      <h2 class="text-black" style="font-size: 9px;">Cannot Accept Applicants</h2><br>
+                    </div>
+                  </div>
+                </div>
               <% } %>
             <% } %>
           </div>
@@ -499,6 +528,7 @@ font-size: 1.2vh;
     </div>
    </div>
  </section>
+
  <!-- End banner Area -->
  <script src="/socket.io/socket.io.js"></script>
  <script src="js/mains.js"></script>

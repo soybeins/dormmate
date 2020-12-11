@@ -16,9 +16,7 @@
 </style>
 
  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
- <!--
-			CSS
-			============================================= -->
+ <!--CSS============================================= -->
  <link rel="stylesheet" href="css/linearicons.css">
  <link rel="stylesheet" href="css/font-awesome.min.css">
  <link rel="stylesheet" href="css/bootstrap.css">
@@ -217,7 +215,7 @@
             <% for(var i = 0;i < roommate.length;i++) {%>
             <div class="row">
                 <div class="profile-card">
-                    <% if(user[0].userid == lobby[0].LOBBYHOSTID ){ %>
+                    <% if(roommate[i].userid === lobby[0].LOBBYHOSTID ){ %>
                     <span class="pro">Host</span>
                     <% }else {%>
                     <span class="verified">Member</span>
