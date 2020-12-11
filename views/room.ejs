@@ -84,7 +84,7 @@
         <div class="container px-lg-5">
             <div class="row mx-lg-n5">
                 <div class="col py-3 px-md-5">
-                    <a href="/findL" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
+                    <form action="/findL" method="GET"> <button class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></button> </form>
                 </div>
                 <% if(applicant.length === 1){ %>
                     <% if(applicant[0].APPROVED === 'W' || applicant[0].APPROVED === 'F'){ %>

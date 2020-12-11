@@ -33,6 +33,7 @@ db.connect((err) =>{
 //====== For User Log Session ======
 let user;
 let lobby;
+let location;
 var loggedIn = false;
 
 //====== Basic Routes ====== //
@@ -250,7 +251,7 @@ app.get('/signout', (req,res)=>{
     loggedIn = false;
     user = null;
     lobby = null;
-    loc = null;
+    location = null;
     res.redirect('/');
 });
 
@@ -417,6 +418,60 @@ app.get('/findL', (req,res)=>{
         });
     }     
 });
+// ========================= editMyRoom ======================== //
+app.post('/editMyRoom',(req,res)=>{
+    if(!loggedIn){
+        res.render('index');       
+    }else{
+        db.query("select * from lobby l join location loc on l.LOBBYID = loc.LOBBYID where l.LOBBYID = ?",[lobby],(err,row)=>{
+            if(!err){
+                res.render('editLobby', {user:user,lobby:row,error:false});
+            }
+        })
+    }
+})
+//============================================================== //
+
+app.post('/updateLobby',(req,res)=>{
+    console.log(req.body);
+    data = req.body;
+    var sql = "update lobby set title = ?,description = ?,roommatemax = ?, genderselect = ?, agemin = ?, agemax = ?, studentsonly = ?, \
+            nosmoking = ?,nopets = ?,noalcohol = ? where lobbyid = ?";
+    var sql2 = "update location set name = ?,address = ?,wifi = ?, rentingbudget = ?, image = ?, bookinglink = ?, email = ?, telephone = ? where lobbyid = ?";
+
+    db.query(sql,[data.title,data.description,data.roommates,data.gender,data.minAge,data.maxAge,data.studentsOnly,data.smoking,
+            data.pets,data.alcohol,data.lobbyid],(err)=>{
+        if(err){
+            throw err;
+        }else{
+            db.query(sql2,[data.name,data.address,data.wifi,data.rentAmount,data.image,data.booklink,data.email,data.telephone,data.lobbyid],(err)=>{
+                if(!err){
+                    db.query("SELECT count(lobbyid) as count,lobbyid,lobbyhostid,title,description,DATE_FORMAT(date,'%y-%m-%d') as date,roommatemax, \
+                    roommatecount,views,agemin,agemax,genderselect,studentsonly,nosmoking,noalcohol,nopets from lobby WHERE lobbyhostid = ?",user[0].userid,(err,row)=> {
+                        console.log("Searching if user has lobby.");
+                        if(err){
+                            console.log(err);      
+                        }else{
+                            if(row[0].count > 0){
+                                lobby = row[0].lobbyid;
+                                console.log("User has lobby = " + lobby);
+                                res.redirect('/home');
+                            }else{
+                                lobby=0;
+                                console.log("User has no lobby = " + lobby);
+                                res.redirect('/home');
+                            }
+                        }
+                    });
+                }
+
+            })
+        }
+
+    })
+
+
+})
 
 app.post('/findL', (req,res)=>{
     var sql = "SELECT u.VERIFIEDSTUDENT,u.USERNAME,u.USERID,u.PROFILEPICTURE,loc.IMAGE,loc.ADDRESS,loc.RENTINGBUDGET, \

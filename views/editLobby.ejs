@@ -234,16 +234,16 @@
                   <% } %>
                   <hr><label class ="text-dark text-uppercase">Lobby Details</label>
                   
-                  <input type="hidden" value="<%= lobby[0].lobbyid %>" name="lobbyid">
+                  <input type="hidden" value="<%= lobby[0].LOBBYID %>" name="lobbyid">
 
-                  <input type="text" class="design text"  value="<%= lobby[0].title %>" name="title" placeholder="<%= lobby[0].title %>" required autofocus/>
+                  <input type="text" class="design text"  value="<%= lobby[0].TITLE %>" name="title" placeholder="<%= lobby[0].TITLE %>" required autofocus/>
 
-                  <input type="text" class ="design text"value="<%= lobby[0].description %>" name="description" placeholder="<%= lobby[0].description %>" required/>
+                  <input type="text" class ="design text"value="<%= lobby[0].DESCRIPTION %>" name="description"  required/>
 
-                  <input type="number" class ="design text"  value="<%= lobby[0].roommatemax %>" name="roommates" placeholder="<%= lobby[0].roommatemax %>" required/>
+                  <input type="number" class ="design text"  value="<%= lobby[0].ROOMMATEMAX %>" name="roommates" required/>
 
                   <label class ="text-dark text-uppercase" for="gender">Gender</label>
-                    <select class="design text-uppercase custom-select"  value="<%= lobby[0].gender %>" name="gender" style="width: 150px;"> 
+                    <select class="design text-uppercase custom-select"  value="<%= lobby[0].GENDERSELECT %>" name="gender" style="width: 150px;"> 
                       <option value="male">Male</option> 
                       <option value="female">Female</option> 
                   </select>
@@ -310,10 +310,10 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="nameofPlace">Name of Place </label>
-                      <input type="text" class="design text" value="<%= location[0].name %>" name="name" placeholder="<%= location[0].name %>" />
+                      <input type="text" class="design text" value="<%= lobby[0].NAME %>" name="name"  />
              
                       <label class ="text-dark text-uppercase"  for="placeAddress">Location Address </label>
-                      <input type="text" class="design text" value="<%= location[0].address %>" name="address" placeholder="<%= location[0].address %>" />
+                      <input type="text" class="design text" value="<%= lobby[0].ADDRESS %>" name="address"  />
                         <div class="row">
                           <div class="col-lg-6">
                             <label class ="text-dark text-uppercase"  for="Wifi">Wifi </label><br>
@@ -326,7 +326,7 @@
                           </div><br><br><br>
                           <div class="col-lg-6">
                             <label class ="text-dark text-uppercase" for="Currency">Rent Amount: </label>
-                            <input class="design text-uppercase" type ="number" value="<%= location[0].rentingbudget %>" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
+                            <input class="design text-uppercase" type ="number" value="<%= lobby[0].RENTINGBUDGET %>" name="rentAmount" id="rentAmount" style="width: 120px; height: 3vh;">
                           </div>
                         </div>
                   
@@ -334,13 +334,13 @@
   
                     <div class="col-lg-6">
                       <label class ="text-dark text-uppercase"  for="locationImage">Location Image </label>
-                      <input class="design text" type="text"  value="<%= location[0].image %>"" name="image" placeholder="Please input image link only..." id="imageInput">
+                      <input class="design text" type="text"  value="<%= lobby[0].IMAGE %>"" name="image" placeholder="Please input image link only..." id="imageInput">
                       <label class ="text-dark text-uppercase"  for="olBookLink">Online Booking Link </label>
-                      <input type="text" class="design text" value="<%= location[0].bookinglink %>" name="booklink" placeholder="Booking Email.." />
+                      <input type="text" class="design text" value="<%= lobby[0].BOOKINGLINK %>" name="booklink" placeholder="Booking Email.." />
                       <label class ="text-dark text-uppercase"  for="email">Email </label>
-                      <input type="email" class="design text" value="<%= location[0].email %>"  name="email" placeholder="Email" />
+                      <input type="email" class="design text" value="<%= lobby[0].EMAIL %>"  name="email" placeholder="Email" />
                       <label class ="text-dark text-uppercase"  for="telephone">Contact Number</label>
-                      <input type="text" class="design text" value="<%= location[0].telephone %>" name="telephone" placeholder="Contact Number" />
+                      <input type="text" class="design text" value="<%= lobby[0].TELEPHONE %>" name="telephone" placeholder="Contact Number" />
                     </div>
 
                   </div>
