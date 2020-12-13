@@ -78,12 +78,8 @@
 
           <div class="container px-lg-5">
             <div class="row mx-lg-n5">
-             <div class="col py-3 px-md-5">
+             <div class="col-sm-12 col-md-6 py-3 px-md-5">
                 <a href="/home" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
-              </div>
-
-              <div class="col py-3 px-md-5">
-                <a href="/viewRoom" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-right">LOBBY</span></a>
               </div>
             </div>
           </div>
@@ -169,12 +165,6 @@
                     <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Name</h5></div>
                     <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLNAME %> </p></div>
                 </div>
-                <% if(user[0].userid === prof[0].USERID){ %>
-                    <div class="row mt-1">
-                        <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School ID or Code</h5></div>
-                        <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLID %> </p></div>
-                    </div>
-                <% } %>
                 <div class="row mt-1">
                     <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Level</h5></div>
                     <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLLEVEL %> </p></div>
