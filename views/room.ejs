@@ -129,7 +129,7 @@
             <h1 class="text-dark text-uppercase"><%= lobby[0].TITLE %></h1>
             <h4 class="text-dark text-uppercase" style=" border: 1px solid grey;"></h4>
         </div><br><br>
-        <% if(lobby < 0 && user[0].userid != lobby[0].LOBBYHOSTID && applicant.length != 1 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX && y != 'T'){ %>
+        <% if(lobby != 0 && user[0].userid != lobby[0].LOBBYHOSTID && applicant.length != 1 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX && y != 'T'){ %>
             <div class = "col-lg-12">
                <br> <a href="/apply" class="btn" style="width: initial; color: black; background-color: #c3c3e590;">Request to Join Chatroom</a><br>
             </div>
@@ -192,8 +192,9 @@
             <b style="color: black;">Created on</b> : <%= lobby[0].DATE %> <br>
             <b style="color: black;">Max Roommates</b> : <%= lobby[0].ROOMMATEMAX %>
         </div>
-        <div class="col-lg-12"><hr></div><br> 
-        <div class="col-lg-12">
+        <div class="col-lg-12"><hr></div><br> <br><br>
+        <div class = "row">
+        <div class="col-lg-4 offset-lg-2 offset-sm-0 col-sm-12">
             <h5 class="text-dark text-uppercase">Description:</h5>
             <%= lobby[0].DESCRIPTION %> <br><br>
             <b style="color: black;">PERSONAL PREFERENCE:</b> <br><br>
@@ -227,8 +228,7 @@
             <b style="color: black;">Lobby Status:</b> <%= lobby[0].SEARCHSTATE %>
                
         </div>
-        <div class="col-lg-12"><br><br></div>
-        <div class="col-lg-6">
+        <div class="col-lg-4 offset-lg-2 offset-sm-0 col-sm-12">
             <h5 class="text-dark text-uppercase">Location:</h5>
             <%= lobby[0].ADDRESS %> <br><br>
 
@@ -248,8 +248,8 @@
 
         </div>
         <div class="col-lg-6">
-   
-        </div> -->
+        </div>
+        </div> 
 
         <div class="col-lg-12">
             <img src='<%= lobby[0].image %>'class="img-thumbnail">  
