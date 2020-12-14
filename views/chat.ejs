@@ -363,8 +363,8 @@ font-size: 1.2vh;
           <li><a href="/home#about">About</a></li>
               <li class="menu-has-children"><a class="text-white"><strong> <%= current[0].username %> </strong></a>
                   <ul>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/signout">Sign-Out</a></li>                      
+                    <li><a href="/profile?id=<%= current[0].userid %>">Profile</a></li>
+                    <li><a href="/signout">Sign-Out</a></li>                       
                   </ul>
               </li>
       </ul>
@@ -439,7 +439,7 @@ font-size: 1.2vh;
                   <div class="chat-title sticky-top">
                     <div class = "row">
                       <div class = "col-md-6">
-                        <h1 class="text-black"><%= roomies[x].firstname %> <%= roomies[x].lastname %></h1>
+                        <a href="/profile?id=<%= roomies[x].userid %>"><h1 class="text-black"><%= roomies[x].firstname %> <%= roomies[x].lastname %></h1></a>
                         <h2 class="text-black" style="font-size: 9px;">Member</h2>
                       </div>
                       <% if(current[0].userid === host[0].userid){ %>
@@ -461,15 +461,34 @@ font-size: 1.2vh;
               <% if(applicants != 0 && lobby[0].ROOMMATECOUNT != lobby[0].ROOMMATEMAX){ %>
                 <% for(var x = 0; x < applicants.length; x++){ %>
                   <% if(applicants[x].APPROVED != 'T' && applicants[x].APPROVED != 'F'){ %>
+                    <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="declineModalLabel">Are you sure you want to decline <%= applicants[x].FIRSTNAME %> <%= applicants[x].LASTNAME %>?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to continue?
+                          </div>
+                          <div class="modal-footer">
+                            <a href="/decline?id=<%= applicants[x].APPLICANTID%>"><button type="button" class="btn btn-primary" style="background-color:red">Yes</button></a>
+                            <a href="/joinRoom"><button type="button" class="btn btn-primary" style="background-color:rgb(79, 79, 79)">Cancel</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="chat-title sticky-top">
                       <div class = "row">
                         <div class="col-md-6">
-                          <h1 class="text-black"><%= applicants[x].FIRSTNAME %> <%= applicants[x].LASTNAME %></h1>
+                          <a href="/profile?id=<%= applicants[x].USERID %>"><h1 class="text-black"><%= applicants[x].FIRSTNAME %> <%= applicants[x].LASTNAME %></h1></a>
                           <h2 class="text-black" style="font-size: 9px;">Pending Applicant</h2><br>
                         </div>
                         <div class = "col-md-6">
                           <a href = "/accept?id=<%= applicants[x].APPLICANTID%>" class="btn-success btn-application" style="background-color: rgb(135, 135, 210); text-transform: capitalize;">Accept</a>
-                          <a href = "/decline?id=<%= applicants[x].APPLICANTID%>" class="btn-danger btn-application" style="background-color: rgb(206, 91, 118); text-transform: capitalize;">Decline</a>
+                          <button data-toggle="modal" data-target="#declineModal" class="btn-danger btn-application" style="background-color: rgb(206, 91, 118); text-transform: capitalize;">Decline</button>
                         </div>
                       </div>
                       <figure class="avatar">

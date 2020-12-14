@@ -62,15 +62,17 @@ app.get('/login', (req,res)=>{
 });
 
 app.get('/profile', (req,res)=>{
+    let id = req.query.id;
+
     if(!loggedIn){
         res.render('index');       
     }else{
         let sql = "SELECT *, DATE_FORMAT(BIRTHDAY,'%y-%m-%d') as bday FROM users WHERE userid = ?"
-        db.query(sql, user[0].userid, (err, row) => {
+        db.query(sql, id, (err, row) => {
             if(err){
                 throw err;
             }else{
-                res.render('profile', {user:user, lobby:lobby, prof: row});
+                res.render('profile', {user:user, lobby:lobby, prof: row, lob:mylobby});
             }
         });
     }
@@ -84,7 +86,7 @@ app.get('/editAccount', (req, res) =>{
     if(!loggedIn){
         res.render('index');       
     }else{
-        let sql = 'SELECT username, email, password, profilepicture FROM users WHERE userid = ?'
+        let sql = 'SELECT userid, username, email, password, profilepicture FROM users WHERE userid = ?'
         db.query(sql, id, (err, row) => {
             info = row;
             if(err){
@@ -105,7 +107,7 @@ app.post('/editAccountInfo', (req, res) => {
         if(err){
             res.render('editAccount', {user: user, lobby: lobby, info: info, error: true});
         }else{
-            res.redirect('/profile');
+            res.redirect('/profile?id=' + user[0].userid);
         }
     })
 })
@@ -136,7 +138,7 @@ app.post('/editPersonalInfo', (req, res) => {
         if(err){
             throw err;
         }else{
-            res.redirect('/profile');
+            res.redirect('/profile?id=' + user[0].userid);
         }
     })
 })
@@ -153,8 +155,6 @@ var mylobby, roommates;
 
 app.get(('/viewRoom'), (req,res)=>{
     let id = req.query.id;
-
-    console.log(id);
 
     if(!loggedIn){
         res.render('index');       
@@ -235,7 +235,7 @@ app.get(('/joinRoom'), (req,res)=>{
             db.query(sql, mylobby[0].LOBBYID, (err, row) => {
                 var chat = row;
 
-                let sql3 = 'SELECT users.FIRSTNAME, users.LASTNAME, applicants.APPLICANTID, applicants.APPROVED FROM users INNER JOIN applicants ON users.USERID = applicants.APPLICANTID WHERE applicants.LOBBYID = ?';
+                let sql3 = 'SELECT users.USERID, users.FIRSTNAME, users.LASTNAME, applicants.APPLICANTID, applicants.APPROVED FROM users INNER JOIN applicants ON users.USERID = applicants.APPLICANTID WHERE applicants.LOBBYID = ?';
                 db.query(sql3, mylobby[0].LOBBYID, (err, row) => {
                     var applicants = row;
                     
@@ -452,7 +452,7 @@ app.post('/updateLobby',(req,res)=>{
                             if(row[0].count > 0){
                                 lobby = row[0].lobbyid;
                                 console.log("User has lobby = " + lobby);
-                                res.redirect('/home');
+                                res.redirect('/viewRoom?id=' + lobby);
                             }else{
                                 lobby=0;
                                 console.log("User has no lobby = " + lobby);
@@ -609,6 +609,8 @@ app.get('/decline', (req, res) => {
 
 app.get('/leave', (req, res) => {
     var id = req. query.id;
+
+    lobby = 0;
 
     let sql = 'DELETE FROM roommate WHERE userid = ?';
     db.query(sql, id, (err, row) => {

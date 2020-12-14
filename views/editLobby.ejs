@@ -191,7 +191,8 @@
             <li><a href="/home#about">About</a></li>
                 <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
-                        <li> <li><a href="/signout">Sign-Out</a></li> </li>                       
+                      <li><a href="/profile?id=<%= user[0].userid %>">Profile</a></li>
+                      <li><a href="/signout">Sign-Out</a></li>                         
                     </ul>
                 </li>
         </ul>
@@ -263,7 +264,7 @@
                     </div>
                     
                     <hr>
-                      <a type="button" name="next" class="next action-button btn-success" href="/home" style="border-radius: 25px;">Cancel</a>
+                      <a type="button" name="next" class="next action-button btn-success" href="/viewRoom?id=<%= lobby[0].LOBBYID %>" style="border-radius: 25px;">Cancel</a>
                   <input type="button" name="next" class="next action-button btn-success" value="Next" style="border-radius: 25px;"/>
                 </fieldset>
                 <fieldset>

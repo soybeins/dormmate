@@ -41,7 +41,7 @@
             <li><a href="/home#about">About</a></li>
                 <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                     <ul>
-                      <li><a href="/profile">Profile</a></li>
+                      <li><a href="/profile?id=<%= user[0].userid %>">Profile</a></li>
                       <li><a href="/signout">Sign-Out</a></li>                        
                     </ul>
                 </li>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="modal-footer">
                   <a href="/deleteRoom"><button type="button" class="btn btn-primary" style="background-color:red">Delete</button></a>
-                  <a href="/enterMyRoom"><button type="button" class="btn btn-primary" style="background-color:rgb(79, 79, 79)">Close</button></a>
+                  <a href="/viewRoom?id=<%= lobby[0].LOBBYID %>"><button type="button" class="btn btn-primary" style="background-color:rgb(79, 79, 79)">Close</button></a>
                 </div>
               </div>
             </div>
@@ -220,10 +220,11 @@
                     <% }else {%>
                     <span class="verified">Member</span>
                     <%}%>
+                    <a href="/profile?id=<%= roommate[i].userid %>">
                     <img class="round" src='<%= roommate[i].profilepicture%>' alt="user" />
                     <h5 class="text-dark"><%= roommate[i].username%></h5>
                     <div class="col-lg-12">
-                        <%= roommate[i].firstname + ' ' + roommate[i].lastname %><br>
+                        <%= roommate[i].firstname + ' ' + roommate[i].lastname %><br></a>
                         <i class="fas fa-thumbs-up"></i>&nbsp;<%= roommate[i].upvote%> &emsp; <i class="fas fa-thumbs-down"></i>&nbsp;<%= roommate[i].downvote%>
                     </div>
                 </div>

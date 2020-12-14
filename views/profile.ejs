@@ -32,11 +32,11 @@
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="menu-active"><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li class="menu-active"><a href="/home">Home</a></li>
+                        <li><a href="/home#about">About</a></li>
                             <li class="menu-has-children"><a class="text-white"><strong> <%= user[0].username %> </strong></a>
                                 <ul>
-                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/profile?id=<%= user[0].userid %>">Profile</a></li>
                                     <li><a href="/signout">Sign-Out</a></li>                       
                                 </ul>
                             </li>
@@ -75,15 +75,15 @@
           </div>
         </div>
         <!-- End of Empty -->
-
+        <% if(user[0].userid != prof[0].USERID){ %>
           <div class="container px-lg-5">
             <div class="row mx-lg-n5">
              <div class="col-sm-12 col-md-6 py-3 px-md-5">
-                <a href="/home" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
+                <a href="/viewRoom?id=<%= lob[0].LOBBYID %>" class="btn btn-success" style="padding:.5rem;border-radius:25px;background-color: rebeccapurple;"><span class="arrow-left slide-right">BACK</span></a>  
               </div>
             </div>
           </div>
- 
+        <% } %>
  <!-- start banner Area -->
  <section id="home">
   <div class="container">
@@ -114,16 +114,18 @@
                         <p class="text-dark text-left text mt-2 ml-2"> <%= prof[0].EMAIL %> </p>
                     </div>
                 </div>
-                <div class ="offset-sm-1 col-sm-10 offset-md-9 col-md-3 offset-lg-0 col-lg-2 mt-3">
-                <ul class="nav-menu">    
-                    <li class="menu-has-children btn btn-info" style="padding: 3px;"><a class="text-white"><strong><i class="fas fa-user-edit"></i>&nbsp;&nbsp;&nbsp;EDIT </strong></a>
-                        <ul>
-                            <li><a href="/editAccount?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Account Info</span></a></li>
-                            <li><a href="/editPersonal?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Personal Info</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-                </div>
+                <% if(user[0].userid === prof[0].USERID){ %>
+                    <div class ="offset-sm-1 col-sm-10 offset-md-9 col-md-3 offset-lg-0 col-lg-2 mt-3">
+                    <ul class="nav-menu">    
+                        <li class="menu-has-children btn btn-info" style="padding: 3px;"><a class="text-white"><strong><i class="fas fa-user-edit"></i>&nbsp;&nbsp;&nbsp;EDIT </strong></a>
+                            <ul>
+                                <li><a href="/editAccount?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Account Info</span></a></li>
+                                <li><a href="/editPersonal?id=<%= prof[0].USERID %>" style="border-radius:10px;">&nbsp; Edit Personal Info</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </div>
+                <% } %>
             </div>
          </div>
         
@@ -165,6 +167,12 @@
                     <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Name</h5></div>
                     <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLNAME %> </p></div>
                 </div>
+                <% if(user[0].userid === prof[0].USERID){ %>
+                    <div class="row mt-1">
+                        <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School ID Number</h5></div>
+                        <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLID %> </p></div>
+                    </div>
+                <% } %>
                 <div class="row mt-1">
                     <div class="offset-sm-1 col-sm-5 offset-md-2 col-md-6 offset-lg-4 col-lg-3"> <h5 class="text-dark text-left">School Level</h5></div>
                     <div class="col-sm-5 col-md-4 col-lg-5 mt-1"> <p class="text-left"> <%= prof[0].SCHOOLLEVEL %> </p></div>

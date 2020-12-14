@@ -333,7 +333,7 @@
                       <div class="col-lg-5"></div>
                       <div class="col-lg-2">
                         <div class="custom-control custom-checkbox">
-                          <% if(info[0].SMOKING === 'No'){ %>  
+                          <% if(info[0].SMOKING == "No" || info[0].SMOKING == ""){ %>  
                             <input type="checkbox" class="custom-control-input" id="Smoker" value="Yes" name="smoker">
                             <label class="custom-control-label" for="Smoker">Smoking</label>
                           <% }else{ %>
@@ -348,7 +348,7 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                        <% if(info[0].PETS === 'No'){ %>  
+                        <% if(info[0].PETS == "No" || info[0].PETS == ""){ %>  
                           <input type="checkbox" class="custom-control-input" id="Pets" value="Yes" name="pets">
                           <label class="custom-control-label" for="Pets">Pets</label>
                         <% }else{ %>
@@ -363,7 +363,7 @@
                     <div class="col-lg-5"></div>
                     <div class="col-lg-2">
                       <div class="custom-control custom-checkbox">
-                        <% if(info[0].ALCOHOL === 'No'){ %>  
+                        <% if(info[0].ALCOHOL == "No" || info[0].ALCOHOL == ""){ %>  
                           <input type="checkbox" class="custom-control-input" id="Alcohol" value="Yes" name="alcohol">
                           <label class="custom-control-label" for="Alcohol">Alcohol</label>
                         <% }else{ %>
@@ -374,7 +374,7 @@
                     </div>
                     <div class="col-lg-5"></div><br><br>
                 </div>
-                  <a href = "/profile" type="button" name="previous" class="previous action-button btn-success" style="border-radius:25px">Cancel</a>
+                  <a href = "/profile?id=<%= info[0].USERID %>" type="button" name="previous" class="previous action-button btn-success" style="border-radius:25px">Cancel</a>
                   <input type="submit" name="next" class="next action-button btn-success" value="Edit" style="border-radius:25px"/>
                 </fieldset>
               </form>
