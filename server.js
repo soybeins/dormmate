@@ -109,15 +109,19 @@ app.get('/editAccount', (req, res) =>{
 
 app.post('/editAccountInfo', (req, res) => {
     let data = req.body;
-
     let sql = 'UPDATE users SET username = ?, email = ?, password = ?, profilepicture = ? WHERE userid = ?'
-    db.query(sql, [data.username, data.email, data.password, data.profile, id], (err, row) => {
-        if(err){
-            res.render('editAccount', {user: user, lobby: lobby, info: info, error: true});
-        }else{
-            res.redirect('/profile?id=' + user[0].userid);
-        }
-    })
+
+    bcrypt.genSalt(11).then(salt =>{
+        bcrypt.hash(data.password, salt).then(hash =>{
+            db.query(sql, [data.username, data.email,hash, data.profile, id], (err, row) => {
+                if(err){
+                    res.render('editAccount', {user: user, lobby: lobby, info: info, error: true});
+                }else{
+                    res.redirect('/profile?id=' + user[0].userid);
+                }
+            })  
+        })
+    })  
 })
 
 app.get('/editPersonal', (req, res) =>{
@@ -273,8 +277,8 @@ app.post('/findUser', (req,res)=>{
         return res.status(200).render('login', {error:'true'});
     }
 
-    var sql='SELECT count(UserID) as count,firstname, lastname, username, userid, profilepicture FROM users WHERE strcmp(USERNAME,BINARY ?) = 0 && strcmp(PASSWORD,?) = 0';
-    db.query(sql,[data.username,data.password],(err,row,fields)=>{
+    var sql='SELECT count(UserID) as count,firstname, lastname, username, userid, password, profilepicture FROM users WHERE username = ?';
+    db.query(sql,[data.username],(err,row,fields)=>{
         console.log("Initiating Query.");
         if(err){
             console.log("Database is empty");
@@ -284,27 +288,35 @@ app.post('/findUser', (req,res)=>{
               });
         }else{
             if(row[0].count == 1){
-                user = row;
-                loggedIn = true;
-                console.log("user count = " + user[0].count);
-                console.log("data found");
-                db.query("SELECT lobbyid FROM roommate WHERE userid = ?",user[0].userid,(err,row)=> {
-                    console.log("Searching if user has lobby.");
-                    if(err){
-                        console.log(err);      
+                bcrypt.compare(data.password,row[0].password,(err,success)=>{
+                    console.log(success)
+                    if(success == true){
+                        user = row;
+                        loggedIn = true;
+                        console.log("user count = " + user[0].count);
+                        console.log("data found");
+                        db.query("SELECT lobbyid FROM roommate WHERE userid = ?",user[0].userid,(err,row)=> {
+                            console.log("Searching if user has lobby.");
+                            if(err){
+                                console.log(err);      
+                            }else{
+                                if(row.length > 0){
+                                    lobby = row[0].lobbyid;
+                                    console.log("User has lobby = " + lobby);
+                                    // res.render('home',{page: 'home',user: user,lobby:lobby});
+                                    res.redirect('/home');
+                                }else{
+                                    lobby=0;
+                                    console.log("User has no lobby = " + lobby);
+                                    res.redirect('/home');
+                                }
+                            }
+                        });
                     }else{
-                        if(row.length > 0){
-                            lobby = row[0].lobbyid;
-                            console.log("User has lobby = " + lobby);
-                            // res.render('home',{page: 'home',user: user,lobby:lobby});
-                            res.redirect('/home');
-                        }else{
-                            lobby=0;
-                            console.log("User has no lobby = " + lobby);
-                            res.redirect('/home');
-                        }
+                        console.log("password incorrect!");
+                        res.render('login',{error:'Password Incorrect!'} );
                     }
-                });
+                })
             }else{
                 console.log("data not found");
                 res.render('login',{error:'User not found'} );
@@ -329,20 +341,24 @@ app.post('/createUser', (req,res)=>{
     var sql ='INSERT into users(Username,Email,Password,FirstName,LastName,Gender,Birthday, \
               Occupation,Schoolname,SchoolID,Schoollevel,VerifiedStudent,Smoking,Alcohol,Pets) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
-    db.query(sql,[data.username,data.email,data.password,data.fname,data.lname,data.gender,data.bday, 
-            data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
-        if(err){
-            console.log("Value exists in db!");
-            res.render('signup',{error:true});
-            db.on('error', function(err) { //rethrow errors
-                console.log("[mysql error]",err);
-              });
-        }
-        else{
-            console.log("Successfully Inserted!");
-            res.redirect('login');
-        }
-    });            
+    bcrypt.genSalt(11).then(salt =>{
+        bcrypt.hash(data.password, salt).then(hash =>{
+            db.query(sql,[data.username,data.email,hash,data.fname,data.lname,data.gender,data.bday, 
+                data.occupation,data.schoolname,data.schoolid,data.schoollevel,data.student,data.smoker,data.alcohol,data.pets],(err,rows,fields)=>{
+                if(err){
+                    console.log("Value exists in db!");
+                    res.render('signup',{error:true});
+                    db.on('error', function(err) { //rethrow errors
+                        console.log("[mysql error]",err);
+                    });
+                }
+                else{
+                    console.log("Successfully Inserted!");
+                    res.redirect('login');
+                }
+            });            
+        })
+    })  
 });
 
 //creating lobby route with validation//
