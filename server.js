@@ -4,7 +4,8 @@ const express = require('express'),
       app = express(),
       mysql = require('mysql'),
       bodyParser= require('body-parser'),
-      url = require('url');
+      url = require('url'),
+      bcrypt = require('bcrypt');
 //====== Body Parser for input data from body ======
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +30,13 @@ db.connect((err) =>{
     if(err){throw err;}
     console.log('Server Connected');
 });
+
+// ====== Bcrpyt Code ======
+// bcrypt.genSalt(11).then(salt =>{
+//     bcrypt.hash('password', salt).then(hash =>{
+//         bcrypt.compare('password',hash).then(res=>null)
+//     })
+// })  
 
 //====== For User Log Session ======
 let user;
